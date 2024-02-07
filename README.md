@@ -1,1 +1,2 @@
-"# CS495" 
+# CS495
+# Lab Inventory
