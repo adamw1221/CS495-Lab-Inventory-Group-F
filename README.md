@@ -1,4 +1,4 @@
 # CS495
-# # Lab Inventory
+## Lab Inventory
 
 *Owen C.*
