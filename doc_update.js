@@ -1,24 +1,22 @@
-//imports
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
 
 async function update(inClient, inDB, inCollection, inFilter, inChanges) {
 
+    // imports
     const db = inClient.db(inDB);
     const collection = db.collection(inCollection);
 
-    // Update criteria
+    // update criteria
     const filter = inFilter;
 
-    // New values for the fields to be updated
+    // new values for the fields to be updated
     const updateDoc = {
         $set: inChanges
     };
 
-    // Update the document
+    // update the document
     const result = await collection.updateOne(filter, updateDoc);
 
+    // log changes to console
     console.log(`${result.modifiedCount} document(s) updated`);
 
 }

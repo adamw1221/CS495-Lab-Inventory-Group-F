@@ -1,9 +1,10 @@
+
 async function testOperations(inClient) {
 
-    //imports
+    // imports
     const update = require("./doc_update.js");
 
-    //list of operations to be done
+    // list of operations to be done
     await update(
         inClient,
         "sample_airbnb",

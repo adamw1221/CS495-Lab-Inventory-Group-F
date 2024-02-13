@@ -1,17 +1,19 @@
 
 async function main() {
 
-    //imports
+    // imports
     const runServer = require("./run_server.js");
     const testOperations = require("./test_operations.js");
 
-    //connects to mongodb server
+    // connects to mongodb server
     const client = await runServer();
 
-    //performs operations
+    // performs operations
     if (client) {
+
         await testOperations(client);
         await client.close();
+        
     }
 
 }
