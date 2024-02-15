@@ -3,7 +3,7 @@ async function testOperations(inClient) {
 
     // imports
     const update = require("./doc_update.js");
-    const read = require("./test_db_read.js");
+    const read = require("./doc_read.js");
 
     // list of operations to be done
     await update(
