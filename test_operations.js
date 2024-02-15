@@ -4,6 +4,7 @@ async function testOperations(inClient) {
     // imports
     const update = require("./doc_update.js");
     const read = require("./doc_read.js");
+    const remove = require("./doc_remove.js");
 
     // list of operations to be done
     await update(
@@ -19,6 +20,13 @@ async function testOperations(inClient) {
         "sample_analytics",
         "accounts",
         {limit : {$lt: 9000} }
+    );
+
+    await remove(
+        inClient,
+        "sample_analytics",
+        "accounts",
+        {account_id: 903542}
     );
 
 }
