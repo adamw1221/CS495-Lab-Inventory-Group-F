@@ -4,6 +4,7 @@ async function testOperations(inClient) {
     // imports
     const update = require("./doc_update.js");
     const read = require("./doc_read.js");
+    const remove = require("./doc_remove.js");
 
     // list of operations to be done
     await update(
