@@ -21,6 +21,13 @@ async function testOperations(inClient) {
         {limit : {$lt: 9000} }
     );
 
+    await remove(
+        inClient,
+        "sample_analytics",
+        "accounts",
+        {account_id: 903542}
+    );
+
 }
 
 module.exports = testOperations;
