@@ -17,9 +17,9 @@ async function testOperations(inClient) {
 
     await read(
         inClient,
-        "sample_analytics",
-        "accounts",
-        {limit : {$lt: 9000} }
+        "InventoryDB",
+        "Robotics_Lab",
+        { id: 'turtlebot13' }
     );
 
     await remove(
