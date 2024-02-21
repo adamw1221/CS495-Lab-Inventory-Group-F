@@ -25,6 +25,23 @@
   </div>
   <div style="text-align: left;">
   </div>
+
+  <!-- testing http request -->
+  <br>
+  <br>
+  <button onclick="makeRequest()">Make Request</button>
+  <div id="response">Text goes here</div>
+  <script>
+    async function makeRequest() {
+        try {
+            const response = await fetch('http://localhost:3000');
+            const data = await response.text();
+            document.getElementById('response').innerText = data;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+  </script>
  
 </body>
 </html>
