@@ -11,6 +11,11 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
+app.post('/', (req, res) => {
+    console.log('request received:', req.url);
+    res.send('Here is the data you sent:', req.body);
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
