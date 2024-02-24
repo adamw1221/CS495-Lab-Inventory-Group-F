@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Read Parts</title>
+  <script type="text/javascript" src="testUpdate.js"></script>
+</head>
+
+
+<body>
+  <header>
+    <div style="text-align: center;">
+      <h1>Lab Inventory Basic Website</h1>
+      <h4>Owen Campbell, Blake Cantrell, Preston Mazzei, Adam Wrote</h4>
+    </div>
+  </header>
+
+  <div style="text-align: center;">
+    <button id = "checkoutParts">Checkout Parts</button>
+    <button id = "addNewParts">Add New Parts</button>
+    <button id = "removeOldParts">Remove Old Parts</button>
+  </div>
+  <div style="text-align: left;">
+  </div>
+
+  <!-- testing http request -->
+  <br>
+  <br>
+  <label for="id-input">Part ID:</label>
+  <input type="text" id="id-input" name="id-input">
+  <button onclick="printQuery()">Equipment Search</button>
+  <div id="response"><pre>Awaiting Equipment Query</pre></div>
+
+
+  <br>
+  <br>
+
+  <label for="document-input">Update</label>
+  <textarea id="document-input" name="document-input" rows="4" cols="50"></textarea>
+
+  <button onclick="updateDoc()">Equipment Update</button>
+  <div id="text-output">Enter 1. Json Doc format query and 2. another Json Doc with changes</div>
+  <div id="text-output">Example: [
+    {"id": "document1", "key": "value1"},
+    {"key1": "value2", "key2": "value2"}
+  ]
+  </div>
+  <br>
+  <div id="response">Awaiting Update Response</div>
+ 
+</body>
+</html>
