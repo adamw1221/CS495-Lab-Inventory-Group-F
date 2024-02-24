@@ -42,18 +42,23 @@ app.post('/', async (req, res) => {
     console.log('Data received:', req.body);
 
     const actionType = req.body.postType;
+    const filter = req.body.filter;
+    const updateDB = req.body.update;
 
     // Switch statement to handle different types of actions
     switch (actionType) {
         case 'update':
             try {
+                console.log('Trying Filter: ', filter);
+                console.log('Trying Update: ', updateDB);
+
                 // Reuse the established MongoDB client
-                const result = await operations.read(inClient, { id: req.body.id }); //update
+                const result = await operations.update(inClient, filter, updateDB); //update
 
                 console.log('Database query result:', result);
-                res.json({ message: 'Database query successful', result });
+                res.json({ message: 'Database update successful', result });
             } catch (error) {
-                console.error('Error querying the database:', error);
+                console.error('Error updating the database:', error);
                 res.status(500).json({ message: 'Internal server error' });
             }
             break;

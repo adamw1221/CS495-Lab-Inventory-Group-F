@@ -20,6 +20,7 @@ async function postRequest(data) {
     }
 }
 
+// needs work to use the postrequest function and pass in the proper data
 function printQuery() {
     const idInput = document.getElementById("id-input").value;
 
@@ -33,7 +34,7 @@ function printQuery() {
         },
         body: JSON.stringify({
             id: idInput,
-            postType: 'update', // or the appropriate action type
+            postType: 'read', // or the appropriate action type
         }),
     })
     .then(response => response.json())
@@ -54,21 +55,47 @@ function printQuery() {
 }
 
 function updateDoc() {
-    const inputData = document.getElementById("id-input").value;
+    const inputData = document.getElementById("document-input").value;
+
     if (inputData) {
-        console.log('ID entered:', inputData);
+        console.log('Input Data:', inputData);
 
-        // Construct a data object with the ID
-        const data = {
-            id: inputData,
-            postType: 'update'
-        };
+        let data;
+        try {
+            data = JSON.parse(inputData);
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            displayError('Invalid JSON format');
+            return;
+        }
 
-        // Call the postRequest function with the data object
-        postRequest(data);
+        // Check if the parsed data is an array with a length of 2
+        if (Array.isArray(data) && data.length === 2) {
+            // Extract filter and update values
+            const [filter, update] = data;
+
+            // Construct a data object with the ID, filter, and update
+            const requestData = {
+                filter: filter,
+                update: update,
+                postType: 'update'
+            };
+
+            // Call the postRequest function with the requestData object
+            postRequest(requestData);
+        } else {
+            const errorMessage = 'Invalid input: The data must be a list with a length of 2, in JSON format';
+            console.error(errorMessage);
+            displayError(errorMessage);
+        }
     } else {
-        console.error('ID is empty or undefined');
+        console.error('Data is empty or undefined');
+        displayError('Data is empty or undefined');
     }
+}
+
+function displayError(errorMessage) {
+    document.getElementById('error-message').innerText = errorMessage;
 }
 
 function debugInput() {

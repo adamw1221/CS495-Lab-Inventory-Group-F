@@ -3,13 +3,16 @@ const read = require("./doc_read");
 const remove = require("./doc_remove");
 
 const operations = {
-    update: async (inClient, params) => {
+    update: async (inClient, filter, updates) => {
         // Your update logic here
+
+        // [ {"id": "turtlebot13"}, {"Status" : "Down"}]
         return await update(
             inClient,
             "InventoryDB",
             "Robotics_Lab",
-            params
+            filter,
+            updates
         );
     },
     read: async (inClient, params) => {
