@@ -10,5 +10,7 @@ async function read(inClient, inDB, inCollection, inQuery) {
   console.log("Documents returned from query: ");
   console.log(result);
 
+  return result;
+
 }
 module.exports = read;
