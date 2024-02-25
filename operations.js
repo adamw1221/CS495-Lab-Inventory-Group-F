@@ -7,7 +7,7 @@ const operations = {
         // Your update logic here
 
         // [ {"id": "turtlebot13"}, {"Status" : "Down"}]
-        return await update(
+        return await update( // returns string
             inClient,
             "InventoryDB",
             "Robotics_Lab",

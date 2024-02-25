@@ -5,8 +5,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Read Parts</title>
+  <title>Update Parts</title>
+  <link rel="stylesheet" href="styles.css">
   <script type="text/javascript" src="testUpdate.js"></script>
+  <!-- <script type="text/javascript" src="basicWebsite.js"></script> -->
 </head>
 
 
@@ -14,43 +16,52 @@
   <header>
     <div style="text-align: center;">
       <h1>Lab Inventory Basic Website</h1>
-      <h4>Owen Campbell, Blake Cantrell, Preston Mazzei, Adam Wrote</h4>
+      <h3>Update Parts</h3>
     </div>
   </header>
 
+  <!-- Buttons to Matching Page or add Nav Bar -->
   <div style="text-align: center;">
-    <button id = "checkoutParts">Checkout Parts</button>
-    <button id = "addNewParts">Add New Parts</button>
-    <button id = "removeOldParts">Remove Old Parts</button>
-  </div>
-  <div style="text-align: left;">
+    <a href="basicWebsite.html" id="homeButton">
+        <button>Home</button>
+    </a>
   </div>
 
-  <!-- testing http request -->
-  <br>
-  <br>
+  <div style="text-align: center;">
+    <button id="Checkout Parts">Checkout Parts</button>
+
+    <a href="testUpdate.html" id="updateParts">
+        <button>Update Parts</button>
+    </a>
+
+    <button id="addNewParts">Add New Parts</button>
+    <button id="removeOldParts">Remove Old Parts</button>
+  </div>
+  <!-- END Buttons to Matching Page or add Nav Bar -->
+
+<div style="text-align: left;"></div>
+
+  <!-- HTTP requests -->
+  <br> <br>
+
   <label for="id-input">Part ID:</label>
   <input type="text" id="id-input" name="id-input">
   <button onclick="printQuery()">Equipment Search</button>
-  <div id="response"><pre>Awaiting Equipment Query</pre></div>
+  <div id="readResponse"><pre>Awaiting Equipment Query</pre></div>
 
-
-  <br>
-  <br>
-
-  <label for="document-input">Update</label>
-  <textarea id="document-input" name="document-input" rows="4" cols="50"></textarea>
-
-  <button onclick="updateDoc()">Equipment Update</button>
+  <br> <br>
   <div id="text-output">Enter 1. Json Doc format query and 2. another Json Doc with changes</div>
   <div id="text-output">Example: [
       {"id": "document1", "key": "value1"},
       {"key1": "value2", "key2": "value2"}
     ]
-  </div>
-  <br>
-  <!-- <div id="response">Text goes here</div> -->
-  <div id="error-message"></div>
+  </div><br>
+  <label for="document-input">Update</label>
+  <textarea id="document-input" name="document-input" rows="4" cols="50"></textarea>
+  <button onclick="updateDoc()">Equipment Update</button>
+  <div id="updateResponse"><pre>Update Results..</pre></div>
+
+  <!-- HTTP requests -->
  
 </body>
 </html>
