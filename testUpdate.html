@@ -39,15 +39,13 @@
   </div>
   <!-- END Buttons to Matching Page or add Nav Bar -->
 
-<div style="text-align: left;"></div>
-
   <!-- HTTP requests -->
   <br> <br>
 
   <label for="id-input">Part ID:</label>
   <input type="text" id="id-input" name="id-input">
   <button onclick="printQuery()">Equipment Search</button>
-  <div id="readResponse"><pre>Awaiting Equipment Query</pre></div>
+  <div class="response" id="readResponse"><pre>Awaiting Equipment Query</pre></div>
 
   <br> <br>
   <div id="text-output">Enter 1. Json Doc format query and 2. another Json Doc with changes</div>
@@ -59,9 +57,9 @@
   <label for="document-input">Update</label>
   <textarea id="document-input" name="document-input" rows="4" cols="50"></textarea>
   <button onclick="updateDoc()">Equipment Update</button>
-  <div id="updateResponse"><pre>Update Results..</pre></div>
+  <div class="response" id="updateResponse"><pre>Awaiting Update..</pre></div>
 
-  <!-- HTTP requests -->
+  <!-- END HTTP requests -->
  
 </body>
 </html>

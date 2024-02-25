@@ -32,7 +32,7 @@ async function postRequest(data) {
 }
 
 // needs work to use the postrequest function and pass in the proper data
-function printQuery() {
+function printQuery() {  // FIXME: use the post request 
     const idInput = document.getElementById("id-input").value;
 
     console.log('ID:', idInput);
@@ -99,7 +99,7 @@ function updateDoc() {
         } else {
             const errorMessage = 'Invalid input: Must be a list ' +
                 'with a length of 2, in JSON format';
-                
+
             console.error(errorMessage);
             document.getElementById('updateResponse').innerText = errorMessage;
         }

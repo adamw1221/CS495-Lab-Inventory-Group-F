@@ -10,14 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const operations = require('./operations');
-const get_server_client = require("./get_server_client");
+const runServer = require("./run_server.js");
 
 let inClient; // Declare the client variable outside the route handler
 
 async function initializeServer() {
     try {
         // Establish the MongoDB client during application startup
-        inClient = await get_server_client();
+        inClient = await runServer();
         console.log('MongoDB client connected successfully');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
