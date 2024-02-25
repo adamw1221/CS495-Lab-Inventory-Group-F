@@ -6,7 +6,8 @@ const operations = {
     update: async (inClient, filter, updates) => {
         // Your update logic here
 
-        // [ {"id": "turtlebot13"}, {"Status" : "Down"}]
+        // {"Issue" : {"Type": "Hardware" , "Priority": "High"} }
+        // {"Test" : [{"1":"Monday"},{"2":"Tuesday"}] }
         return await update( // returns string
             inClient,
             "InventoryDB",

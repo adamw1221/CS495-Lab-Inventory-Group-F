@@ -21,7 +21,7 @@ async function postRequest(data) {
                 document.getElementById('updateResponse').innerText = `Update result: ${responseText}`;
                 break;
             
-            case 'read':
+            case 'read': //needs to be create or delete
                 const dbData = await response.json();
                 document.getElementById('readResponse').innerText = JSON.stringify(dbData, null, 2);
                 break;
@@ -66,43 +66,37 @@ function printQuery() {  // FIXME: use the post request
 }
 
 function updateDoc() {
-    const inputData = document.getElementById("document-input").value;
+    // const inputData = document.getElementById("document-input").value;
+    const filterInput = document.getElementById("filterInput").value;
+    const changesInput = document.getElementById("changesInput").value;
 
-    if (inputData) {
-        console.log('Input Data:', inputData);
+
+    if (filterInput.trim() !== '' && changesInput.trim() !== '') {
+        console.log('Filter: ', filterInput);
+        console.log('Changes: ', changesInput);
 
         // Try parsing json
-        let data;
+        let filterObject;
+        let changesObject;
         try {
-            data = JSON.parse(inputData);
+            filterObject = parseInputString(filterInput);
+            changesObject = parseInputString(changesInput);
         } catch (error) {
-            console.error('Error parsing JSON:', error);
-            document.getElementById('updateResponse').innerText = 'Invalid JSON format';
+            console.error('Error parsing string:', error);
+            displayError('Invalid Format', 'updateResponse')
             return;
         }
 
-        // Check if the parsed data is an array with a length of 2
-        if (Array.isArray(data) && data.length === 2) {
+        // Construct a data object with the filter, update, and Post Type
+        const requestData = {
+            filter: filterObject,
+            update: changesObject,
+            postType: 'update'
+        };
 
-            // Extract filter and update values
-            const [filter, update] = data;
-
-            // Construct a data object with the filter, update, and Post Type
-            const requestData = {
-                filter: filter,
-                update: update,
-                postType: 'update'
-            };
-
-            // Call the postRequest function with the requestData object
-            postRequest(requestData);
-        } else {
-            const errorMessage = 'Invalid input: Must be a list ' +
-                'with a length of 2, in JSON format';
-
-            console.error(errorMessage);
-            document.getElementById('updateResponse').innerText = errorMessage;
-        }
+        // Call the postRequest function with the requestData object
+        postRequest(requestData);
+  
     } else {
         console.error('Data is empty or undefined');
         document.getElementById('updateResponse').innerText = 'Data is empty or undefined';
@@ -125,4 +119,32 @@ function debugInput() {
     } else {
         console.error('ID is empty or undefined');
     }
+}
+
+function parseInputString(inputString) {
+    try {
+        // Attempt to parse the input as JSON
+        return JSON.parse(inputString);
+    } catch (error) {
+        // If JSON parsing fails, treat it as a list of key-value pairs
+        const keyValuePairs = inputString.split(',').map(pair => pair.trim());
+
+        const resultObject = {};
+        keyValuePairs.forEach(pair => {
+            const [key, ...valueParts] = pair.split(':').map(item => item.trim());
+            const value = valueParts.join(':').trim();
+
+            if (key && value) {
+                resultObject[key] = value;
+            }
+        });
+
+        return resultObject;
+    }
+}
+
+
+function displayError(message, responseId) {
+    const errorElement = document.getElementById(responseId);
+    errorElement.innerText = message;
 }

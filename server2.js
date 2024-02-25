@@ -12,7 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 const operations = require('./operations');
 const runServer = require("./run_server.js");
 
-let inClient; // Declare the client variable outside the route handler
+// Get Mongo client + Start Server
+let inClient;
 
 async function initializeServer() {
     try {
@@ -21,7 +22,7 @@ async function initializeServer() {
         console.log('MongoDB client connected successfully');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
-        process.exit(1); // Terminate the application if MongoDB connection fails
+        process.exit(1); 
     }
 
     // Start the server after the MongoDB client is successfully connected
@@ -31,6 +32,7 @@ async function initializeServer() {
 }
 
 initializeServer(); // Call the initialization function
+// Done getting client + Starting Server 
 
 app.get('/', (req, res) => {
     console.log('GET request received:', req.url);

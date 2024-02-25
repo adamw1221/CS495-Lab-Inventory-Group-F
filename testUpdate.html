@@ -48,17 +48,27 @@
   <div class="response" id="readResponse"><pre>Awaiting Equipment Query</pre></div>
 
   <br> <br>
-  <div id="text-output">Enter 1. Json Doc format query and 2. another Json Doc with changes</div>
-  <div id="text-output">Example: [
-      {"id": "document1", "key": "value1"},
-      {"key1": "value2", "key2": "value2"}
-    ]
-  </div><br>
-  <label for="document-input">Update</label>
-  <textarea id="document-input" name="document-input" rows="4" cols="50"></textarea>
-  <button onclick="updateDoc()">Equipment Update</button>
-  <div class="response" id="updateResponse"><pre>Awaiting Update..</pre></div>
 
+
+  <form class="input-container" id="updateForm">
+
+    <div id="text-output">
+      Enter comma-seperated key:value pairs or full JSON format
+    </div>
+    <div id="text-output">
+      e.g., {"id": "document1", "key": { "status" : "value1"}}
+    </div><br>
+
+    <label for="filterInput">Filter (key : value) pairs:</label>
+    <textarea type="text" id="filterInput" name="filterInput" rows="4" cols="50" required></textarea><br>
+  
+    <label for="changesInput">Changes  (key : value) pairs:</label>
+    <textarea type="text" id="changesInput" name="changesInput"  rows="4" cols="50" required></textarea>
+  
+    <button type="button" onclick="updateDoc()">Update Equipment</button>
+    <div class="response" id="updateResponse"><pre>Awaiting Update..</pre></div>
+  </form>
+  
   <!-- END HTTP requests -->
  
 </body>
