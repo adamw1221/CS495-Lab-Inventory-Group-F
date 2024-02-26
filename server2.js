@@ -52,7 +52,7 @@ app.post('/', async (req, res) => {
                 const filter = req.body.filter;
                 const updateDB = req.body.update;
                 const result = await operations.update(inClient, filter, updateDB);// returns string
-                res.send(result);
+                res.send(result); //0 or 1
 
             } catch (error) {
                 console.error('Error updating the database:', error);
@@ -62,11 +62,10 @@ app.post('/', async (req, res) => {
         
         case 'read':
             try {
-                // Reuse the established MongoDB client
-                const result = await operations.read(inClient, { id: req.body.id });
+                const result = await operations.read(inClient, req.body.id );
 
                 console.log('Database query result:', result);
-                res.json({ message: 'Database query successful', result });
+                res.json(result); //list of documents
             } catch (error) {
                 console.error('Error querying the database:', error);
                 res.status(500).json({ message: 'Internal server error' });

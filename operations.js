@@ -7,7 +7,6 @@ const operations = {
         // Your update logic here
 
         // {"Issue" : {"Type": "Hardware" , "Priority": "High"} }
-        // {"Test" : [{"1":"Monday"},{"2":"Tuesday"}] }
         return await update( // returns string
             inClient,
             "InventoryDB",

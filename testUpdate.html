@@ -16,7 +16,7 @@
   <header>
     <div style="text-align: center;">
       <h1>Lab Inventory Basic Website</h1>
-      <h3>Update Parts</h3>
+      <h2>Update Parts</h2>
     </div>
   </header>
 
@@ -36,20 +36,10 @@
 
     <button id="addNewParts">Add New Parts</button>
     <button id="removeOldParts">Remove Old Parts</button>
-  </div>
+  </div><br>
   <!-- END Buttons to Matching Page or add Nav Bar -->
 
   <!-- HTTP requests -->
-  <br> <br>
-
-  <label for="id-input">Part ID:</label>
-  <input type="text" id="id-input" name="id-input">
-  <button onclick="printQuery()">Equipment Search</button>
-  <div class="response" id="readResponse"><pre>Awaiting Equipment Query</pre></div>
-
-  <br> <br>
-
-
   <form class="input-container" id="updateForm">
 
     <div id="text-output">
@@ -59,10 +49,10 @@
       e.g., {"id": "document1", "key": { "status" : "value1"}}
     </div><br>
 
-    <label for="filterInput">Filter (key : value) pairs:</label>
+    <label for="filterInput">ID Filter (for 1 document):</label>
     <textarea type="text" id="filterInput" name="filterInput" rows="4" cols="50" required></textarea><br>
   
-    <label for="changesInput">Changes  (key : value) pairs:</label>
+    <label for="changesInput">Changes:</label>
     <textarea type="text" id="changesInput" name="changesInput"  rows="4" cols="50" required></textarea>
   
     <button type="button" onclick="updateDoc()">Update Equipment</button>

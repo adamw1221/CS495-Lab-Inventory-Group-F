@@ -12,72 +12,39 @@ async function postRequest(data) {
     try {
         // send request while providing data parameter
         const response = await fetch('http://localhost:3000', options);
-        // convert response into json and then post into div component
         
         switch(data.postType){
             case 'update':
                 const responseText = await response.text();
-                console.log('Update result:', responseText);
-                document.getElementById('updateResponse').innerText = `Update result: ${responseText}`;
-                break;
-            
-            case 'read': //needs to be create or delete
+                const intValue = parseInt(responseText, 10);
+
+                // Check if the parsing was successful
+                if (!isNaN(intValue)) {
+                    
+                    return intValue;
+                } else {
+                    console.error('Error: Unable to parse responseText as an integer');
+                    return -1; 
+                }
+
+            case 'read': 
                 const dbData = await response.json();
-                document.getElementById('readResponse').innerText = JSON.stringify(dbData, null, 2);
-                break;
+                return dbData;
         }
     } catch (error) {
         console.error('Error:', error);
+        throw error;
     }
 }
 
-// needs work to use the postrequest function and pass in the proper data
-function printQuery() {  // FIXME: use the post request 
-    const idInput = document.getElementById("id-input").value;
-
-    console.log('ID:', idInput);
-
-    // Make the POST request to the server
-    fetch('http://localhost:3000', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: idInput,
-            postType: 'read', // or the appropriate action type
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Check if 'result' is an array and not undefined
-        if (Array.isArray(data.result) && data.result.length > 0) {
-            // Display the first document in the response div
-            const formattedResult = JSON.stringify(data.result[0], null, 2);
-            document.getElementById('readResponse').innerText = `Reference Document For Updating:\n${formattedResult}`;
-        } else {
-            document.getElementById('readResponse').innerHTML = 'No document found for the given ID';
-        }
-    })
-    .catch(error => {
-        console.error('Error in POST request:', error);
-        document.getElementById('readResponse').innerText = 'Error in the request';
-    });
-}
-
-function updateDoc() {
-    // const inputData = document.getElementById("document-input").value;
+async function updateDoc() {
+    // 1. Get filter and changes
     const filterInput = document.getElementById("filterInput").value;
     const changesInput = document.getElementById("changesInput").value;
 
-
+    // 2. Formatting
     if (filterInput.trim() !== '' && changesInput.trim() !== '') {
-        console.log('Filter: ', filterInput);
-        console.log('Changes: ', changesInput);
 
-        // Try parsing json
-        let filterObject;
-        let changesObject;
         try {
             filterObject = parseInputString(filterInput);
             changesObject = parseInputString(changesInput);
@@ -87,40 +54,40 @@ function updateDoc() {
             return;
         }
 
-        // Construct a data object with the filter, update, and Post Type
+        // 3. Construct a data object with the filter, update, and Post Type
         const requestData = {
             filter: filterObject,
             update: changesObject,
             postType: 'update'
         };
 
-        // Call the postRequest function with the requestData object
-        postRequest(requestData);
+        // 4. Call the postRequest function with the requestData object
+        const updateResponse = await postRequest(requestData);
+        console.log("Update Response: ", updateResponse);
+        
+
+        //5. Check if the update was successful (number set in postRequest)
+        if (updateResponse == 1) {
+         
+            document.getElementById('updateResponse').innerText = `1 document updated`;
+
+        }
+        else if (updateResponse == 0){
+            document.getElementById('updateResponse').innerText = `No document updated`;
+        }
+        else {
+            console.error('Update failed');
+            displayError('Update failed', 'updateResponse');
+        }
   
     } else {
-        console.error('Data is empty or undefined');
-        document.getElementById('updateResponse').innerText = 'Data is empty or undefined';
+        console.error('A data field is empty or undefined');
+        document.getElementById('updateResponse').innerText =
+            'A data field is empty or undefined';
     }
 }
 
-function debugInput() {
-    const inputData = document.getElementById("id-input").value;
-    if (inputData) {
-        console.log('ID entered:', inputData);
-
-        // taking in 2 docs
-        const data = {
-            id: inputData,
-            postType: 'read'
-        };
-
-        // Call the postRequest function with the data object
-        postRequest(data);
-    } else {
-        console.error('ID is empty or undefined');
-    }
-}
-
+// Helper Functions
 function parseInputString(inputString) {
     try {
         // Attempt to parse the input as JSON
@@ -142,7 +109,6 @@ function parseInputString(inputString) {
         return resultObject;
     }
 }
-
 
 function displayError(message, responseId) {
     const errorElement = document.getElementById(responseId);
