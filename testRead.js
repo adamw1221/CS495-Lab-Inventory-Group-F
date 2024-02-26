@@ -13,11 +13,19 @@ async function postRequest(data) {
         // send request while providing data parameter
         const response = await fetch('http://localhost:3000', options);
         // convert response into json and then post into div component
-        const dbData = response.json();
-        document.getElementById('response').innerText = dbData;
+        const dbData = await response.json();
+        console.log(dbData);
+        document.getElementById('response').innerText = await dbData["0"]["MAC"];
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+function searchById() {
+    data = {};
+    data["type"] = "read";
+    data["input"] = document.getElementById("id-input").value;
+    postRequest(data);
 }
 
 function debugInput() {
