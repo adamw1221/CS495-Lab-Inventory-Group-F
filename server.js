@@ -13,11 +13,7 @@ app.use(express.json());
 
 let client;
 async function initializeServer() {
-    try {
-        client = await runServer();
-    } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-    }
+    client = await runServer();
 }
 
 initializeServer(); 
