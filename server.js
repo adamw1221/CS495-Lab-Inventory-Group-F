@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const runServer = require("./run_server.js");
 const read = require("./doc_read.js");
+const update = require("./doc_update.js")
 
 const app = express();
 const port = 3000;
@@ -27,7 +28,10 @@ app.post('/', (req, res) => {
                 res.status(200).send(result);
             }
             else if (req.body.type == "update") {
-
+                const filter = req.body.filter;
+                const updateDB = req.body.update;
+                const result = await update(client,"InventoryDB", "Robotics_Lab", filter, updateDB);// returns string
+                res.status(200).send(result); //0 or 1
             }
             else if (req.body.type == "delete") {
 

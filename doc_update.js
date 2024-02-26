@@ -19,6 +19,7 @@ async function update(inClient, inDB, inCollection, inFilter, inChanges) {
     // log changes to console
     console.log(`${result.modifiedCount} document(s) updated`);
 
+    return `${result.modifiedCount}`;
 }
 
 module.exports = update;
