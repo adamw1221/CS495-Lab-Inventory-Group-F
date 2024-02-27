@@ -13,8 +13,9 @@ async function postRequest(data) {
       // send request while providing data parameter
       const response = await fetch('http://localhost:3000', options);
       
-      /*const responseText = await response.text();
-      const intValue = parseInt(responseText, 10);
+      const responseText = await response.text();
+      alert(responseText);
+      /*const intValue = parseInt(responseText, 10);
 
       // Check if the parsing was successful
       if (!isNaN(intValue)) {
@@ -32,21 +33,24 @@ async function postRequest(data) {
 async function addDoc() {
   // 1. Get filter
   const filterInput = document.getElementById("textbox").value;
+  const nameInput = document.getElementById("name").value;
 
   // 2. Formatting
   if (filterInput.trim() !== '') {
 
       filterObject = parseInputString(filterInput);
+      objectName = parseInputString(nameInput);
 
       // 3. Construct a data object with the filter and Post Type
       const requestData = {
           filter: filterObject,
+          name: objectName,
           type: 'add'
       };
 
       // 4. Call the postRequest function with the requestData object
       const updateResponse = await postRequest(requestData);
-      console.log("Update Response: ", updateResponse);
+      /*console.log("Update Response: ", updateResponse);
 
       //5. Check if the update was successful (number set in postRequest)
       if (updateResponse == 1) {
@@ -58,7 +62,7 @@ async function addDoc() {
       else {
           console.error('Add failed');
           displayError(`Add failed. Please try again later.`, "updateResponse");
-      }
+      }*/
 
   } else {
       console.error('A data field is empty or undefined');

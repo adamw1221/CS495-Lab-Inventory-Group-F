@@ -47,7 +47,7 @@ app.post('/', async(req, res) => {
             }
             else if (req.body.type == "add") {
                 const filter = req.body.filter;
-                const result = await update(client,"InventoryDB", "Robotics_Lab",
+                const result = await add(client,"InventoryDB", "Robotics_Lab",
                     filter);// returns string
                 res.status(200).send(result); //0 or 1
             }
