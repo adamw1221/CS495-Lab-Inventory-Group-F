@@ -2,8 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const runServer = require("./run_server.js");
 const read = require("./doc_read.js");
-const update = require("./doc_update.js");
-const remove = require("./doc_remove.js");
+const update = require("./doc_update.js")
 
 const app = express();
 const port = 3000;
