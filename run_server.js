@@ -3,6 +3,7 @@ async function runServer() {
 
     // imports
     const { MongoClient, ServerApiVersion } = require("mongodb");
+    const poolSize = 10;
     
     // creates client
     const uri = "mongodb+srv://pjmazzei:pjmazzei" +
@@ -12,6 +13,7 @@ async function runServer() {
         version: ServerApiVersion.v1,
         strict: true,
         deprecationErrors: true,
+        poolSize: poolSize,
         }
     });
 
@@ -21,8 +23,8 @@ async function runServer() {
         await client.connect();
         // send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment. " +
-                    "You successfully connected to MongoDB!");
+        // console.log("Pinged your deployment. " +
+        //             "You successfully connected to MongoDB!");
         return client;
 
     } catch (err) {

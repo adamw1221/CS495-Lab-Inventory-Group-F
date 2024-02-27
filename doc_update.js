@@ -14,7 +14,7 @@ async function update(inClient, inDB, inCollection, inFilter, inChanges) {
     };
 
     // update the document
-    const result = await collection.updateOne(filter, updateDoc);
+    const result = await collection.updateOne(filter, updateDoc); //vs updateMany
 
     // log changes to console
     console.log(`${result.modifiedCount} document(s) updated`);
