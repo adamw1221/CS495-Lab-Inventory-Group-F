@@ -11,9 +11,6 @@ async function read(inClient, inDB, inCollection, inQuery) {
   console.log(result);
 
   return result;
-<<<<<<< HEAD
-=======
 
->>>>>>> c075a11d643aa70739515c1cfc19e45c105d6e96
 }
 module.exports = read;

@@ -64,9 +64,10 @@ app.post('/', async(req, res) => {
                 }
             }
             else if (req.body.type == "add") {
-                const filter = req.body.filter;
+                const itemId = req.body.filter;
+                const itemName = req.body.name;
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
-                    filter);// returns string
+                    itemId, itemName);// returns string
                 res.status(200).send(result); //0 or 1
             }
             // await client.close();

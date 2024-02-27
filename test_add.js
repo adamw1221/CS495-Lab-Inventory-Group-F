@@ -32,19 +32,19 @@ async function postRequest(data) {
 
 async function addDoc() {
   // 1. Get filter
-  const filterInput = document.getElementById("textbox").value;
+  const idInput = document.getElementById("textbox").value;
   const nameInput = document.getElementById("name").value;
 
   // 2. Formatting
-  if (filterInput.trim() !== '') {
+  if (idInput.trim() !== '' && nameInput.trim() !== '') {
 
-      filterObject = parseInputString(filterInput);
-      objectName = parseInputString(nameInput);
+      //filterObject = parseInputString(filterInput);
+      //objectName = parseInputString(nameInput);
 
       // 3. Construct a data object with the filter and Post Type
       const requestData = {
-          filter: filterObject,
-          name: objectName,
+          filter: idInput,
+          name: nameInput,
           type: 'add'
       };
 
