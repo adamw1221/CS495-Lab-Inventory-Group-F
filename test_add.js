@@ -1,31 +1,96 @@
-"use strict"
+async function postRequest(data) {
+  // configure options for post request
+  let options = {
+      method: 'POST',
+      headers: {
+          'Content-Type':
+              'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+  }
 
-async function add(inDB, inCollection, inQuery) {
+  try {
+      // send request while providing data parameter
+      const response = await fetch('http://localhost:3000', options);
+      
+      /*const responseText = await response.text();
+      const intValue = parseInt(responseText, 10);
 
-  const runServer = require("./run_server.js");
+      // Check if the parsing was successful
+      if (!isNaN(intValue)) {
+          return intValue;
+      } else {
+          console.error('Error: Unable to parse responseText as an integer');
+          return -1; 
+      }*/
 
-  // connects to mongodb server
-  const inClient = await runServer();
-
-  const db = inClient.db(inDB);
-  const collection = db.collection(inCollection);
-
-  await collection.insertOne({
-    name: inQuery
-  });
-
-  await inClient.close();
-
+  } catch (error) {
+      console.error('Error:', error);
+  }
 }
 
-window.onload = function initialize() {
-    document.getElementById("addPartButton").onclick = function(){
-      var textBoxValue = document.getElementById("textbox").value;
-      var sanitizedInput = textBoxValue.replace(/'/g, ''); //input sanitation,
-                      //not sure what other characters need to be removed,
-                      //for SQL injection stuff, should check with cyber guys
-                      //next meeting
-      add("InventoryDB", "Robotics_Lab", { id: sanitizedInput });
-      alert("New part " + sanitizedInput + " added!");
-    };
+async function addDoc() {
+  // 1. Get filter
+  const filterInput = document.getElementById("textbox").value;
+
+  // 2. Formatting
+  if (filterInput.trim() !== '') {
+
+      filterObject = parseInputString(filterInput);
+
+      // 3. Construct a data object with the filter and Post Type
+      const requestData = {
+          filter: filterObject,
+          type: 'add'
+      };
+
+      // 4. Call the postRequest function with the requestData object
+      const updateResponse = await postRequest(requestData);
+      console.log("Update Response: ", updateResponse);
+
+      //5. Check if the update was successful (number set in postRequest)
+      if (updateResponse == 1) {
+          document.getElementById('updateResponse').innerText = `1 document added`;
+      }
+      else if (updateResponse == 0){
+          document.getElementById('updateResponse').innerText = `No document added`;
+      }
+      else {
+          console.error('Add failed');
+          displayError(`Add failed. Please try again later.`, "updateResponse");
+      }
+
+  } else {
+      console.error('A data field is empty or undefined');
+      document.getElementById('updateResponse').innerText =
+          'A data field is empty or undefined';
+  }
+}
+
+// Helper Functions
+function parseInputString(inputString) {
+  try {
+      // Attempt to parse the input as JSON
+      return JSON.parse(inputString);
+  } catch (error) {
+      // If JSON parsing fails, treat it as a list of key-value pairs
+      const keyValuePairs = inputString.split(',').map(pair => pair.trim());
+
+      const resultObject = {};
+      keyValuePairs.forEach(pair => {
+          const [key, ...valueParts] = pair.split(':').map(item => item.trim());
+          const value = valueParts.join(':').trim();
+
+          if (key && value) {
+              resultObject[key] = value;
+          }
+      });
+
+      return resultObject;
+  }
+}
+
+function displayError(message, responseId) {
+  const errorElement = document.getElementById(responseId);
+  errorElement.innerText = message;
 }
