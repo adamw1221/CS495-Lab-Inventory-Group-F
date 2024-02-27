@@ -1,21 +1,16 @@
-// Asynchronous function to remove a document
+// Asynchronous function to delete a document
 async function remove(inClient, inDB, inCollection, inQuery) {
-  try {
-    // imports
-    const db = inClient.db(inDB);
-    const collection = db.collection(inCollection);
 
-    // update the document
-    const result = await collection.deleteOne(inQuery);
+  // imports
+  const db = inClient.db(inDB);
+  const collection = db.collection(inCollection);
 
-    // Log the count of deleted documents
-    console.log(`${result.deletedCount} document(s) deleted.`);
+  // update the document
+  const result = await collection.deleteOne(inQuery);
 
-    return result; // Return the result object
-  } catch (error) {
-    console.error('Error removing document:', error);
-    throw error; // Rethrow the error
-  }
+  // Log the count of deleted documents
+  console.log(`${result.deletedCount} document(s) deleted.`);
+
 }
 
 module.exports = remove;
