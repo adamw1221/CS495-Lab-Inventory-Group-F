@@ -26,7 +26,6 @@ async function postRequest(data) {
 
     } catch (error) {
         console.error('Error:', error);
-        // throw error;
     }
 }
 
@@ -61,7 +60,7 @@ async function updateDoc() {
         }
         else {
             console.error('Update failed');
-            displayError('Update failed', 'updateResponse');
+            displayError(`Update failed. Please try again later.`, "updateResponse");
         }
   
     } else {
