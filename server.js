@@ -11,22 +11,15 @@ app.use(express.static('LabInventory'));
 app.use(cors());
 app.use(express.json());
 
-let client;
-async function initializeServer() {
-    client = await runServer();
-}
-
-initializeServer(); 
-
 app.get('/', (req, res) => {
     console.log('request received:', req.url);
     res.send('Hello, World!');
 });
 
-app.post('/', async(req, res) => {
+app.post('/', (req, res) => {
     console.log('request received:', req.url);
-    // (async (req, res) => {
-        // const client = await runServer();
+    (async (req, res) => {
+        const client = await runServer();
         if (client) {
             if (req.body.type == "read") {
                 console.log(req.body.input);
@@ -37,8 +30,7 @@ app.post('/', async(req, res) => {
             else if (req.body.type == "update") {
                 const filter = req.body.filter;
                 const updateDB = req.body.update;
-                const result = await update(client,"InventoryDB", "Robotics_Lab",
-                    filter, updateDB);// returns string
+                const result = await update(client,"InventoryDB", "Robotics_Lab", filter, updateDB);// returns string
                 res.status(200).send(result); //0 or 1
             }
             else if (req.body.type == "delete") {
@@ -47,12 +39,9 @@ app.post('/', async(req, res) => {
             else if (req.body.type == "add") {
                 
             }
-            // await client.close();
-        }else{
-            res.status(500).send("Sorry there's a problem with the website!" +
-            "Please try again later."); //0 or 1
+            await client.close();
         }
-    // })(req, res);
+    })(req, res);
 });
 
 app.listen(port, () => {
