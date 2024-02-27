@@ -1,21 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-<<<<<<< HEAD
 const runServer = require("./run_server.js");
 const read = require("./doc_read.js");
 const update = require("./doc_update.js");
 const add = require("./doc_add.js");
 const remove = require("./doc_remove.js");
 
-=======
 const bodyParser = require('body-parser');
->>>>>>> c075a11d643aa70739515c1cfc19e45c105d6e96
 const app = express();
 const port = 3000;
 
 app.use(express.static('LabInventory'));
 app.use(cors());
-<<<<<<< HEAD
 app.use(express.json());
 
 let client;
@@ -24,9 +20,7 @@ async function initializeServer() {
 }
 
 initializeServer(); 
-=======
 app.use(bodyParser.json());
->>>>>>> c075a11d643aa70739515c1cfc19e45c105d6e96
 
 app.get('/', (req, res) => {
     console.log('get request received: ', req.url);
