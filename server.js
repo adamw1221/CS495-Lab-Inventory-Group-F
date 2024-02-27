@@ -41,8 +41,16 @@ app.post('/', async(req, res) => {
                     filter, updateDB);// returns string
                 res.status(200).send(result); //0 or 1
             }
-            else if (req.body.type == "delete") {
-
+            else if (req.body.type == "remove") {
+                console.log('Removing Document: ', req.body.input);
+                const query = { id: req.body.input };
+                const result = await remove(client, "InventoryDB", "Robotics_Lab", query);
+                //console.log(result.deletedCount);
+                if (result.deletedCount == 1) {
+                    res.status(200).json({ success: true, message: 'Document removed successsfully.' });
+                } else {
+                    res.status(404).json({ success: false, message: 'Document not found or already removed.' });
+                }
             }
             else if (req.body.type == "add") {
                 
