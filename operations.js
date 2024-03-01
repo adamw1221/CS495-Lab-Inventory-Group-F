@@ -1,3 +1,7 @@
+// Allows us to only import "operations" to our server file
+// and use the dot operator to access operations that we require here
+// e.g. operations.read(client,params)
+//could shorten to op.read(client, params) by changing the func name below
 const update = require("./doc_update");
 const read = require("./doc_read");
 const remove = require("./doc_remove");
