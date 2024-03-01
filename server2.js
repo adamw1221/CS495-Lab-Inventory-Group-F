@@ -22,9 +22,28 @@ async function initializeServer() {
 initializeServer(); 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/getEquipment', async (req, res) => {
+    //switch here based on type?
     console.log('get request received: ', req.url);
-    res.send('Hello, World! this is a get request response.');
+    if (client){
+        // { projection: { name: 1, _id: 1} }
+        const query = { "Available": { $ne: "No" } }
+        const products = await read(client, "InventoryDB", "Robotics_Lab",query, { _id:0, name: 1, id: 1} );
+        
+            // console.log("Products: ", products);
+        // const keyValuePairs = {};
+        // products.forEach(product => {
+        //     keyValuePairs[product.name] = product.id;
+        //     });
+        
+        res.json({ data: products });
+    } 
+    else{
+        res.status(500).send("Sorry there's a problem with the website!" +
+        "Please try again later."); //0 or 1
+    }
+    // Send the key-value pairs as a JSON response
+    
 });
 
 app.post('/data', (req, res) => {
