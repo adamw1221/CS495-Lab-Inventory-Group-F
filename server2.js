@@ -19,30 +19,26 @@ async function initializeServer() {
     client = await runServer();
 }
 
-initializeServer(); 
+initializeServer();
 app.use(bodyParser.json());
 
 app.get('/getEquipment', async (req, res) => {
-    //switch here based on type?
     console.log('get request received: ', req.url);
-    if (client){
-        // { projection: { name: 1, _id: 1} }
-        const query = { "Available": { $ne: "No" } }
-        const products = await read(client, "InventoryDB", "Robotics_Lab",query, { _id:0, name: 1, id: 1} );
-        
-            // console.log("Products: ", products);
-        // const keyValuePairs = {};
-        // products.forEach(product => {
-        //     keyValuePairs[product.name] = product.id;
-        //     });
-        
-        res.json({ data: products });
-    } 
-    else{
-        res.status(500).send("Sorry there's a problem with the website!" +
-        "Please try again later."); //0 or 1
+
+    try{
+        if (client){
+            const query = { "Available": { $ne: "No" } }
+            const products = await read(client, "InventoryDB", "Robotics_Lab",query,
+                { _id:0, name: 1, id: 1} );
+            res.json({ data: products });
+        } 
+        else{
+            res.status(500).send();
+        }
+    } catch (error){
+        console.error("Error in /getEquipment route:", error.message);
+        res.status(500).send();
     }
-    // Send the key-value pairs as a JSON response
     
 });
 
@@ -55,8 +51,7 @@ app.post('/data', (req, res) => {
 
 app.post('/', async(req, res) => {
     console.log('request received:', req.url);
-    // (async (req, res) => {
-        // const client = await runServer();
+
         if (client) {
             if (req.body.type == "read") {
                 console.log(req.body.input);
@@ -87,14 +82,12 @@ app.post('/', async(req, res) => {
                 const itemName = req.body.name;
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
                     itemId, itemName);// returns string
-                res.status(200).send(result); //0 or 1
+                res.status(200).send(result);
             }
-            // await client.close();
         }else{
             res.status(500).send("Sorry there's a problem with the website!" +
-            "Please try again later."); //0 or 1
+            "Please try again later.");
         }
-    // })(req, res);
 });
 
 app.listen(port, () => {

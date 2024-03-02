@@ -1,15 +1,6 @@
 async function fetchEquipmentData() {
 
-    let options = {
-        method: 'GET',
-        headers: {
-            'Content-Type':
-                'application/json;charset=utf-8'
-        },
-    }
-
     try {
-      // Replace 'http://localhost:3000/api/products' with your actual API endpoint
       const response = await fetch('http://localhost:3000/getEquipment');
       
       if (!response.ok) {
@@ -104,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         dropdown.appendChild(option);
         });
     }else {
-        console.error('Invalid or non-array data received:', equipmentData);
+        console.error('Invalid data received:', equipmentData);
     }
   }
   
