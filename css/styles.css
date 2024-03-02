@@ -19,11 +19,16 @@ button:hover {
 }
 
 #text-output {
-    font-family: "Arial", sans-serif; /* Change the font-family to your preferred font */
-    font-size: 14px; /* Change the font size if needed */
-    line-height: 1.5; /* Adjust the line height for better readability */
-    color: rgb(17, 182, 17); /* Set the text color */
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgb(17, 182, 17);
     font-weight: bold;
+
+    background-color: rgba(17, 182, 17, 0.1); /* Subtle background color */
+    padding: 10px; /* Add padding for better visual separation */
+    border: 1px solid rgba(17, 182, 17, 0.5); /* Border with transparency */
+    box-shadow: 0 0 5px rgba(17, 182, 17, 0.3); /* Box shadow for a subtle glow */
 }
 
 .response {
@@ -40,6 +45,6 @@ button:hover {
 
 .input-container {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
 }

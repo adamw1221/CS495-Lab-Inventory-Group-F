@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const runServer = require("./run_server.js");
-const read = require("./doc_read.js");
-const update = require("./doc_update.js");
-const add = require("./doc_add.js");
-const remove = require("./doc_remove.js");
+const read = require("../operations/doc_read.js");
+const update = require("../operations/doc_update.js");
+const add = require("../operations/doc_add.js");
+const remove = require("../operations/doc_remove.js");
 
 const bodyParser = require('body-parser');
 const app = express();
