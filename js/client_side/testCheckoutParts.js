@@ -31,16 +31,19 @@ async function postRequest(data) {
         // send request while providing data parameter
         const response = await fetch('http://localhost:3000', options);
         
-        const responseText = await response.text();
-        const intValue = parseInt(responseText, 10);
+        const responseJson = await response.json();
+        return responseJson;
+        //const intValue = parseInt(responseText, 10);
 
         // Check if the parsing was successful
+        /*
         if (!isNaN(intValue)) {
             return intValue;
         } else {
             console.error('Error: Unable to parse responseText as an integer');
             return -1; 
         }
+        */
 
     } catch (error) {
         console.error('Error:', error);
@@ -90,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (Array.isArray(equipmentData)) {
         equipmentData.forEach((equipment) => {
         const option = document.createElement("option");
-        option.value = equipment.name; // Replace with the actual ID or identifier of the equipment
+        option.value = equipment.id; // Replace with the actual ID or identifier of the equipment
         option.text = equipment.name + ' - ' + equipment.id; // Replace with the actual property representing the equipment name
         dropdown.appendChild(option);
         });
@@ -103,6 +106,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Replace with your logic to handle the selected equipment
     //Insert Post request here
     console.log("Selected Equipment ID:", selectedEquipment);
+
+    // assuming selectedEquipment is actually an ID
+    const data = {};
+    data["type"] = "read";
+    data["input"] = selectedEquipment;
+
+    postRequest(data).then(response => {
+      console.log(response);
+      // need error handling to ensure response is proper form
+
+      // temporary: dump json into div text
+      document.getElementById("partInfo").innerText = JSON.stringify(response);
+    });
+
     // Add your additional logic here, such as displaying details or initiating checkout.
   }
   
