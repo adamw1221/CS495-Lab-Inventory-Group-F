@@ -123,72 +123,49 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Add your additional logic here, such as displaying details or initiating checkout.
   }
   
+async function checkoutPart() {
+  //
+  // button logic here
+  //
 
-///OLD UPDATE CODE 
-// async function checkoutParts() {
-//     // 1. Get filter and changes
-//     const filterInput = document.getElementById("search").value;
-//     const changesInput = document.getElementById("part?").value;
+  // 1.0: pull data
+  var selectedEquipment = null;
+  var checkoutDate = null;
+  var checkoutTime = null;
+  var returnDate = null;
+  var returnTime = null;
+  try {
+    selectedEquipment = document.getElementById("equipmentDropdown").value;
+    checkoutDate = document.getElementById("checkoutDate").value;
+    checkoutTime = document.getElementById("checkoutTime").value;
+    returnDate = document.getElementById("returnDate").value;
+    returnTime = document.getElementById("returnTime").value;
+  }
+  catch(err) {
+    console.log(err);
+    alert("Input Error");
+  }
+  finally {
+    // 1.1: clear input fields (security)
+    // preston: i'm not sure whether i can just set dom element values here to null or not, will have to test
+  }
+  // START-DEBUG
+  console.log(selectedEquipment);
+  console.log(checkoutDate);
+  console.log(checkoutTime);
+  console.log(returnDate);
+  console.log(returnTime);
+  // END-DEBUG
 
-//     // 2. Formatting
-//     if (filterInput.trim() !== '' && changesInput.trim() !== '') {
+  // 2.0: send request to verify that checkout is possible
 
-//         filterObject = parseInputString(filterInput);
-//         changesObject = parseInputString(changesInput);
+  // 3.0: handle response (possible/impossible, request needed?)
 
-//         // 3. Construct a data object with the filter, update, and Post Type
-//         const requestData = {
-//             input: { projection: { name: 1, id: 1, _id: 0 } },
-//             type: 'getEquipment'
-//         };
-
-//         // 4. Call the postRequest function with the requestData object
-//         const updateResponse = await postRequest(requestData);
-//         console.log("Update Response: ", updateResponse);
-
-//         //5. Check if the update was successful (number set in postRequest)
-//         if (updateResponse == 1) {
-//             document.getElementById('updateResponse').innerText = `1 document updated`;
-//         }
-//         else if (updateResponse == 0){
-//             document.getElementById('updateResponse').innerText = `No document updated`;
-//         }
-//         else {
-//             console.error('Update failed');
-//             displayError(`Update failed. Please try again later.`, "updateResponse");
-//         }
+  // 4.0: possible + no request needed: send request to perform checkout
   
-//     } else {
-//         console.error('A data field is empty or undefined');
-//         document.getElementById('updateResponse').innerText =
-//             'A data field is empty or undefined';
-//     }
-// }
+  // 5.0: possible + request needed: produce alert giving user the option to send request email
 
-// // Helper Functions
-// function parseInputString(inputString) {
-//     try {
-//         // Attempt to parse the input as JSON
-//         return JSON.parse(inputString);
-//     } catch (error) {
-//         // If JSON parsing fails, treat it as a list of key-value pairs
-//         const keyValuePairs = inputString.split(',').map(pair => pair.trim());
+  // 6.0: impossible: notify user
 
-//         const resultObject = {};
-//         keyValuePairs.forEach(pair => {
-//             const [key, ...valueParts] = pair.split(':').map(item => item.trim());
-//             const value = valueParts.join(':').trim();
-
-//             if (key && value) {
-//                 resultObject[key] = value;
-//             }
-//         });
-
-//         return resultObject;
-//     }
-// }
-
-// function displayError(message, responseId) {
-//     const errorElement = document.getElementById(responseId);
-//     errorElement.innerText = message;
-// }
+  // 7.0: handle db op response (if applicable)
+}
