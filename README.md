@@ -21,3 +21,10 @@ Senior of Computer Science at UA
 email: pjmazzei@crimson.ua.edu
 
 mobile: (803) 719-1314
+
+### Blake Cantrell
+Senior of Computer Science at UA
+
+email: btcantrell@crimson.ua.edu
+
+mobile: (912) 288-4170
