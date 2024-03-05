@@ -15,7 +15,7 @@
 
    **"start": "node js\server_side\server.js"**
 
-   Now you can run the command: **npm start**
+   Now you can run the command: **npm start** to start our server and connect to our database
    
 2. Or navigate to folder js, then into server_side:
 
