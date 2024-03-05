@@ -6,7 +6,7 @@
    
    **git clone https://github.com/adamw1221/CS495-Lab-Inventory-Group-F.git**
    
-2. Navigate to the folder: **CD CS495-Lab-Inventory-Group-F**
+2. Navigate into the project folder: **CD CS495-Lab-Inventory-Group-F**
 3. Run the command: **npm init -y**
    to initialize the folder with npm. You should now have a package json
 
@@ -21,9 +21,12 @@
 
    **CD js\server_side** and run **node server.js**
 
-4. Copy the full path of one of the html pages e.g., **C:\user\CS495-Lab-Inventory-Group-F\html\basicWebsite.html** 
-5. Paste the path into your web browser.
-6. The web pages should now be visible and you should be able to add, read, update, and remove from the database.
+4. Copy the full path of an html page (in the html folder) e.g.,
+  
+   **C:\user\CS495-Lab-Inventory-Group-F\html\basicWebsite.html**
+   
+7. Paste the path into your web browser.
+8. The web pages should now be visible and you should be able to add, read, update, and remove from the database.
 
 
 ## Team Member Bios
