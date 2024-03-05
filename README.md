@@ -11,13 +11,13 @@
    to initialize the folder with npm. You should now have a package json
 
 ### Run:
-1. In your package json, modify your start to match this:
+1. A) In your package json, modify your start to match this:
 
    **"start": "node js\server_side\server.js"**
 
-   Now you can run the command  **npm start**  to start our server and connect to our database
+   Now you can run the command  **npm start**  to start our server and connect to our database.
    
-Or navigate to folder js, then into server_side:
+   B) Or navigate to folder js, then into server_side:
 
    **CD js\server_side** and run **node server.js**
 
