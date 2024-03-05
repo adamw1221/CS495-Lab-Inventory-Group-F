@@ -48,3 +48,67 @@ button:hover {
     align-items: center;
     flex-direction: column;
 }
+
+.header {
+    background-color: #990000; 
+    padding: 10px;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.logo img { 
+    float: left;
+    height: 80px;
+    width: auto;
+}
+
+.dropdown {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 300px; /* Adjust the width as per your requirement */
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: center; /* Center the content inside the dropdown */
+    left: 50%; /* Position the dropdown at the center */
+    transform: translateX(-50%); /* Move the dropdown back by half of its width */
+    margin-top: 20px;
+}
+
+.dropdown-content select,
+.dropdown-content input,
+.dropdown-content button {
+    display: block;
+    margin: 10px auto; /* Center the select, input, and button */
+    font-size: 16px;
+    padding: 8px;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.datetime-pair {
+    margin-bottom: 10px;
+}
+
+.datetime-pair label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.datetime-pair input[type="date"],
+.datetime-pair input[type="time"] {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
