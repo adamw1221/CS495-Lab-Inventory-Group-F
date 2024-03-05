@@ -15,7 +15,7 @@
 
    **"start": "node js\server_side\server.js"**
 
-  Now you can run the command: **npm start**
+   Now you can run the command: **npm start**
    
 2. Or navigate to folder js, then into server_side:
 
@@ -46,4 +46,5 @@ mobile: (912) 288-4170
 Senior of Computer Science at UA
 
 email: odcampbell@crimson.ua.edu
+
 mobile: (334) 328-5115
