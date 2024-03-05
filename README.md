@@ -17,16 +17,16 @@
 
    Now you can run the command  **npm start**  to start our server and connect to our database
    
-2. Or navigate to folder js, then into server_side:
+Or navigate to folder js, then into server_side:
 
    **CD js\server_side** and run **node server.js**
 
-4. Copy the full path of an html page (in the html folder) e.g.,
+2. Copy the full path of an html page (in the html folder) e.g.,
   
    **C:\user\CS495-Lab-Inventory-Group-F\html\basicWebsite.html**
    
-7. Paste the path into your web browser.
-8. The web pages should now be visible and you should be able to add, read, update, and remove from the database.
+3. Paste the path into your web browser.
+4. The web pages should now be visible and you should be able to add, read, update, and remove from the database.
 
 
 ## Team Member Bios
