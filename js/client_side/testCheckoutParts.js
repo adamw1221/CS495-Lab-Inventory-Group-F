@@ -147,6 +147,11 @@ async function checkoutPart() {
   }
   finally {
     // 1.1: clear input fields (security)
+    document.getElementById("equipmentDropdown").value ="";
+    document.getElementById("checkoutDate").value ="";
+    document.getElementById("checkoutTime").value ="";
+    document.getElementById("returnDate").value ="";
+    document.getElementById("returnTime").value ="";
     // preston: i'm not sure whether i can just set dom element values here to null or not, will have to test
   }
   // START-DEBUG
@@ -155,6 +160,15 @@ async function checkoutPart() {
   console.log(checkoutTime);
   console.log(returnDate);
   console.log(returnTime);
+
+  // Comment out lines in finally to test 
+  console.log("Fields post clean");
+
+  console.log("equipmentDropdown: ", document.getElementById("equipmentDropdown").value)
+  console.log("checkoutDate: ", document.getElementById("checkoutDate").value)
+  console.log("checkoutTime: ",document.getElementById("checkoutTime").value)
+  console.log("returnDate: ",document.getElementById("returnDate").value)
+  console.log("returnTime: ",document.getElementById("returnTime").value)
   // END-DEBUG
 
   // 2.0: send request to verify that checkout is possible
