@@ -57,3 +57,10 @@ Senior of Computer Science at UA
 email: odcampbell@crimson.ua.edu
 
 mobile: (334) 328-5115
+
+### Adam Wrote
+Senior of Computer Science and Mechanical Engineering at UA
+
+email: awwrote@crimson.ua.edu
+
+mobile: (702) 630-9946
