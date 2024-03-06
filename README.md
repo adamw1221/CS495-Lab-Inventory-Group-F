@@ -30,6 +30,11 @@
 5. The web pages should now be visible and you should be able to add, read, update, and remove from the database.
 
 
+## Project Focus
+Our job is to build a web application to help the Robotics Lab manage inventory​
+
+The web app will allow users to add, update, remove, and read lab equipment. It will also allow users to check out this equipment and notify users when it is due back.​
+
 ## Team Member Bios
 
 ### Preston Mazzei
