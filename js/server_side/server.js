@@ -49,6 +49,77 @@ app.post('/data', (req, res) => {
     res.send('received post request. data received: ', JSON.stringify(requestData));
 });
 
+app.post('/checkout', async(req, res) => {
+    console.log('request received:', req.url);
+
+    if (client) {
+        if (req.body.type == "validate") {
+            // validate checkout input
+            const issues = [];
+
+            // validate equipment selection
+            console.log(req.body.input["selectedEquipment"]);
+            const query = {id: req.body.input["selectedEquipment"]};
+            const result = await read(client, "InventoryDB", "Robotics_Lab", query);
+            console.log(result[0]["Available"]);
+            if (result[0]["Available"] != "Yes") {
+                issues.push("Selected equipment is not available.");
+            }
+
+            // validate checkout date
+            console.log(req.body.input["checkoutDate"]);
+            console.log(req.body.input["checkoutTime"]);
+            const checkoutDate = Date.parse(req.body.input["checkoutDate"]
+                                            + "T"
+                                            + req.body.input["checkoutTime"]);
+            try {
+                if (checkoutDate <= Date.now()) {
+                    issues.push("Checkout time cannot be in the past.");
+                }
+            }
+            catch {
+                issues.push("Must select a valid checkout date and time.");
+            }
+
+            // validate return date
+            console.log(req.body.input["returnDate"]);
+            console.log(req.body.input["returnTime"]);
+            const returnDate = Date.parse(req.body.input["returnDate"]
+                                            + "T"
+                                            + req.body.input["returnTime"]);
+            try {
+                if (returnDate <= Date.now()) {
+                    issues.push("Return time cannot be in the past.");
+                }
+            }
+            catch {
+                issues.push("Must select a valid return date and time.");
+            }
+            try {
+                if (returnDate <= checkoutDate) {
+                    issues.push("Return date cannot be before checkout date.");
+                }
+            }
+            catch {}
+
+            // send response based on validation
+            if (issues.length > 0) {
+                res.status(200).send(issues);
+            }
+            else {
+                res.status(200).send(["No issues"]);
+            }
+        }
+        else if (req.body.type == "checkout") {
+            //
+        }
+    }
+    else {
+        res.status(500).send("Sorry there's a problem with the website!" +
+            "Please try again later.");
+    }
+});
+
 app.post('/', async(req, res) => {
     console.log('request received:', req.url);
 
