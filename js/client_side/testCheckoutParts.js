@@ -16,38 +16,27 @@ async function fetchEquipmentData() {
     }
   }
 
-async function postRequest(data) {
-    // configure options for post request
-    let options = {
-        method: 'POST',
-        headers: {
-            'Content-Type':
-                'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(data)
-    }
+async function postRequest(data, endpoint) {
+  // configure options for post request
+  let options = {
+      method: 'POST',
+      headers: {
+          'Content-Type':
+              'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+  }
 
-    try {
-        // send request while providing data parameter
-        const response = await fetch('http://localhost:3000', options);
-        
-        const responseJson = await response.json();
-        return responseJson;
-        //const intValue = parseInt(responseText, 10);
+  try {
+    // send request while providing data parameter
+    const response = await fetch('http://localhost:3000' + endpoint, options);
+    
+    const responseJson = await response.json();
+    return responseJson;
 
-        // Check if the parsing was successful
-        /*
-        if (!isNaN(intValue)) {
-            return intValue;
-        } else {
-            console.error('Error: Unable to parse responseText as an integer');
-            return -1; 
-        }
-        */
-
-    } catch (error) {
-        console.error('Error:', error);
-    }
+  } catch (error) {
+      console.error('Error:', error);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -112,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     data["type"] = "read";
     data["input"] = selectedEquipment;
 
-    postRequest(data).then(response => {
+    postRequest(data, "/").then(response => {
       console.log(response);
       // need error handling to ensure response is proper form
 
@@ -172,6 +161,20 @@ async function checkoutPart() {
   // END-DEBUG
 
   // 2.0: send request to verify that checkout is possible
+  const data = {};
+  data["type"] = "validate"
+  data["input"] = {
+    "selectedEquipment": selectedEquipment,
+    "checkoutDate": checkoutDate,
+    "checkoutTime": checkoutTime,
+    "returnDate": returnDate,
+    "returnTime": returnTime,
+  };
+  var response;
+  postRequest(data, "/checkout").then(res => {
+    console.log(res);
+    response = res;
+  });
 
   // 3.0: handle response (possible/impossible, request needed?)
 
