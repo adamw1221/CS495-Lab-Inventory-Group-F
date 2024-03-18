@@ -66,6 +66,10 @@ app.post('/checkout', async(req, res) => {
                 issues.push("Selected equipment is not available.");
             }
 
+            if (result[0]["Request_Needed"] == "Yes") {
+                issues.push("Email professor to verify your permissions for this equipment.");
+            }
+
             // validate checkout date
             console.log(req.body.input["checkoutDate"]);
             console.log(req.body.input["checkoutTime"]);

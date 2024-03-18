@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // If data is not present, fetch it from the API and store it in sessionStorage
         const equipmentData = await fetchEquipmentData();
-        console.log("EqData: ", equipmentData);
+        // console.log("EqData: ", equipmentData);
         populateDropdown(equipmentData);
           // Store equipment data in sessionStorage
         sessionStorage.setItem("equipmentData", JSON.stringify(equipmentData));
@@ -91,8 +91,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   
+  //This function is probably not needed or could be updated
   function handleEquipmentSelection(selectedEquipment) {
-    // Replace with your logic to handle the selected equipment
     //Insert Post request here
     console.log("Selected Equipment ID:", selectedEquipment);
 
@@ -153,11 +153,11 @@ async function checkoutPart() {
   // Comment out lines in finally to test 
   console.log("Fields post clean");
 
-  console.log("equipmentDropdown: ", document.getElementById("equipmentDropdown").value)
-  console.log("checkoutDate: ", document.getElementById("checkoutDate").value)
-  console.log("checkoutTime: ",document.getElementById("checkoutTime").value)
-  console.log("returnDate: ",document.getElementById("returnDate").value)
-  console.log("returnTime: ",document.getElementById("returnTime").value)
+  // console.log("equipmentDropdown: ", document.getElementById("equipmentDropdown").value)
+  // console.log("checkoutDate: ", document.getElementById("checkoutDate").value)
+  // console.log("checkoutTime: ",document.getElementById("checkoutTime").value)
+  // console.log("returnDate: ",document.getElementById("returnDate").value)
+  // console.log("returnTime: ",document.getElementById("returnTime").value)
   // END-DEBUG
 
   // 2.0: send request to verify that checkout is possible
@@ -174,15 +174,25 @@ async function checkoutPart() {
   postRequest(data, "/checkout").then(res => {
     console.log(res);
     response = res;
+
+    if(response[0] == "No issues"){
+      // 4.0: possible + no request needed: send request to perform checkout
+      console.log("Res: No issues");
+    }
+    else if (response.length == 1 && response[0] == 
+      "Email professor to verify your permissions for this equipment."){
+
+    // 5.0: possible + request needed: produce alert giving user the option to send request email
+      console.log("Res: Email professor to..");
+    }
+    else{
+      // 6.0: impossible: notify user
+      console.log("Res: Issues..");
+    }
   });
 
   // 3.0: handle response (possible/impossible, request needed?)
-
-  // 4.0: possible + no request needed: send request to perform checkout
   
-  // 5.0: possible + request needed: produce alert giving user the option to send request email
-
-  // 6.0: impossible: notify user
 
   // 7.0: handle db op response (if applicable)
 }
