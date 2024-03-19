@@ -169,6 +169,7 @@ async function checkoutPart() {
     "checkoutTime": checkoutTime,
     "returnDate": returnDate,
     "returnTime": returnTime,
+    "username": "myusername",
   };
   var response;
   postRequest(data, "/checkout").then(res => {
@@ -178,6 +179,11 @@ async function checkoutPart() {
     if(response[0] == "No issues"){
       // 4.0: possible + no request needed: send request to perform checkout
       console.log("Res: No issues");
+      // modify data object to change request type and add user info
+      // NOTE: NEED TO GET USER INFO, PLACEHOLDER IS BEING USED
+      data["type"] = "checkout";
+      // incomplete
+      postRequest(data, "/checkout").then(res => {});
     }
     else if (response.length == 1 && response[0] == 
       "Email professor to verify your permissions for this equipment."){

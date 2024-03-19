@@ -115,7 +115,29 @@ app.post('/checkout', async(req, res) => {
             }
         }
         else if (req.body.type == "checkout") {
-            //
+            // perform checkout process
+
+            // transform input data
+            const Checkout_Status = {};
+            Checkout_Status["username"] = req.body.input["username"];
+            Checkout_Status["checkoutDate"] = Date.parse(req.body.input["checkoutDate"]
+                                                            + "T"
+                                                            + req.body.input["checkoutTime"]);
+            Checkout_Status["returnDate"] = Date.parse(req.body.input["returnDate"]
+                                                            + "T"
+                                                            + req.body.input["returnTime"]);
+            
+            const filter = {"id": req.body.input["selectedEquipment"]};
+            const updateDB = {"Checkout_Status": Checkout_Status,
+                              "Available": "No"};
+            
+            // run a document update with the supplied data
+            const result = await update(client,"InventoryDB", "Robotics_Lab",
+                                        filter, updateDB);
+
+            // return operation status
+            res.status(200).send(result);
+
         }
     }
     else {
