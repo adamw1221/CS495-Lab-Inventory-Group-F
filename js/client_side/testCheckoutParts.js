@@ -193,6 +193,7 @@ async function checkoutPart() {
     }
     else{
       // 6.0: impossible: notify user
+      openPopup("Invalid date please select another");
       console.log("Res: Issues..");
     }
   });
@@ -201,4 +202,13 @@ async function checkoutPart() {
   
 
   // 7.0: handle db op response (if applicable)
+}
+
+function openPopup(errorMessage) {
+  document.getElementById('error-message').innerText = errorMessage;
+  document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup(){
+  document.getElementById('popup').style.display = 'none';
 }
