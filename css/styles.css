@@ -61,7 +61,7 @@ header {
 
 .dropdown {
     position: absolute;
-    top: 20%;
+    /* top: 20%; */
     left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -77,7 +77,7 @@ header {
     text-align: center; /* Center the content inside the dropdown */
     left: 50%; /* Position the dropdown at the center */
     transform: translateX(-50%); /* Move the dropdown back by half of its width */
-    margin-top: 20px;
+    /* margin-top: 2px; */
 }
 
 .dropdown-content select,

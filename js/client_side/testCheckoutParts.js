@@ -113,9 +113,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   
 async function checkoutPart() {
-  //
-  // button logic here
-  //
 
   // 1.0: pull data
   var selectedEquipment = null;
@@ -129,10 +126,16 @@ async function checkoutPart() {
     checkoutTime = document.getElementById("checkoutTime").value;
     returnDate = document.getElementById("returnDate").value;
     returnTime = document.getElementById("returnTime").value;
+
+    emptyVal = isEmpty(selectedEquipment, checkoutDate, checkoutTime, returnDate, returnTime);
+    if(emptyVal){
+      throw new Error('All fields are required.');
+    }
   }
   catch(err) {
-    console.log(err);
-    alert("Input Error");
+    openPopup(err);
+    return;
+    // alert("Input Error, ", err);
   }
   finally {
     // 1.1: clear input fields (security)
@@ -151,7 +154,7 @@ async function checkoutPart() {
   console.log(returnTime);
 
   // Comment out lines in finally to test 
-  console.log("Fields post clean");
+  // console.log("Fields post clean");
 
   // console.log("equipmentDropdown: ", document.getElementById("equipmentDropdown").value)
   // console.log("checkoutDate: ", document.getElementById("checkoutDate").value)
@@ -190,6 +193,8 @@ async function checkoutPart() {
 
     // 5.0: possible + request needed: produce alert giving user the option to send request email
       console.log("Res: Email professor to..");
+      openPopup("Email professor to verify your permissions for this equipment.");
+
     }
     else{
       // 6.0: impossible: notify user
@@ -211,4 +216,14 @@ function openPopup(errorMessage) {
 
 function closePopup(){
   document.getElementById('popup').style.display = 'none';
+}
+
+function isEmpty(...args){
+  for (let i = 0; i < args.length; i++) {
+    console.log(`Arg ${i}: ${args[i]}`);
+    if(args[i] == ""){
+      return true;
+    }
+  }
+  return false;
 }
