@@ -194,6 +194,20 @@ nav ul li {
     margin: auto;
 }
 
+#textareaform {
+    display: block;
+    background-color: #f9f9f9;
+    width: 75%;
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center the content inside the dropdown */
+    margin: auto;
+}
+
+form {
+    width: 75%;
+}
+
 .form div {
     display: block;
     background-color: #f9f9f9;
