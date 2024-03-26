@@ -28,11 +28,15 @@
   <!-- END Buttons to Matching Page or add Nav Bar -->
 
   <!-- Input box for Part ID and Remove button -->
-  <div style="text-align: center;">
-    <input type="text" id="partIdInput" placeholder="Enter Part ID">
+  <div class="form">
+    <div>
+      <label for="partIdInput">Equipment ID:</label>
+      <input type="text" id="partIdInput">
+    </div>
+    <br><br>
     <button type="button" onclick="removeDocument()" id="removeButton">Remove Part</button>  
-    <div class="response" id="removeResponse"><pre>Awaiting Removal..</pre></div>  
   </div>
+  <div id="removeResponse"></div>
   <!-- END Input box for Part ID and Remove button -->
 
   <!-- HTTP requests -->

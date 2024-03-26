@@ -41,11 +41,16 @@
       e.g., {"id": "document1", "key": { "status" : "value1"}}
     </div><br>
 
-    <label for="filterInput">ID Filter (for 1 document):</label>
-    <textarea type="text" id="filterInput" name="filterInput" rows="4" cols="50" required></textarea><br>
-  
-    <label for="changesInput">Changes:</label>
-    <textarea type="text" id="changesInput" name="changesInput"  rows="4" cols="50" required></textarea>
+    <div class="form">
+      <div>
+        <label for="filterInput">Equipment ID:</label>
+        <textarea type="text" id="filterInput" name="filterInput" rows="4" cols="25" required></textarea>
+      </div>
+      <div>
+        <label for="changesInput">Changes:</label>
+        <textarea type="text" id="changesInput" name="changesInput"  rows="4" cols="25" required></textarea>
+      </div>
+    </div>
   
     <button type="button" onclick="updateDoc()">Update Equipment</button>
     <div class="response" id="updateResponse"><pre>Awaiting Update..</pre></div>

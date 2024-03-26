@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       // need error handling to ensure response is proper form
 
       // temporary: dump json into div text
-      document.getElementById("partInfo").innerText = JSON.stringify(response);
+      // document.getElementById("partInfo").innerText = JSON.stringify(response);
     });
 
     // Add your additional logic here, such as displaying details or initiating checkout.
@@ -184,16 +184,17 @@ async function checkoutPart() {
       data["type"] = "checkout";
       // incomplete
       postRequest(data, "/checkout").then(res => {});
+      openPopup("Checkout successful!");
     }
     else if (response.length == 1 && response[0] == 
       "Email professor to verify your permissions for this equipment."){
 
     // 5.0: possible + request needed: produce alert giving user the option to send request email
-      console.log("Res: Email professor to..");
+      console.log("This equipment needs special permission from your instructor. Would you like to send a request?");
     }
     else{
       // 6.0: impossible: notify user
-      openPopup("Invalid date please select another");
+      openPopup("Invalid checkout or return date! Please select another.");
       console.log("Res: Issues..");
     }
   });
