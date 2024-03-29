@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Checkout</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="text/javascript" src="../js/client_side/testCheckoutParts.js"></script>
+
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../img/ua-square-logo.png" alt="UA Logo">
+    </div>
+    <h1>Equipment Checkout</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="checkoutParts.html" id="checkoutParts">Checkout Parts</a></li>
+      <li><a href="testUpdate.html" id="updateParts">Update Parts</a></li>
+      <li><a href="test_add.html" id="addParts">Add Parts</a></li>
+      <li><a href="testRemove.html" id="removeOldParts">Remove Old Parts</a></li>
+    </ul>
+  </nav>
+
+  <div class="dropdown">
+    <div class="dropdown-content">
+      <select id="equipmentDropdown"></select><br><br>
+      <div class="datetime-pair">
+        <label for="checkoutDate">Checkout Date:</label>
+        <input type="date" id="checkoutDate"><br><br>
+        <label for="checkoutTime">Checkout Time:</label>
+        <input type="time" id="checkoutTime"><br><br>
+      </div>
+      <div class="datetime-pair">
+        <label for="returnDate">Return Date:</label>
+        <input type="date" id="returnDate"><br><br>
+        <label for="returnTime">Return Time:</label>
+        <input type="time" id="returnTime"><br><br>
+      </div>
+      <div id="partInfo"></div>
+      <button id="checkoutButton" onclick="checkoutPart()">Checkout</button>
+    </div>
+  </div>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p id="error-message"></p>
+    </div>
+  </div>
+  
+
+  <div class="content">
+
+</div>
+</body>
+</html>

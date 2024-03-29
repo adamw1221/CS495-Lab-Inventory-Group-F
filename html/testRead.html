@@ -1,0 +1,40 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Read Parts</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="text/javascript" src="../js/client_side/testRead.js"></script>
+</head>
+
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="../img/ua-square-logo.png" alt="UA Logo">
+    </div>
+    <h1>View Lab Inventory</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="checkoutParts.html" id="checkoutParts">Checkout Parts</a></li>
+      <li><a href="testUpdate.html" id="updateParts">Update Parts</a></li>
+      <li><a href="test_add.html" id="addParts">Add Parts</a></li>
+      <li><a href="testRemove.html" id="removeOldParts">Remove Old Parts</a></li>
+    </ul>
+  </nav>
+
+  <!-- testing http request -->
+  <br>
+  <br>
+  <label for="id-input">Part ID:</label>
+  <input type="text" id="id-input" name="id-input">
+  <button onclick="searchById()">Get MAC Address</button>
+  <div id="response">MAC address goes here:</div>
+ 
+</body>
+</html>

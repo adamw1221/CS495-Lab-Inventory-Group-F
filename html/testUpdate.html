@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Update Parts</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="text/javascript" src="../js/client_side/testUpdate.js"></script>
+  <!-- <script type="text/javascript" src="basicWebsite.js"></script> -->
+</head>
+
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="../img/ua-square-logo.png" alt="UA Logo">
+    </div>
+    <h1>Update Existing Equipment</h1>
+  </header>
+
+  <!-- Buttons to Matching Page or add Nav Bar -->
+  <nav>
+    <ul>
+      <li><a href="checkoutParts.html" id="checkoutParts">Checkout Parts</a></li>
+      <li><a href="testUpdate.html" id="updateParts">Update Parts</a></li>
+      <li><a href="test_add.html" id="addParts">Add Parts</a></li>
+      <li><a href="testRemove.html" id="removeOldParts">Remove Old Parts</a></li>
+    </ul>
+  </nav>
+  <!-- END Buttons to Matching Page or add Nav Bar -->
+
+  <!-- HTTP requests -->
+  <form class="input-container" id="updateForm">
+
+    <div id="text-output">
+      Enter comma-seperated key:value pairs or full JSON format
+    </div>
+    <div id="text-output">
+      e.g., {"id": "document1", "key": { "status" : "value1"}}
+    </div><br>
+
+      <div class="form">
+        <label for="filterInput">Equipment ID:</label>
+        <textarea type="text" id="filterInput" name="filterInput" rows="4" cols="25" required></textarea>
+      </div>
+      <div class="form">
+        <label for="changesInput">Changes:</label>
+        <textarea type="text" id="changesInput" name="changesInput"  rows="4" cols="25" required></textarea>
+      </div>
+  
+    <button type="button" onclick="updateDoc()">Update Equipment</button>
+    <div class="response" id="updateResponse"><pre>Awaiting Update..</pre></div>
+  </form>
+  
+  <!-- END HTTP requests -->
+ 
+</body>
+</html>

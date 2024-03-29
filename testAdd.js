@@ -2,7 +2,7 @@
 
 async function add(inDB, inCollection, inQuery) {
 
-  const runServer = require("./run_server.js");
+  const runServer = require("./js/server_side/run_server.js");
 
   // connects to mongodb server
   const inClient = await runServer();

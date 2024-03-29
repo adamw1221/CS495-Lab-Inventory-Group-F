@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Read Parts</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="text/javascript" src="../js/client_side/testRemove.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="../img/ua-square-logo.png" alt="UA Logo">
+    </div>
+    <h1>Remove Existing Equipment</h1>
+  </header>
+
+  <!-- Buttons to Matching Page or add Nav Bar -->
+  <nav>
+    <ul>
+      <li><a href="checkoutParts.html" id="checkoutParts">Checkout Parts</a></li>
+      <li><a href="testUpdate.html" id="updateParts">Update Parts</a></li>
+      <li><a href="test_add.html" id="addParts">Add Parts</a></li>
+      <li><a href="testRemove.html" id="removeOldParts">Remove Old Parts</a></li>
+    </ul>
+  </nav>
+  <!-- END Buttons to Matching Page or add Nav Bar -->
+
+  <!-- Input box for Part ID and Remove button -->
+  <div class="form">
+    <div>
+      <label for="partIdInput">Equipment ID:</label>
+      <input type="text" id="partIdInput">
+    </div>
+    <br><br>
+    <button type="button" onclick="removeDocument()" id="removeButton">Remove Part</button>  
+  </div>
+  <div id="removeResponse"></div>
+  <!-- END Input box for Part ID and Remove button -->
+
+  <!-- HTTP requests -->
+  <br> <br>
+
+  <!-- END HTTP requests -->
+ 
+</body>
+</html>

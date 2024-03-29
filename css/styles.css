@@ -1,0 +1,231 @@
+/* styles.css */
+
+#homeButton {
+    margin-bottom: 20px; /* Adjust the margin to create space between "Home" and other buttons */
+}
+
+button {
+    padding: 2px; /* Remove button padding */
+    margin: 4px;
+    cursor: pointer; /* Change cursor to pointer on hover for buttons */
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+#text-output {
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgb(17, 182, 17);
+    font-weight: bold;
+
+    background-color: rgba(17, 182, 17, 0.1); /* Subtle background color */
+    padding: 10px; /* Add padding for better visual separation */
+    border: 1px solid rgba(17, 182, 17, 0.5); /* Border with transparency */
+    box-shadow: 0 0 5px rgba(17, 182, 17, 0.3); /* Box shadow for a subtle glow */
+}
+
+.response {
+    font-family: "Arial", sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-container {
+    align-items: center;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    
+    flex-direction: column;
+    left: 50%;
+    padding: 25px;
+    position: absolute;
+    transform: translateX(-50%); /* Move the dropdown back by half of its width */
+
+}
+
+
+header {
+    background-color: #9E1B32; 
+    padding: 10px;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.logo img { 
+    float: left;
+    height: 80px;
+    width: auto;
+}
+
+.dropdown {
+    position: absolute;
+    /* top: 20%; */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 300px; /* Adjust the width as per your requirement */
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: center; /* Center the content inside the dropdown */
+    left: 50%; /* Position the dropdown at the center */
+    transform: translateX(-50%); /* Move the dropdown back by half of its width */
+    /* margin-top: 2px; */
+}
+
+.dropdown-content select,
+.dropdown-content input,
+.dropdown-content button {
+    display: block;
+    margin: 10px auto; /* Center the select, input, and button */
+    font-size: 16px;
+    padding: 8px;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.datetime-pair {
+    margin-bottom: 10px;
+}
+
+.datetime-pair label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.datetime-pair input[type="date"],
+.datetime-pair input[type="time"] {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 80%;
+    text-align: center;
+}
+
+.popup-content p {
+    font-size: 18px;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 20px;
+    background-color: #9E1B32;
+    color: white;
+}
+
+a:hover {
+    scale: 1.3;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+nav {
+    margin: auto;
+    background-color: #9E1B32;
+    padding: 0px;
+    display: flex;
+    border: 2px solid black;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+nav ul li {
+	float: left;
+}
+
+.input-container > div {
+    display: block;
+    background-color: #f9f9f9;
+    width: 50%;
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center the content inside the dropdown */
+    margin: auto;
+}
+
+#textareaform {
+    display: block;
+    background-color: #f9f9f9;
+    width: 75%;
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center the content inside the dropdown */
+    margin: auto;
+}
+
+form {
+    width: 75%;
+}
+
+.form div {
+    display: block;
+    background-color: #f9f9f9;
+    width: 50%;
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center the content inside the dropdown */
+    margin: auto;
+}
+
+.form input,
+.form button,
+.form label,
+.form textarea {
+    display: block;
+    margin: 10px auto; /* Center the select, input, and button */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px;
+    box-sizing: border-box;
+}
