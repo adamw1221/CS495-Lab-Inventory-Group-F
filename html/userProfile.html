@@ -5,9 +5,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Basic Website</title>
+  <title>My Checkouts</title>
   <link rel="stylesheet" href="../css/styles.css">
-  <!-- <script type="text/javascript" src="basicWebsite.js"></script> -->
+  <script type="text/javascript" src="userProfile.js"></script>
 </head>
 
 
@@ -16,7 +16,7 @@
     <div class="logo">
       <img src="../img/ua-square-logo.png" alt="UA Logo">
     </div>
-    <h1>Lab Inventory Checkout</h1>
+    <h1>My Checkouts</h1>
   </header>
 
   <nav>
@@ -29,22 +29,27 @@
     </ul>
   </nav>
 
-  <!-- testing http request -->
-  <br>
-  <br>
-  <button onclick="makeRequest()">Make Request</button>
-  <div id="response">Text goes here</div>
-  <script>
-    async function makeRequest() {
-        try {
-            const response = await fetch('http://localhost:3000');
-            const data = await response.text();
-            document.getElementById('response').innerText = data;
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-  </script>
+  <br><br>
+  <div>
+    <table>
+        <thead>
+            <tr>
+                <th>Equipment Name</th>
+                <th>Checkout Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>template</td>
+                <td>3-28-2024T14:00</td>
+                <td>4-04-2024T15:00</td>
+                <td>OK</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
  
 </body>
 </html>

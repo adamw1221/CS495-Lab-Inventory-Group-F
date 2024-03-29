@@ -229,3 +229,19 @@ form {
     padding: 8px;
     box-sizing: border-box;
 }
+
+table {
+    border: 2px solid black;
+}
+
+thead > tr > th {
+    border: 2px solid black;
+}
+
+tbody > tr > td {
+    border: 1px solid gray;
+}
+
+td, th {
+    padding: 5px 10px;
+}
