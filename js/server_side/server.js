@@ -5,24 +5,98 @@ const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
 const add = require("../operations/doc_add.js");
 const remove = require("../operations/doc_remove.js");
-
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const path = require('path');
+const { requireLogin, requireAdmin } = require('./helpers.js');
+
 const app = express();
 const port = 3000;
 
 app.use(express.static('LabInventory'));
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "..","..", "css",)));
+app.use(express.static(path.join(__dirname, "..","..", "html",)));
+app.use(express.static(path.join(__dirname, "..","..", "js",)));
+app.use(express.static(path.join(__dirname, "..","..", "img",)));
+app.use(session({ secret: 'your_secret_key', resave: false, saveUninitialized: false }));
 
+// Start server
 let client;
 async function initializeServer() {
     client = await runServer();
 }
-
 initializeServer();
-app.use(bodyParser.json());
 
-app.get('/getEquipment', async (req, res) => {
+// Page Routing Below
+
+    // "home" page
+app.get("/", requireLogin, function (req, res) {
+    // console.log("Home! SessionRole is:", req.session.role);
+
+    // Redirect user based on their role
+    if (req.session.role === 'admin') {
+        res.redirect('/add');
+    } else {
+        res.redirect('/userProfile');
+    }
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'login.html')); // Serve the login.html page
+});
+  
+app.get('/userProfile', requireLogin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'userProfile.html'));
+});
+
+app.get('/update', requireLogin, requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'update.html'));
+});
+
+app.get('/add', requireLogin, requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
+});
+
+app.get('/remove', requireLogin, requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
+});
+
+app.get('/checkoutParts', requireLogin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
+});
+
+// Operation Requests Below
+
+app.post('/login', (req, res) => {
+
+    let username = req.body.username;
+    let password = req.body.password;
+
+    if (username && password){
+        if (username === 'admin' ) {//&& password === 'Lab1'
+        console.log("Admin in!");
+            req.session.userId = 1;
+            req.session.role = "admin";
+            res.redirect('/update');
+        } 
+        else {
+            req.session.userId = 1;
+            req.session.role = "student";
+            res.redirect('/userProfile');
+        }
+    }else {
+		res.send('Please enter Username and Password!');
+	}
+    // else {
+    //     res.redirect('/login?error=1'); // Redirect back to login with error query parameter
+    // }
+});
+
+app.get('/getEquipment',requireLogin, async (req, res) => {
     console.log('get request received: ', req.url);
 
     try{

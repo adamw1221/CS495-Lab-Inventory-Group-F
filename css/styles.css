@@ -245,3 +245,46 @@ tbody > tr > td {
 td, th {
     padding: 5px 10px;
 }
+
+/* Center the login form vertically and horizontally */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px); /* Adjust as needed */
+    position: relative; /* Position relative to its containing element */
+    top: -50px; /* Adjust to float the login box higher */
+}
+
+
+.login-form {
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    padding: 20px; /* Padding inside the form */
+    max-width: 400px; /* Adjust width as needed */
+    width: 100%; /* Take full width of container */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form button {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+}
+
+.login-form button {
+    background-color: #007bff; /* Blue color for button */
+    color: #fff; /* White text color */
+    border: none; 
+    cursor: pointer; 
+}
+
+/* Hover effect for login button */
+.login-form button:hover {
+    background-color: #01c22e; /* Darker blue on hover */
+}

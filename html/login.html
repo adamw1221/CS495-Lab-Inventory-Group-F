@@ -1,13 +1,12 @@
-
+<!-- sends login directly to server -->
 
 <!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Read Parts</title>
+  <title>Login</title>
   <link rel="stylesheet" href="/styles.css">
-  <script type="text/javascript" src="/client_side/testRead.js"></script>
 </head>
 
 
@@ -16,10 +15,10 @@
     <div class="logo">
       <img src="/ua-square-logo.png" alt="UA Logo">
     </div>
-    <h1>View Lab Inventory</h1>
+    <h1>Login</h1>
   </header>
-
-  <nav>
+    
+  <!-- <nav>
     <ul>
       <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
       <li><a href="/update" id="updateParts">Update Parts</a></li>
@@ -27,15 +26,22 @@
       <li><a href="/remove" id="removeOldParts">Remove Old Parts</a></li>
       <li><a href="/userProfile" id="myCheckouts">My Checkouts</a></li>
     </ul>
-  </nav>
+  </nav> -->
 
-  <!-- testing http request -->
-  <br>
-  <br>
-  <label for="id-input">Part ID:</label>
-  <input type="text" id="id-input" name="id-input">
-  <button onclick="searchById()">Get MAC Address</button>
-  <div id="response">MAC address goes here:</div>
- 
+  <div class="login-container">
+    <form class="login-form" action="/login" method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+  <!--
+  <div style="text-align: center;">
+    <button id = "addPart">Add Part</button>
+  </div>
+  -->
+  <div style="text-align: left;">
+  </div>
+
 </body>
 </html>
