@@ -8,6 +8,11 @@
    
 2. Navigate into the project folder: **CD CS495-Lab-Inventory-Group-F**
 3. All of the following commands will be run from this folder
+4. The clone will be of the **main** branch, so if there's a more up to date branch like *sprint3* you can use this command:
+
+   **git checkout -b <newBranchName> origin/<newBranchName
+   
+6. Now you should be on the branch you just made, code form the up to date branch.
 
 ### Errors
 If the run commands in the next section give you node_module errors, this should fix it:
