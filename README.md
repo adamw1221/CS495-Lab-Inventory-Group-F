@@ -18,14 +18,16 @@ If the run commands in the next section give you node_module errors, this should
 1. A) Run the command  **npm start**  to start our server and connect to our database.
    
    
-   B) Or run **node js\server_side\server.js"**
+   B) Or run **node js\server_side\server.js**
 
 
 3. In your web browser paste and go to: **http://localhost:3000**
   
 5. You should be directed to a login page.
    For access to all pages -> **username: admin**
+   
    The password can be anything at the moment.
+   
    Use any username other than admin for the student view.
 
 
