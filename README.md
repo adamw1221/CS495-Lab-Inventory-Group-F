@@ -12,9 +12,9 @@
    
 3. The clone will be of the **main** branch, so if there's a more up-to-date branch like **sprint3** you can use this command:
 
-   example template: **git checkout -b < newBranchName > origin/< newBranchName >**
+   example template:    **git checkout -b < newBranchName > origin/< newBranchName >**
 
-   actual cmd: **git checkout -b sprint3 origin/sprint3**
+   actual cmd:     **git checkout -b sprint3 origin/sprint3**
    
 5. Now you should be on the branch you just made, with code from the up-to-date branch
 
