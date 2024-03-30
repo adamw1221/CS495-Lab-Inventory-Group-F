@@ -2,32 +2,31 @@
 ## Lab Inventory Project
 
 ### Setup
-1. Clone the repository. Open a terminal and run the command:
+1. Clone the repository-> Open a terminal and run the command:
    
    **git clone https://github.com/adamw1221/CS495-Lab-Inventory-Group-F.git**
    
 2. Navigate into the project folder: **CD CS495-Lab-Inventory-Group-F**
-3. Run the command: **npm init -y**
-   to initialize the folder with npm. You should now have a package json
+3. All of the following commands will be run from this folder
 
-### Run:
-1. A) In your package json, modify your start to match this:
-
-   **"start": "node js\server_side\server.js"**
-
-   Now you can run the command  **npm start**  to start our server and connect to our database.
-   
-   
-   B) Or navigate to folder js, then into server_side:
-
-   **CD js\server_side** and run **node server.js**
-
-3. Copy the full path of an html page (in the html folder) e.g.,
+### Errors
+If the run commands in the next section give you node_module errors, this should fix it:
+- **rm -rf node_modules**
+- **npm install**
   
-   **C:\user\CS495-Lab-Inventory-Group-F\html\basicWebsite.html**
+### Run:
+1. A) Run the command  **npm start**  to start our server and connect to our database.
    
-4. Paste the path into your web browser.
-5. The web pages should now be visible and you should be able to add, read, update, and remove from the database.
+   
+   B) Or run **node js\server_side\server.js"**
+
+
+3. In your web browser paste and go to: **http://localhost:3000**
+  
+5. You should be directed to a login page.
+   For access to all pages -> **username: admin**
+   The password can be anything at the moment.
+   Use any username other than admin for the student view.
 
 
 ## Project Focus
