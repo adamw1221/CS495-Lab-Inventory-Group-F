@@ -1,32 +1,26 @@
 const express = require('express');
 const cors = require('cors');
-<<<<<<< HEAD
 const runServer = require("./run_server.js");
 const read = require("./doc_read.js");
 const update = require("./doc_update.js");
 const add = require("./doc_add.js");
 const remove = require("./doc_remove.js");
 
-=======
 const bodyParser = require('body-parser');
->>>>>>> c075a11d643aa70739515c1cfc19e45c105d6e96
 const app = express();
 const port = 3000;
 
 app.use(express.static('LabInventory'));
 app.use(cors());
-<<<<<<< HEAD
 app.use(express.json());
 
-let client;
-async function initializeServer() {
-    client = await runServer();
-}
+// let client;
+// async function initializeServer() {
+//     client = await runServer();
+// }
 
-initializeServer(); 
-=======
+// initializeServer(); 
 app.use(bodyParser.json());
->>>>>>> c075a11d643aa70739515c1cfc19e45c105d6e96
 
 app.get('/', (req, res) => {
     console.log('get request received: ', req.url);
@@ -42,8 +36,8 @@ app.post('/data', (req, res) => {
 
 app.post('/', async(req, res) => {
     console.log('request received:', req.url);
-    // (async (req, res) => {
-        // const client = await runServer();
+    (async (req, res) => {
+        const client = await runServer();
         if (client) {
             if (req.body.type == "read") {
                 console.log(req.body.input);
@@ -70,17 +64,18 @@ app.post('/', async(req, res) => {
                 }
             }
             else if (req.body.type == "add") {
-                const filter = req.body.filter;
+                const itemId = req.body.filter;
+                const itemName = req.body.name;
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
-                    filter);// returns string
+                    itemId, itemName);// returns string
                 res.status(200).send(result); //0 or 1
             }
-            // await client.close();
+            await client.close();
         }else{
             res.status(500).send("Sorry there's a problem with the website!" +
             "Please try again later."); //0 or 1
         }
-    // })(req, res);
+    })(req, res);
 });
 
 app.listen(port, () => {
