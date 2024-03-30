@@ -10,9 +10,9 @@
   "author": "Adam Wrote, Preston Mazzei, Owen Campbell, Blake Cantrell",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adamw1221/CS495-Lab-Inventory-Group-F.git"
