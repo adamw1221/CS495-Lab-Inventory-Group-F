@@ -8,7 +8,7 @@ const remove = require("../operations/doc_remove.js");
 
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static('LabInventory'));
 app.use(cors());
@@ -188,7 +188,7 @@ app.post('/', async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
 /*
