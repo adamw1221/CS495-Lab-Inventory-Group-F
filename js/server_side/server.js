@@ -4,6 +4,7 @@ const runServer = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
 const add = require("../operations/doc_add.js");
+const authUser = require("./auth.js");
 const remove = require("../operations/doc_remove.js");
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -33,8 +34,9 @@ initializeServer();
 
 // Page Routing Below
 
-    // "home" page
+  // "home" page
 app.get("/", requireLogin, function (req, res) {
+    // console.log("Home! Session UserID is:", req.session.userId);
     // console.log("Home! SessionRole is:", req.session.role);
 
     // Redirect user based on their role
@@ -46,7 +48,8 @@ app.get("/", requireLogin, function (req, res) {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'login.html')); // Serve the login.html page
+    const errorMessage = req.query.error || '';
+    res.sendFile(path.join(__dirname,"..","..", "html",'login.html'));
 });
   
 app.get('/userProfile', requireLogin, (req, res) => {
@@ -71,29 +74,36 @@ app.get('/checkoutParts', requireLogin, (req, res) => {
 
 // Operation Requests Below
 
-app.post('/login', (req, res) => {
+app.post('/auth/login', async (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
 
-    if (username && password){
-        if (username === 'admin' ) {//&& password === 'Lab1'
-        console.log("Admin in!");
-            req.session.userId = 1;
-            req.session.role = "admin";
-            res.redirect('/update');
-        } 
-        else {
-            req.session.userId = 1;
-            req.session.role = "student";
-            res.redirect('/userProfile');
-        }
-    }else {
-		res.send('Please enter Username and Password!');
-	}
-    // else {
-    //     res.redirect('/login?error=1'); // Redirect back to login with error query parameter
-    // }
+    //Note: returns user object- users probably need a checkout field?
+    authUser(username, password, client, "InventoryDB", "Roster")
+    .then(user => {
+        console.log('Authentication successful:', user);
+
+        if (user["userType"] === 'admin' ) {
+            console.log("Admin in!");
+                req.session.userId = username; //Note: Should be unique? might be useful
+                req.session.role = "admin";
+                res.redirect('/update');
+            } 
+            else {
+                req.session.userId = username;
+                req.session.role = "student";
+                res.redirect('/userProfile');
+            }
+
+    })
+    .catch(error => {
+        console.error('Authentication failed:', error);
+
+        // Redirect back to login with error query parameter
+        res.redirect('/login?error=Authentication failed.'); 
+    });
+
 });
 
 app.get('/getEquipment',requireLogin, async (req, res) => {
