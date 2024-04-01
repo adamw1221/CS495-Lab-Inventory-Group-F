@@ -11,6 +11,12 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const path = require('path');
+
+app.get("/", function (req, res) {
+res.sendFile(path.join(__dirname,"..","..", "html",'testUpdate.html'));
+});
+
 //app.use(express.static('LabInventory'));
 app.use(cors());
 app.use(express.json());
