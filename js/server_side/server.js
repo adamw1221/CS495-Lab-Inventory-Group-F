@@ -31,7 +31,7 @@ initializeServer();
 app.use(bodyParser.json());
 
 app.get("/updateParts", function (req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', 'html', 'updateParts.html'));
+    res.sendFile(path.join(__dirname, '..', '..', 'html', 'testUpdate.html'));
 });
 
 app.get('/getEquipment', async (req, res) => {
