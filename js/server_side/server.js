@@ -18,6 +18,7 @@ res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
 });
 
 app.use(express.static(path.join(__dirname, '..', '..', 'html')));
+app.use(express.static(path.join(__dirname, '..', '..', 'css')));
 app.use(cors());
 app.use(express.json());
 
@@ -28,10 +29,6 @@ async function initializeServer() {
 
 initializeServer();
 app.use(bodyParser.json());
-
-/*app.get("/testUpdate", function (req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', 'html', 'testUpdate.html'));
-});*/
 
 app.get('/getEquipment', async (req, res) => {
     console.log('get request received: ', req.url);
