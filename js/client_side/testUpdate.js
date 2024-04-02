@@ -1,3 +1,6 @@
+const { hostname, protocol } = window.location;
+const baseURL = `${protocol}//${hostname}`;
+
 async function postRequest(data) {
     // configure options for post request
     let options = {
@@ -11,7 +14,7 @@ async function postRequest(data) {
 
     try {
         // send request while providing data parameter
-        const response = await fetch('http://localhost:3000', options);
+        const response = await fetch(`${baseURL}`, options);
         
         const responseText = await response.text();
         const intValue = parseInt(responseText, 10);
