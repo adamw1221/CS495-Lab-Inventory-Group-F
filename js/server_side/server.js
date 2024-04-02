@@ -29,9 +29,9 @@ async function initializeServer() {
 initializeServer();
 app.use(bodyParser.json());
 
-app.get("/testUpdate", function (req, res) {
+/*app.get("/testUpdate", function (req, res) {
     res.sendFile(path.join(__dirname, '..', '..', 'html', 'testUpdate.html'));
-});
+});*/
 
 app.get('/getEquipment', async (req, res) => {
     console.log('get request received: ', req.url);
