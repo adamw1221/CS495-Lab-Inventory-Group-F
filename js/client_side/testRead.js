@@ -1,3 +1,6 @@
+const { hostname, protocol } = window.location;
+const baseURL = `${protocol}//${hostname}`;
+
 async function postRequest(data) {
     // configure options for post request
     let options = {
