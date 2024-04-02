@@ -11,7 +11,7 @@ async function postRequest(data) {
 
     try {
         // send request while providing data parameter
-        const response = await fetch('http://localhost:3000', options);
+        const response = await fetch(`${baseURL}`, options);
         // convert response into json and then post into div component
         const dbData = await response.json();
         console.log(dbData);
