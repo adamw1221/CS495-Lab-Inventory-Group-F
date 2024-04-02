@@ -20,6 +20,7 @@ res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
 app.use(express.static(path.join(__dirname, '..', '..', 'html')));
 app.use(express.static(path.join(__dirname, '..', '..', 'css')));
 app.use(express.static(path.join(__dirname, '..', '..', 'img')));
+app.use(express.static(path.join(__dirname, '..', 'client_side')));
 app.use(cors());
 app.use(express.json());
 
