@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 
 app.get("/", function (req, res) {
-res.sendFile(path.join(__dirname,"..","..", "html",'basicWebsite.html'));
+res.sendFile(path.join(__dirname,"..","..", "html",'testUpdate.html'));
 });
 
 //app.use(express.static('LabInventory'));
