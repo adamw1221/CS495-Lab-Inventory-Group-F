@@ -25,7 +25,7 @@ async function addUser(inClient, inDB, inCollection, userInfo) {
     return "Document added successfully!";
   }
 
-  // return "Document was not added successfully...";
+  // return "Document was not added successfully..."; //currently not used
 
 }
 
