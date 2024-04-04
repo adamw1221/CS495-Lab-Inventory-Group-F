@@ -1,3 +1,15 @@
+const rateLimit = require("express-rate-limit");
+
+function loginHandler(req, res){
+  message = 'Too many login attempts. Please try again later.';
+  res.redirect(`/login?error=${message}`)
+}
+
+const loginLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 15 minutes - 15 * 60 * 1000
+  max: 3, // Maximum requests
+  handler : loginHandler
+});
 
 // TODO: add hashing and way to add user/roster?
 function verifyPassword(password, hashedPassword) {
@@ -9,7 +21,7 @@ function verifyPassword(password, hashedPassword) {
     }
 }
 
-async function authenticateUser(username, password, inClient, inDB, inCollection) {
+async function authUser(username, password, inClient, inDB, inCollection) {
     
     try {
       const db = inClient.db(inDB);
@@ -40,4 +52,7 @@ async function authenticateUser(username, password, inClient, inDB, inCollection
     }
   }
 
-  module.exports = authenticateUser;
+  module.exports = {
+    authUser,
+    loginLimiter
+  };
