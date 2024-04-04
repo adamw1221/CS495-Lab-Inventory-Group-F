@@ -35,7 +35,8 @@ initializeServer();
 // Page Routing Below
 
   // "home" page
-app.get("/", requireLogin, function (req, res) {
+
+  app.get("/", requireLogin, function (req, res) {
     // console.log("Home! Session UserID is:", req.session.userId);
     // console.log("Home! SessionRole is:", req.session.role);
 
@@ -66,6 +67,10 @@ app.get('/add', requireLogin, requireAdmin, (req, res) => {
 
 app.get('/remove', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
+});
+
+app.get('/removeUser', requireLogin, requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
 });
 
 app.get('/checkoutParts', requireLogin, (req, res) => {
@@ -264,6 +269,17 @@ app.post('/', async(req, res) => {
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
                     itemId, itemName);// returns string
                 res.status(200).send(result);
+            }
+            else if (req.body.type == "removeUser") {
+                console.log('Removing User: ', req.body.input);
+                const query = { "username": req.body.input };
+                const result = await remove(client, "InventoryDB", "Roster", query);
+                //console.log(result.deletedCount);
+                if (result.deletedCount == 1) {
+                    res.status(200).json({ success: true, message: 'Document removed successsfully.' });
+                } else {
+                    res.status(404).json({ success: false, message: 'Document not found or already removed.' });
+                }
             }
         }else{
             res.status(500).send("Sorry there's a problem with the website!" +
