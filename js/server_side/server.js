@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const runServer = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
@@ -8,9 +9,18 @@ const remove = require("../operations/doc_remove.js");
 
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static('LabInventory'));
+const path = require('path');
+
+app.get("/", function (req, res) {
+res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
+});
+
+app.use(express.static(path.join(__dirname, '..', '..', 'html')));
+app.use(express.static(path.join(__dirname, '..', '..', 'css')));
+app.use(express.static(path.join(__dirname, '..', '..', 'img')));
+app.use(express.static(path.join(__dirname, '..', 'client_side')));
 app.use(cors());
 app.use(express.json());
 
@@ -21,6 +31,10 @@ async function initializeServer() {
 
 initializeServer();
 app.use(bodyParser.json());
+
+app.get("/updateParts", function (req, res) {
+    res.sendFile(path.join(__dirname, '..', '..', 'html', 'testUpdate.html'));
+});
 
 app.get('/getEquipment', async (req, res) => {
     console.log('get request received: ', req.url);
@@ -188,7 +202,7 @@ app.post('/', async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
 /*

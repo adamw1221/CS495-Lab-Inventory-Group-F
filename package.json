@@ -1,15 +1,26 @@
 {
-    "name": "cs495",
-    "version": "1.0.0",
-    "description": "",
-    "main": "js/server_side/server.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node js/server_side/server.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "dotenv": "^16.4.5"
-    }
-  }
+  "name": "cs495",
+  "version": "1.0.0",
+  "description": "1. Clone the repository. Open a terminal and run the command:",
+  "main": "js/server_side/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node js/server_side/server.js"
+  },
+  "author": "Adam Wrote, Preston Mazzei, Owen Campbell, Blake Cantrell",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamw1221/CS495-Lab-Inventory-Group-F.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adamw1221/CS495-Lab-Inventory-Group-F/issues"
+  },
+  "homepage": "https://github.com/adamw1221/CS495-Lab-Inventory-Group-F#readme"
+}
