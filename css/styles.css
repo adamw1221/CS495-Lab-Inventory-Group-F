@@ -300,3 +300,14 @@ td, th {
     max-width: 400px; 
 }
 
+.radio-container {
+    display: flex;
+  }
+  
+  .radio-container label {
+    flex-grow: 1;
+    display: inline-block;
+    margin-right: 60px;
+    margin-left: 60px;
+  }
+  
