@@ -9,7 +9,6 @@ const remove = require("../operations/doc_remove.js");
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
-// const rateLimit = require("express-rate-limit");
 const { requireLogin, requireAdmin } = require('./helpers.js');
 
 const app = express();
@@ -36,7 +35,6 @@ initializeServer();
 // Page Routing Below
 
   // "home" page
-
   app.get("/", requireLogin, function (req, res) {
     // console.log("Home! Session UserID is:", req.session.userId);
     // console.log("Home! SessionRole is:", req.session.role);
@@ -82,19 +80,8 @@ app.get('/checkoutParts', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
 });
 
+
 // // Operation Requests Below
-
-// Error handler middleware to catch rate limit exceeded errors
-// app.use((err, req, res, next) => {
-//     if (err.statusCode === 429) {
-//         // Redirect to the login page with the error message as a query parameter
-//         res.redirect(`/login?error=${encodeURIComponent(err.message.error)}`);
-//     } 
-//     // else {
-//     //     next(err); // Forward other errors to the default error handler
-//     // }
-// });
-
 
 app.post('/auth/login', loginLimiter, async (req, res) => {
 
