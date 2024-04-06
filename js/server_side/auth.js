@@ -1,25 +1,16 @@
 const rateLimit = require("express-rate-limit");
+const bcrypt = require('bcrypt');
 
 function loginHandler(req, res){
-  message = 'Too many login attempts. Please try again later.';
+  const message = 'Too many login attempts. Please try again later.';
   res.redirect(`/login?error=${message}`)
 }
 
 const loginLimiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 15 minutes - 15 * 60 * 1000
-  max: 3, // Maximum requests
+  windowMs: 10 * 60 * 1000, // 15 minutes - 15 * 60 * 1000
+  max: 100, // Maximum requests
   handler : loginHandler
 });
-
-// TODO: add hashing and way to add user/roster?
-function verifyPassword(password, hashedPassword) {
-    // return await bcrypt.compare(password, hashedPassword);
-    if(password === hashedPassword){
-      return true;
-    } else {
-      return false;
-    }
-}
 
 async function authUser(username, password, inClient, inDB, inCollection) {
     
@@ -34,10 +25,10 @@ async function authUser(username, password, inClient, inDB, inCollection) {
         throw new Error('User not found');
       }
     
-      hash = user["password"];
+      hashedPassword = user["password"];
 
       // Verify the password
-      const isPasswordValid = verifyPassword(password, hash);
+      const isPasswordValid = await bcrypt.compare(password, hashedPassword);
 
       if (!isPasswordValid) {
         throw new Error('Invalid password');

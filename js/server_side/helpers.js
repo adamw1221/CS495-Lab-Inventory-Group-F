@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const requireLogin = (req, res, next) => {
     if (!req.session.userId) {
         res.redirect('/login');
@@ -17,7 +19,16 @@ const requireAdmin = (req, res, next) => {
     }
 };
 
+async function hashPassword(plaintextPassword, saltRounds) {
+    const hash = await bcrypt.hashSync(plaintextPassword, saltRounds);
+    if(hash){
+        console.log("Hash: ", hash);
+        return hash; // Return the hashed password
+    }
+}
+
 module.exports = {
     requireLogin,
-    requireAdmin
+    requireAdmin,
+    hashPassword
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const runServer = require("./run_server.js");
+const {runServer, sessionConfig} = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
 const { add, addUser } = require("../operations/doc_add.js");
@@ -9,7 +9,8 @@ const remove = require("../operations/doc_remove.js");
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
-const { requireLogin, requireAdmin } = require('./helpers.js');
+const { requireLogin, requireAdmin, hashPassword } = require('./helpers.js');
+
 
 const app = express();
 const port = 3000;
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, "..","..", "css",)));
 app.use(express.static(path.join(__dirname, "..","..", "html",)));
 app.use(express.static(path.join(__dirname, "..","..", "js",)));
 app.use(express.static(path.join(__dirname, "..","..", "img",)));
-app.use(session({ secret: 'your_secret_key', resave: false, saveUninitialized: false }));
+app.use(session(sessionConfig));
 
 // Start server
 let client;
@@ -36,8 +37,6 @@ initializeServer();
 
   // "home" page
   app.get("/", requireLogin, function (req, res) {
-    // console.log("Home! Session UserID is:", req.session.userId);
-    // console.log("Home! SessionRole is:", req.session.role);
 
     // Redirect user based on their role
     if (req.session.role === 'admin') {
@@ -64,7 +63,7 @@ app.get('/add', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
 });
 
-app.get('/addUser', requireLogin, requireAdmin, (req, res) => {
+app.get('/addUser',requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
 });
 
@@ -72,7 +71,7 @@ app.get('/remove', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
 });
 
-app.get('/removeUser', requireLogin, requireAdmin, (req, res) => {
+app.get('/removeUser', requireLogin, requireAdmin,(req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
 });
 
@@ -88,16 +87,15 @@ app.post('/auth/login', loginLimiter, async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    //Note: returns user object
-    authUser(username, password, client, "InventoryDB", "Roster")
-    .then(user => {
+    try{//Note: returns user object
+        const user = await authUser(username, password, client, "InventoryDB", "Roster");
         console.log('Authentication successful:', user);
 
         if (user["userType"] === 'admin' ) {
             // console.log("Admin in!");
                 req.session.userId = username;
                 req.session.role = "admin";
-                res.redirect('/update');
+                res.redirect('/add');
             } 
             else {
                 req.session.userId = username;
@@ -105,13 +103,13 @@ app.post('/auth/login', loginLimiter, async (req, res) => {
                 res.redirect('/userProfile');
             }
 
-    })
-    .catch(error => {
+    }
+    catch(error){
         console.error('Authentication failed:', error);
 
         // Redirect back to login with error query parameter
         res.redirect('/login?error=Authentication failed.'); 
-    });
+    }
 
 });
 
@@ -276,7 +274,10 @@ app.post('/', async(req, res) => {
             }
             else if (req.body.type == "addUser") {
                 try {
-                    const userInfo = req.body.userInfo;
+                    var userInfo = req.body.userInfo;
+                    const hashedPassword = await hashPassword(userInfo.password, 10);
+                    userInfo.password = hashedPassword;
+
                     const result = await addUser(client,"InventoryDB", "Roster", userInfo);
                     res.status(200).send(result);
                 } catch (error) {
@@ -304,6 +305,9 @@ app.post('/', async(req, res) => {
             "Please try again later.");
         }
 });
+
+
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

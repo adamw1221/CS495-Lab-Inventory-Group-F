@@ -98,3 +98,31 @@ function displayError(message, responseId) {
   const errorElement = document.getElementById(responseId);
   errorElement.innerText = message;
 }
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const storedEquipmentData = sessionStorage.getItem("equipmentData");
+  
+    if (!storedEquipmentData) {
+        // If data is not present, fetch it from the API and store it in sessionStorage
+        const equipmentData = await fetchEquipmentData();
+        sessionStorage.setItem("equipmentData", JSON.stringify(equipmentData));
+    }
+});
+
+ async function fetchEquipmentData() {
+
+    try {
+      const response = await fetch('http://localhost:3000/getEquipment');
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const responseData = await response.json();
+      return responseData.data; // Assuming the data property is available in the response
+  
+    } catch (error) {
+      console.error('Error fetching equipment data:', error);
+      throw error; // Rethrow the error for the calling code to handle
+    }
+  }

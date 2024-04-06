@@ -1,3 +1,22 @@
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const store = new MongoDBStore({
+    uri: "mongodb+srv://pjmazzei:pjmazzei" +
+                "@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority",
+    collection: 'User_Session_Data',
+    databaseName: 'InventoryDB'
+  });
+
+const sessionConfig = {
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: {
+        maxAge: 30 * 60 * 1000 // Set cookie expiration time to 30 minutes
+    }
+};
 
 async function runServer() {
 
@@ -36,4 +55,7 @@ async function runServer() {
 
 }
 
-module.exports = runServer;
+module.exports = {
+    runServer,
+    sessionConfig
+}; 
