@@ -12,9 +12,9 @@ const path = require('path');
 const { requireLogin, requireAdmin } = require('./helpers.js');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static('LabInventory'));
+//app.use(express.static('LabInventory'));
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, "..","..", "css",)));
 app.use(express.static(path.join(__dirname, "..","..", "html",)));
 app.use(express.static(path.join(__dirname, "..","..", "js",)));
 app.use(express.static(path.join(__dirname, "..","..", "img",)));
+app.use(express.static(path.join(__dirname, '..', 'client_side')));
 app.use(session({ secret: 'your_secret_key', resave: false, saveUninitialized: false }));
 
 // Start server
@@ -306,7 +307,7 @@ app.post('/', async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
 /*
