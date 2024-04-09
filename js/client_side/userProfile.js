@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const requestInput = {};
         requestInput["username"] = "username";
         const userData = [];
-        postRequest(requestInput, "/userprofile/data").then(response => {
+        postRequest(requestInput, "/userprofiledata").then(response => {
             if (response.isArray()) {
                 userData = response;
             } else {
