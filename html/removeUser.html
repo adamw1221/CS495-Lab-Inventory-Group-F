@@ -3,9 +3,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Read Parts</title>
+  <title>Remove User</title>
   <link rel="stylesheet" href="/styles.css">
-  <script type="text/javascript" src="/client_side/testRemove.js"></script>
+  <script type="text/javascript" src="/client_side/removeUser.js"></script>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     <div class="logo">
       <img src="/ua-square-logo.png" alt="UA Logo">
     </div>
-    <h1>Remove Existing Equipment</h1>
+    <h1>Remove Existing User</h1>
   </header>
 
   <!-- Buttons to Matching Page or add Nav Bar -->
@@ -33,19 +33,13 @@
   <!-- Input box for Part ID and Remove button -->
   <div class="form">
     <div>
-      <label for="partIdInput">Equipment ID:</label>
-      <input type="text" id="partIdInput">
+      <label for="userIdInput">User ID:</label>
+      <input type="text" id="userIdInput">
     </div>
     <br><br>
-    <button type="button" onclick="removeDocument()" id="removeButton">Remove Part</button>  
+    <button type="button" onclick="removeDocument()" id="removeButton">Remove User</button>  
   </div>
-  <div id="removeResponse"></div>
-  <!-- END Input box for Part ID and Remove button -->
-
-  <!-- HTTP requests -->
-  <br> <br>
-
-  <!-- END HTTP requests -->
+  <!-- END Input box for User button -->
  
 </body>
 </html>

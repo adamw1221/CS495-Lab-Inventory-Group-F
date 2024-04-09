@@ -3,7 +3,7 @@ const cors = require('cors');
 const runServer = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
-const add = require("../operations/doc_add.js");
+const { add, addUser } = require("../operations/doc_add.js");
 const authUser = require("./auth.js");
 const remove = require("../operations/doc_remove.js");
 const bodyParser = require('body-parser');
@@ -40,7 +40,8 @@ initializeServer();
 // Page Routing Below
 
   // "home" page
-app.get("/", requireLogin, function (req, res) {
+
+  app.get("/", requireLogin, function (req, res) {
     // console.log("Home! Session UserID is:", req.session.userId);
     // console.log("Home! SessionRole is:", req.session.role);
 
@@ -69,8 +70,16 @@ app.get('/add', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
 });
 
+app.get('/addUser', requireLogin, requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
+});
+
 app.get('/remove', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
+});
+
+app.get('/removeUser', requireLogin, requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
 });
 
 app.get('/checkoutParts', requireLogin, (req, res) => {
@@ -84,14 +93,14 @@ app.post('/auth/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    //Note: returns user object- users probably need a checkout field?
+    //Note: returns user object
     authUser(username, password, client, "InventoryDB", "Roster")
     .then(user => {
         console.log('Authentication successful:', user);
 
         if (user["userType"] === 'admin' ) {
-            console.log("Admin in!");
-                req.session.userId = username; //Note: Should be unique? might be useful
+            // console.log("Admin in!");
+                req.session.userId = username;
                 req.session.role = "admin";
                 res.redirect('/update');
             } 
@@ -278,6 +287,31 @@ app.post('/', async(req, res) => {
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
                     itemId, itemName);// returns string
                 res.status(200).send(result);
+            }
+            else if (req.body.type == "addUser") {
+                try {
+                    const userInfo = req.body.userInfo;
+                    const result = await addUser(client,"InventoryDB", "Roster", userInfo);
+                    res.status(200).send(result);
+                } catch (error) {
+                    if(error.errorResponse && error.errorResponse.code === 11000){
+                        res.status(500).send("Duplicate Username Error.");
+                    } else {
+                        console.error("Error adding user:", error.errorResponse);
+                        res.status(500).send("An error occurred while adding the user.");
+                    }
+                }
+            }
+            else if (req.body.type == "removeUser") {
+                console.log('Removing User: ', req.body.input);
+                const query = { "username": req.body.input };
+                const result = await remove(client, "InventoryDB", "Roster", query);
+                //console.log(result.deletedCount);
+                if (result.deletedCount == 1) {
+                    res.status(200).json({ success: true, message: 'Document removed successsfully.' });
+                } else {
+                    res.status(404).json({ success: false, message: 'Document not found or already removed.' });
+                }
             }
         }else{
             res.status(500).send("Sorry there's a problem with the website!" +
