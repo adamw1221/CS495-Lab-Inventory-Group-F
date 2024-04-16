@@ -4,7 +4,7 @@ const baseURL = `${protocol}//${hostname}`;
 async function fetchEquipmentData() {
 
     try {
-      const response = await fetch('http://localhost:3000/getEquipment');
+      const response = await fetch(`${baseURL}/getEquipment`);
       
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -32,7 +32,7 @@ async function postRequest(data, endpoint) {
 
   try {
     // send request while providing data parameter
-    const response = await fetch('http://localhost:3000' + endpoint, options);
+    const response = await fetch(`${baseURL}${endpoint}`, options);
     
     const responseJson = await response.json();
     return responseJson;
