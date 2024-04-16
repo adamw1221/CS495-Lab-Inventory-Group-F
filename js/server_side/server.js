@@ -20,9 +20,14 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+/*
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "..", "..", "html", 'checkoutParts.html'));
+});
+*/
 app.use(express.static(path.join(__dirname, "..","..", "css",)));
 app.use(express.static(path.join(__dirname, "..","..", "html",)));
-app.use(express.static(path.join(__dirname, "..","..", "js",)));
+app.use(express.static(path.join(__dirname, "..", "client_side",)));
 app.use(express.static(path.join(__dirname, "..","..", "img",)));
 app.use(session(sessionConfig));
 
@@ -235,6 +240,15 @@ app.post('/checkout', async(req, res) => {
         res.status(500).send("Sorry there's a problem with the website!" +
             "Please try again later.");
     }
+});
+
+app.post('/userprofiledata', async(req, res) => {
+    console.log(req.body);
+    const query = req.body;
+    //const query = {Checkout_Status: username};
+    // need to modify/add new read operation that can return multiple documents?
+    const result = await read(client, "InventoryDB", "Robotics_Lab", query);
+    res.status(200).send(result);
 });
 
 app.post('/', async(req, res) => {
