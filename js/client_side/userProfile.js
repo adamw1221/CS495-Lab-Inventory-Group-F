@@ -30,11 +30,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
         // if no data, send request to fetch it
         const requestInput = {};
-        requestInput["username"] = "username";
+        requestInput["username"] = "temp";
         const userData = [];
         postRequest(requestInput, "/userprofiledata").then(response => {
             if (response.isArray()) {
                 userData = response;
+                console.log(userData);
             } else {
                 console.log("error: response object is not array");
             }
@@ -47,6 +48,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 function populateTable(userData) {
     var table = document.getElementById("userTable");
+    console.log(userData);
 
     userData.forEach(function(obj) {
         var row = table.insertRow();

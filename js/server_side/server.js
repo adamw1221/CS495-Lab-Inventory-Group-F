@@ -247,7 +247,7 @@ app.post('/checkout', async(req, res) => {
 app.post('/userprofiledata', async(req, res) => {
     console.log(req.body);
     const username = req.body;
-    const query = {Checkout_Status: {username: username}};
+    const query = {Checkout_Status: username};
     // need to modify/add new read operation that can return multiple documents?
     const result = await read(client, "InventoryDB", "Robotics_Lab", query);
     res.status(200).send(result);
