@@ -30,32 +30,57 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
         // if no data, send request to fetch it
         const requestInput = {};
-        requestInput["username"] = "temp";
-        const userData = [];
+        requestInput["Checkout_Status.username"] = "temp";
+        var userData = [];
         postRequest(requestInput, "/userprofiledata").then(response => {
-            if (response.isArray()) {
+            console.log(response);
+            if (Array.isArray(response)) {
                 userData = response;
                 console.log(userData);
             } else {
                 console.log("error: response object is not array");
             }
+            populateTable(userData);
+            // store new data in session storage
+            sessionStorage.setItem("userData", userData);
         });
-        populateTable(userData);
-        // store new data in session storage
-        sessionStorage.setItem("userData", userData);
     }
 });
 
 function populateTable(userData) {
     var table = document.getElementById("userTable");
     console.log(userData);
+    console.log(table);
 
     userData.forEach(function(obj) {
         var row = table.insertRow();
+        
+        var nameCell = row.insertCell();
+        nameCell.textContent = obj["name"];
+        var checkoutCell = row.insertCell();
+        const checkoutDate = new Date(obj["Checkout_Status"]["checkoutDate"]);
+        checkoutCell.textContent = checkoutDate.toString();
+        var returnCell = row.insertCell();
+        const returnDate = new Date(obj["Checkout_Status"]["returnDate"]);
+        returnCell.textContent = returnDate.toString();
+        var statusCell = row.insertCell();
+        // maybe figure out how to dynamically style here? not sure if conditional formatting is possible on a css file
+        if (Date.now() > returnDate) {
+            statusCell.textContent = "OVERDUE";
+        }
+        else if (Date.now() < checkoutDate) {
+            statusCell.textContent = "AWAITING";
+        }
+        else {
+            statusCell.textContent = "OK";
+        }
+        /*
         Object.keys(obj).forEach(function(key) {
+            console.log(key);
             var cell = row.insertCell();
             cell.textContent = obj[key];
         });
+        */
     });
 }
 
