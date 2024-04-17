@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 
-    const storedEquipmentData = sessionStorage.getItem("equipmentData");
+    const storedEquipmentData = sessionStorage.getItem("equipment");
     if (!storedEquipmentData) {
         // If data is not present, fetch it from the API and store it in sessionStorage
         const equipmentData = await fetchEquipmentData();
-        sessionStorage.setItem("equipmentData", JSON.stringify(equipmentData));
+        sessionStorage.setItem("equipment", JSON.stringify(equipmentData));
     }
 });
 

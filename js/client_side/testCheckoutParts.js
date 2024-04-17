@@ -41,7 +41,7 @@ async function postRequest(data, endpoint) {
 
 document.addEventListener("DOMContentLoaded", async function () {
     // Check if equipment data is stored in sessionStorage
-    const storedEquipmentData = sessionStorage.getItem("equipmentData");
+    const storedEquipmentData = sessionStorage.getItem("equipment");
   
     if (storedEquipmentData) {
       // If data is present in sessionStorage, use it to populate the dropdown
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // console.log("EqData: ", equipmentData);
         populateDropdown(equipmentData);
           // Store equipment data in sessionStorage
-        sessionStorage.setItem("equipmentData", JSON.stringify(equipmentData));
+        sessionStorage.setItem("equipment", JSON.stringify(equipmentData));
     }
   
     // Add event listener to the dropdown
