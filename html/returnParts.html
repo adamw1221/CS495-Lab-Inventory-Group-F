@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Return Parts</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="returnParts.js"></script>
+</head>
+
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="ua-square-logo.png" alt="UA Logo">
+    </div>
+    <h1>Return Parts</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
+      <li><a href="/update" id="updateParts">Update Parts</a></li>
+      <li><a href="/add" id="addParts">Add Parts</a></li>
+      <li><a href="/addUser" id="addUser">Add User</a></li>
+      <li><a href="/remove" id="removeOldParts">Remove Old Parts</a></li>
+      <li><a href="/removeUser" id="removeOldUser">Remove Old User</a></li>
+      <li><a href="/userProfile" id="myCheckouts">My Checkouts</a></li>
+      <li><a href="/returnParts" id="returnParts">Return Parts</a></li>
+    </ul>
+  </nav>
+
+  <br><br>
+  <div>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Equipment Name</th>
+                <th>Checkout Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>template</td>
+                <td>3-28-2024T14:00</td>
+                <td>4-04-2024T15:00</td>
+                <td>OK</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <h4>Required: Description of where part was returned.</h4>
+    <h4>Optional: Photo showing where part was returned.</h4>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required>
+    <br>
+    <label for="file">Upload Picture:</label>
+    <input type="file" id="file" name="file" accept="image/*">
+    <br>
+    <button type="submit">Submit</button>
+  </div>
+ 
+</body>
+</html>
