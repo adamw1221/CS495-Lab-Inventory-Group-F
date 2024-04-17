@@ -84,8 +84,11 @@ app.get('/checkoutParts', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
 });
 
+app.get('/returnParts', requireLogin, (req, res) => {
+    res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
+});
 
-// // Operation Requests Below
+// Operation Requests Below
 
 app.post('/auth/login', loginLimiter, async (req, res) => {
 
