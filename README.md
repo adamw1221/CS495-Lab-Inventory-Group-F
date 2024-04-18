@@ -33,9 +33,9 @@ If the run commands in the next section give you node_module errors, this should
 3. In your web browser paste and go to: **http://localhost:3000**
   
 5. You should be directed to a login page.
-   For access to all pages -> **username & password: temp**
+   For access to all pages -> **username & password: temp2**
 
-   For access to student view -> **username & password: student**
+   For access to student view -> **username & password: classmate**
 
 
 ## Project Focus
