@@ -23,10 +23,10 @@ async function postRequest(data, endpoint) {
 
 document.addEventListener("DOMContentLoaded", async function () {
     // check for data in session storage
-    const storedUserData = sessionStorage.getItem("equipmentData");
+    const storedUserData = sessionStorage.getItem("userData");
     if (storedUserData) {
         // if exists, populate table with it
-        populateTable(storedUserData);
+        populateTable(JSON.parse(storedUserData));
     } else {
         // if no data, send request to fetch it
         const requestInput = {};
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
             populateTable(userData);
             // store new data in session storage
-            sessionStorage.setItem("equipmentData", JSON.stringify(userData));
+            sessionStorage.setItem("userData", JSON.stringify(userData));
         });
     }
 });
