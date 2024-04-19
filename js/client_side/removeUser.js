@@ -32,7 +32,12 @@ async function removeDocument() {
 
             const removeResponse = await postRequest(data);
 
-            alert( removeResponse.message);
+            if(removeResponse.error){
+                alert( removeResponse.error);
+            }
+            else{
+                alert( removeResponse.message);
+            }
 
         }
         else{

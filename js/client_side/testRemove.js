@@ -32,7 +32,11 @@ async function removeDocument() {
 
         if (removeResponse.success){
             document.getElementById('removeResponse').innerText = removeResponse.message;
-        } else {
+        } 
+        else if(removeResponse.error) {
+            alert( removeResponse.error);
+        }
+        else{
             console.error('Removal failed:', removeResponse.message);
             document.getElementById('removeResponse').innerText = 'Removal failed: ' + removeResponse.message;
         }

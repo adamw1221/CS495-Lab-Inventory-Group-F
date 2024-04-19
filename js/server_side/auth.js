@@ -7,9 +7,18 @@ function loginHandler(req, res){
 }
 
 const loginLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 15 minutes - 15 * 60 * 1000
+  windowMs: 10 * 60 * 1000, // 10 minutes - 15 * 60 * 1000
   max: 100, // Maximum requests
   handler : loginHandler
+});
+
+const rateLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100,
+  handler: (req, res) => {
+    // Send error response when rate limit is exceeded
+    res.status(429).json({ error: "Too many requests. Please try again later." });
+  }
 });
 
 async function authUser(username, password, inClient, inDB, inCollection) {
@@ -45,5 +54,6 @@ async function authUser(username, password, inClient, inDB, inCollection) {
 
   module.exports = {
     authUser,
-    loginLimiter
+    loginLimiter,
+    rateLimiter
   };

@@ -14,7 +14,10 @@ async function postRequest(data) {
         const response = await fetch('http://localhost:3000', options);
         // convert response into json and then post into div component
         const dbData = await response.json();
-        console.log(dbData);
+        console.log(dbData.message);
+        if(dbData.error){
+            alert(dbData.error);
+        }
         document.getElementById('response').innerText = await dbData["0"]["MAC"];
     } catch (error) {
         console.error('Error:', error);

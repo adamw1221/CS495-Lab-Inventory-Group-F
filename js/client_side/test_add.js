@@ -10,11 +10,17 @@ async function postRequest(data) {
   }
 
   try {
-      // send request while providing data parameter
-      const response = await fetch('http://localhost:3000', options);
-      
-      const responseText = await response.text();
-      alert(responseText);
+    // send request while providing data parameter
+    const response = await fetch('http://localhost:3000', options);
+    
+    const responseText = await response.json();
+
+    if(responseText.error){
+        alert( responseText.error);
+    }
+    else{
+        alert( responseText.message);
+    }
       /*const intValue = parseInt(responseText, 10);
 
       // Check if the parsing was successful

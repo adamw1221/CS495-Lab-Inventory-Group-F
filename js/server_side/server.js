@@ -4,7 +4,7 @@ const {runServer, sessionConfig} = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
 const { add, addUser } = require("../operations/doc_add.js");
-const { authUser, loginLimiter } = require("./auth.js");
+const { authUser, loginLimiter, rateLimiter } = require("./auth.js");
 const remove = require("../operations/doc_remove.js");
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -121,7 +121,7 @@ app.post('/auth/login', loginLimiter, async (req, res) => {
 
 });
 
-app.get('/getEquipment',requireLogin, async (req, res) => {
+app.get('/getEquipment', requireLogin,rateLimiter, async (req, res) => {
     console.log('get request received: ', req.url);
 
     try{
@@ -148,7 +148,7 @@ app.post('/data', (req, res) => {
     res.send('received post request. data received: ', JSON.stringify(requestData));
 });
 
-app.post('/checkout', async(req, res) => {
+app.post('/checkout', rateLimiter, async(req, res) => {
     console.log('request received:', req.url);
 
     if (client) {
@@ -245,7 +245,7 @@ app.post('/checkout', async(req, res) => {
     }
 });
 
-app.post('/userprofiledata', async(req, res) => {
+app.post('/userprofiledata',requireLogin, async(req, res) => {
     console.log(req.body);
     const query = req.body;
     //const query = {Checkout_Status: username};
@@ -254,7 +254,7 @@ app.post('/userprofiledata', async(req, res) => {
     res.status(200).send(result);
 });
 
-app.post('/', async(req, res) => {
+app.post('/', requireLogin, rateLimiter,  async(req, res) => {
     console.log('request received:', req.url);
 
         if (client) {
@@ -262,14 +262,14 @@ app.post('/', async(req, res) => {
                 console.log(req.body.input);
                 const query = {id: req.body.input};
                 const result = await read(client, "InventoryDB", "Robotics_Lab", query);
-                res.status(200).send(result);
+                res.status(200).json({message: result});
             }
             else if (req.body.type == "update") {
                 const filter = req.body.filter;
                 const updateDB = req.body.update;
                 const result = await update(client,"InventoryDB", "Robotics_Lab",
                     filter, updateDB);// returns string
-                res.status(200).send(result); //0 or 1
+                res.status(200).json({message : result}); //0 or 1
             }
             else if (req.body.type == "remove") {
                 console.log('Removing Document: ', req.body.input);
@@ -287,7 +287,7 @@ app.post('/', async(req, res) => {
                 const itemName = req.body.name;
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
                     itemId, itemName);// returns string
-                res.status(200).send(result);
+                res.status(200).json({message: result});
             }
             else if (req.body.type == "addUser") {
                 try {
@@ -296,13 +296,13 @@ app.post('/', async(req, res) => {
                     userInfo.password = hashedPassword;
 
                     const result = await addUser(client,"InventoryDB", "Roster", userInfo);
-                    res.status(200).send(result);
+                    res.status(200).json({ message: result});
                 } catch (error) {
                     if(error.errorResponse && error.errorResponse.code === 11000){
-                        res.status(500).send("Duplicate Username Error.");
+                        res.status(500).json({ error: "Duplicate Username Error."});
                     } else {
                         console.error("Error adding user:", error.errorResponse);
-                        res.status(500).send("An error occurred while adding the user.");
+                        res.status(500).json({ error: "An error occurred while adding the user."});
                     }
                 }
             }

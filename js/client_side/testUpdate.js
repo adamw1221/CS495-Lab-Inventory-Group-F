@@ -13,8 +13,15 @@ async function postRequest(data) {
         // send request while providing data parameter
         const response = await fetch('http://localhost:3000', options);
         
-        const responseText = await response.text();
-        const intValue = parseInt(responseText, 10);
+        const responseJson = await response.json();
+
+        var intValue=0;
+        if(responseJson.error){
+            alert(responseJson.error);
+        }
+        else{
+            intValue = parseInt(responseJson.message, 10);
+        }
 
         // Check if the parsing was successful
         if (!isNaN(intValue)) {

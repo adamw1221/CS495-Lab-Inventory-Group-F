@@ -10,11 +10,17 @@ async function postRequest(data) {
   }
 
   try {
-      // send request while providing data parameter
-      const response = await fetch('http://localhost:3000', options);
-      
-      const responseText = await response.text();
-      alert(responseText);
+    // send request while providing data parameter
+    const response = await fetch('http://localhost:3000', options);
+    
+    const responseJson = await response.json();
+    
+    if(responseJson.error){
+        alert( responseJson.error);
+    }
+    else{
+        alert( responseJson.message);
+    }
 
   } catch (error) {
     alert("There was an error trying to add user.");

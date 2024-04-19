@@ -179,6 +179,11 @@ async function checkoutPart() {
     console.log(res);
     response = res;
 
+    if(response.error){ 
+      alert(response.error);
+      return;
+    }
+
     if(response[0] == "No issues"){
       // 4.0: possible + no request needed: send request to perform checkout
       console.log("Res: No issues");
@@ -199,8 +204,8 @@ async function checkoutPart() {
     }
     else{
       // 6.0: impossible: notify user
-      openPopup("Invalid checkout or return date! Please select another.");
-      console.log("Res: Issues..");
+      openPopup("Invalid checkout! Please try again.");
+      console.log("Res: Issues..", response);
     }
   });
 
