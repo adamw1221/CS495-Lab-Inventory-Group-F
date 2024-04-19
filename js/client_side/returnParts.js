@@ -19,11 +19,12 @@ async function postRequest(data, endpoint) {
     } catch (error) {
         console.error('Error:', error);
     }
-  }
+}
 
 document.addEventListener("DOMContentLoaded", async function () {
     // check for data in session storage
     const storedUserData = sessionStorage.getItem("userData");
+
     if (storedUserData) {
         // if exists, populate table with it
         populateTable(JSON.parse(storedUserData));
@@ -45,93 +46,133 @@ document.addEventListener("DOMContentLoaded", async function () {
             sessionStorage.setItem("userData", JSON.stringify(userData));
         });
     }
+
+    const storedEquipmentData = sessionStorage.getItem("equipment");
+    if (!storedEquipmentData) {
+        // If data is not present, fetch it from the API and store it in sessionStorage
+        const equipmentData = await fetchEquipmentData();
+        sessionStorage.setItem("equipment", JSON.stringify(equipmentData));
+    }
+
+    document.getElementById('returnForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+    
+        // Get all checkboxes in the table
+        const checkboxes = document.querySelectorAll('#userTable tbody input[type="checkbox"]');
+    
+        // Iterate through checkboxes
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                // Make a POST request to clear out "Checkout_Status"
+                console.log(checkbox.parentNode.parentNode);
+                clearCheckoutStatus(checkbox.parentNode.parentNode); // Pass the table row
+            }
+        });
+        openPopup("Part(s) successfully returned!");
+    });
 });
 
 function populateTable(userData) {
     var table = document.getElementById("userTable");
-    console.log(userData);
+    console.log(userData.length);
     console.log(table);
-    userData = JSON.parse(userData);
-    userData = Array.from(userData);
 
-    try {
-        if (Array.isArray(userData)){
-        //userData = JSON.parse(userData);
-            userData.forEach(function(obj) {
-                console.log("Checkout status data type:", typeof obj["Checkout_Status.username"]);
-                if (obj["Checkout_Status"] !== null) {
-                    console.log('UNO!!!');
-                    var row = table.insertRow();
-                    
-                    var nameCell = row.insertCell();
-                    nameCell.textContent = obj["name"];
-                    var checkoutCell = row.insertCell();
-                    const checkoutDate = new Date(obj["Checkout_Status"]["checkoutDate"]);
-                    checkoutCell.textContent = checkoutDate.toString();
-                    var returnCell = row.insertCell();
-                    const returnDate = new Date(obj["Checkout_Status"]["returnDate"]);
-                    returnCell.textContent = returnDate.toString();
-                    var statusCell = row.insertCell();
-                    // maybe figure out how to dynamically style here? not sure if conditional formatting is possible on a css file
-                    if (Date.now() > returnDate) {
-                        statusCell.textContent = "OVERDUE";
-                    }
-                    else if (Date.now() < checkoutDate) {
-                        statusCell.textContent = "AWAITING";
-                    }
-                    else {
-                        statusCell.textContent = "OK";
-                    }
-                }
-                else {
-                    console.log('Invalid user data format.', obj);
-                }
-            });
-        }
-        else {
-            console.error('User data is undefined.');
-        }
+    if (userData.length > 0){
+        userData.forEach(function(obj) {
+            var row = table.insertRow();
+            
+            var checkboxCell = row.insertCell();
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkboxCell.appendChild(checkbox);
+
+            var nameCell = row.insertCell();
+            nameCell.textContent = obj["id"];
+            var checkoutCell = row.insertCell();
+            const checkoutDate = new Date(obj["Checkout_Status"]["checkoutDate"]);
+            checkoutCell.textContent = checkoutDate.toString();
+            var returnCell = row.insertCell();
+            const returnDate = new Date(obj["Checkout_Status"]["returnDate"]);
+            returnCell.textContent = returnDate.toString();
+            var statusCell = row.insertCell();
+            // maybe figure out how to dynamically style here? not sure if conditional formatting is possible on a css file
+            if (Date.now() > returnDate) {
+                statusCell.textContent = "OVERDUE";
+            }
+            else if (Date.now() < checkoutDate) {
+                statusCell.textContent = "AWAITING";
+            }
+            else {
+                statusCell.textContent = "OK";
+            }
+        });
     }
-    catch (error){
-        console.error('Error: ', error);
+    else {
+        var row = table.insertRow();
+        var cell = row.insertCell();
+        cell.textContent = "You currently have no parts checked out.";
+        cell.colSpan = 5;
     }
 }
 
-document.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent default form submission
+async function fetchEquipmentData() {
 
-  // Validate description field
-  const description = document.getElementById('description').value.trim();
-  if (description == '') {
-    alert('Please provide a description.');
-    return;
-  }
-
-  // Handle file upload validation if needed
-
-  // Prepare form data for submission (you can send this via AJAX or prepare for email submission)
-  const formData = new FormData(form);
-  // Example: You can access form data using formData.get('description'), formData.get('file'), etc.
-
-  // log form data to console
-  for (let data of formData.entries()) {
-    console.log(data[0] + ': ' + data[1]);
-  }
-
-});
-
-async function returnPart(){
-
-    var selectedEquipment = null;
-    
-
-    postRequest(data, "/return").then(res => {
-        console.log(res);
-        response = res;
+    try {
+      const response = await fetch('http://localhost:3000/getEquipment');
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
   
-        if(response[0] == "No issues"){
+      const responseData = await response.json();
+      return responseData.data; // Assuming the data property is available in the response
+  
+    } catch (error) {
+      console.error('Error fetching equipment data:', error);
+      throw error; // Rethrow the error for the calling code to handle
+    }
+}
 
-        }
-    });
+async function clearCheckoutStatus(row) {
+    console.log(row);
+
+    const itemIdCell = row.querySelector('td:nth-child(2)');
+    if (itemIdCell){
+        console.log('Content of first cell:', itemIdCell.textContent);
+        const itemId = itemIdCell.textContent;
+        const data = {};
+        data["id"] = itemId
+
+        postRequest(data, "/makereturn").then(res => {
+            console.log(res);
+            if (res != 0) {
+                console.log("UNO");
+                row.remove();
+
+                const updatedUserData = JSON.parse(sessionStorage.getItem("userData")).filter(user => user.id !== itemId);
+                sessionStorage.setItem("userData", JSON.stringify(updatedUserData));
+
+                populateTable(updatedUserData);
+            }
+            else {
+                console.error('Failed to make return:', res.message);
+            }
+
+        }).catch(error => {
+            console.error('Error making return:', error);
+        })
+    }
+    else{
+        console.error('First cell not found in the row.');
+    }
+}
+
+function openPopup(errorMessage) {
+    document.getElementById('error-message').innerText = errorMessage;
+    document.getElementById('popup').style.display = 'block';
+}
+  
+function closePopup(){
+    document.getElementById('popup').style.display = 'none';
 }
 

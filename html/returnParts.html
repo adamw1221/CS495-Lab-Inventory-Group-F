@@ -32,34 +32,40 @@
 
   <br><br>
   <div>
-    <table id="userTable">
-        <thead>
-            <tr>
-                <th>Equipment Name</th>
-                <th>Checkout Date</th>
-                <th>Return Date</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>template</td>
-                <td>3-28-2024T14:00</td>
-                <td>4-04-2024T15:00</td>
-                <td>OK</td>
-            </tr>
-        </tbody>
-    </table>
-    <br><br>
-    <h4>Required: Description of where part was returned.</h4>
-    <h4>Optional: Photo showing where part was returned.</h4>
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description" required>
-    <br>
-    <label for="file">Upload Picture:</label>
-    <input type="file" id="file" name="file" accept="image/*">
-    <br>
-    <button type="submit">Submit</button>
+    <form id="returnForm">
+      <table id="userTable">
+          <thead>
+              <tr>
+                  <th>Return?</th>
+                  <th>Equipment ID</th>
+                  <th>Checkout Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+              </tr>
+          </tbody>
+      </table>
+      <br><br>
+      <h4>Please provide a description of where the part(s) was returned.</h4>
+      <h4>Optional: Photo showing where part was returned.</h4>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" required>
+      <br>
+      <label for="file">Upload Picture:</label>
+      <input type="file" id="file" name="file" accept="image/*">
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p id="error-message"></p>
+    </div>
   </div>
  
 </body>

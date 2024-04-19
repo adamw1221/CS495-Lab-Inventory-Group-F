@@ -254,6 +254,34 @@ app.post('/userprofiledata',requireLogin, async(req, res) => {
     res.status(200).send(result);
 });
 
+app.post('/makereturn', requireLogin, async(req, res) => {
+    console.log('request received:', req.url);
+    console.log(req.body);
+
+    const filter = {"id": req.body.id};
+
+    const Checkout_Status = {}
+    const updateDB = {"Checkout_Status": Checkout_Status,
+                              "Available": "Yes"};
+    
+    try{
+        const result = await update(client, "InventoryDB", "Robotics_Lab", filter, updateDB);
+        console.log(result);
+        if (result){
+            console.log('Checkout status cleared successfully.');
+            res.status(200).send("clear");
+        }
+        else {
+            console.log('Failed to clear status.');
+            res.status(500).send('Failed to clear status.');
+        }
+
+    } catch (error){
+        console.error('Error:', error);
+        res.status(500).send('An error occured while clearing Checkout_Status.');
+    }
+});
+
 app.post('/', requireLogin, rateLimiter,  async(req, res) => {
     console.log('request received:', req.url);
 
@@ -322,9 +350,6 @@ app.post('/', requireLogin, rateLimiter,  async(req, res) => {
             "Please try again later.");
         }
 });
-
-
-
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
