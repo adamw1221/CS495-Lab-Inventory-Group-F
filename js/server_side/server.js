@@ -13,9 +13,9 @@ const { requireLogin, requireAdmin, hashPassword } = require('./helpers.js');
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static('LabInventory'));
+//app.use(express.static('LabInventory'));
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -352,7 +352,7 @@ app.post('/', requireLogin, rateLimiter,  async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
 /*
