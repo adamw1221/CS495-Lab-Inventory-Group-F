@@ -1,3 +1,6 @@
+const { hostname, protocol } = window.location;
+const baseURL = `${protocol}//${hostname}`;
+
 async function postRequest(data){
     let options = {
         method: 'POST',
@@ -9,7 +12,7 @@ async function postRequest(data){
     }
 
     try {
-        const response = await fetch('http://localhost:3000', options);
+        const response = await fetch(`${baseURL}`, options);
         const responseData = await response.json();
         return responseData;
     } catch (error) {
