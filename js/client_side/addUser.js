@@ -14,7 +14,7 @@ async function postRequest(data) {
 
   try {
     // send request while providing data parameter
-    const response = await fetch(`${baseURL}${endpoint}`, options);
+    const response = await fetch(`${baseURL}`, options);
     
     const responseJson = await response.json();
     
