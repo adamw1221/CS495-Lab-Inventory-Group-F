@@ -43,6 +43,37 @@ async function addDoc() {
   // 1. Get filter
   const idInput = document.getElementById("textbox").value;
   const nameInput = document.getElementById("name").value;
+  var macInput = null;
+  if (document.getElementById("mac").value == "") {
+    macInput = null;
+  } else {
+    macInput = document.getElementById("mac").value;
+  }
+  var statusInput = null;
+  if (document.getElementById("status").value == "Working") {
+    statusInput = "Working";
+  } else {
+    statusInput = "Broken";
+  }
+  var availableInput = null;
+  if (document.getElementById("available").value == "Yes") {
+    availableInput = "Yes";
+  } else {
+    availableInput = "No";
+  }
+  var mobileInput = null;
+  if (document.getElementById("mobile").value == "Yes") {
+    mobileInput = "Yes";
+  } else {
+    mobileInput = "No";
+  }
+  const roomInput = document.getElementById("room").value;
+  var requestInput = null;
+  if (document.getElementById("request").value == "Yes") {
+    requestInput = "Yes";
+  } else {
+    requestInput = "No";
+  }
 
   // 2. Formatting
   if (idInput.trim() !== '' && nameInput.trim() !== '') {
@@ -52,8 +83,18 @@ async function addDoc() {
 
       // 3. Construct a data object with the filter and Post Type
       const requestData = {
-          filter: idInput,
-          name: nameInput,
+          data: {
+            id: idInput,
+            name: nameInput,
+            MAC: macInput,
+            Status: statusInput,
+            Available: availableInput,
+            Mobile: mobileInput,
+            Room: roomInput,
+            Request_Needed: requestInput,
+            Checkout_Status: null
+          },
+
           type: 'add'
       };
 

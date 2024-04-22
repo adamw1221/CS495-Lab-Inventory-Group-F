@@ -1,12 +1,11 @@
-async function add(inClient, inDB, inCollection, itemId, itemName) {
+async function add(inClient, inDB, inCollection, document) {
 
     const db = inClient.db(inDB);
     const collection = db.collection(inCollection);
-    const document = {"id": itemId, "name": itemName};
 
     const result = await collection.insertOne(document);
     if (result) {
-      console.log("Document added to collection:", itemName);
+      console.log("Document added to collection:", document);
       return "Document added successfully!";
     }
 

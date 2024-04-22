@@ -141,6 +141,23 @@ app.get('/getEquipment', requireLogin,rateLimiter, async (req, res) => {
     
 });
 
+app.get('/getUser', (req, res) => {
+    console.log('get request received: ', req.url);
+
+    try {
+        if (req.session.userId) {
+            res.status(200).send(req.session.userId);
+        }
+        else {
+            res.status(500).send();
+        }
+    }
+    catch (error) {
+        console.error("Error in /getUser route:", error.message);
+        res.status(500).send();
+    }
+});
+
 app.post('/data', (req, res) => {
     console.log('post request received:', req.url);
     const requestData = req.body;
@@ -311,11 +328,11 @@ app.post('/', requireLogin, rateLimiter,  async(req, res) => {
                 }
             }
             else if (req.body.type == "add") {
-                const itemId = req.body.filter;
-                const itemName = req.body.name;
+                const document = req.body.data;
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
-                    itemId, itemName);// returns string
+                    document);// returns string
                 res.status(200).json({message: result});
+                // res.status(200).send(result);
             }
             else if (req.body.type == "addUser") {
                 try {
