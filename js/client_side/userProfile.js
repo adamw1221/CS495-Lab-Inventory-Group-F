@@ -21,6 +21,17 @@ async function postRequest(data, endpoint) {
     }
   }
 
+async function getRequest(endpoint) {
+    try {
+        const response = await fetch('http://localhost:3000' + endpoint);
+        const responseText = await response.text();
+        return responseText;
+    }
+    catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
     // check for data in session storage
     const storedUserData = sessionStorage.getItem("equipmentData");
@@ -30,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     } else {
         // if no data, send request to fetch it
         const requestInput = {};
-        requestInput["Checkout_Status.username"] = "temp";
+        requestInput["Checkout_Status.username"] = await getRequest('/getUser');
         var userData = [];
         postRequest(requestInput, "/userprofiledata").then(response => {
             console.log(response);
@@ -67,12 +78,15 @@ function populateTable(userData) {
         // maybe figure out how to dynamically style here? not sure if conditional formatting is possible on a css file
         if (Date.now() > returnDate) {
             statusCell.textContent = "OVERDUE";
+            statusCell.style.backgroundColor = "red";
         }
         else if (Date.now() < checkoutDate) {
             statusCell.textContent = "AWAITING";
+            statusCell.style.backgroundColor = "yellow";
         }
         else {
             statusCell.textContent = "OK";
+            statusCell.style.backgroundColor = "green";
         }
         /*
         Object.keys(obj).forEach(function(key) {
