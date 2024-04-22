@@ -1,7 +1,10 @@
+const { hostname, protocol } = window.location;
+const baseURL = `${protocol}//${hostname}`;
+
 export async function fetchEquipmentData() {
 
     try {
-      const response = await fetch('http://localhost:3000/getEquipment');
+      const response = await fetch(`${baseURL}/getEquipment`);
       
       if (!response.ok) {
         throw new Error('Network response was not ok');
