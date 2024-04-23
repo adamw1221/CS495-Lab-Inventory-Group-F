@@ -8,9 +8,7 @@
   <title>Update Parts</title>
   <link rel="stylesheet" href="styles.css">
   <script type="text/javascript" src="testUpdate.js"></script>
-  <!-- <script type="text/javascript" src="basicWebsite.js"></script> -->
 </head>
-
 
 <body>
   <header>
@@ -20,7 +18,6 @@
     <h1>Update Existing Equipment</h1>
   </header>
 
-  <!-- Buttons to Matching Page or add Nav Bar -->
   <nav>
     <ul>
       <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
@@ -33,32 +30,32 @@
       <li><a href="/returnParts" id="returnParts">Return Parts</a></li>
     </ul>
   </nav>
-  <!-- END Buttons to Matching Page or add Nav Bar -->
 
-  <!-- HTTP requests -->
-  <form class="input-container" id="updateForm">
+  <form class="form" id="updateForm">
 
-    <div id="text-output">
-      Enter comma-seperated key:value pairs or full JSON format
-    </div>
-    <div id="text-output">
-      e.g., {"id": "document1", "key": { "status" : "value1"}}
+    <div>
+      <label>Enter comma-seperated key:value pairs or full JSON format</label>
+      <label>e.g., {"id": "document1", "key": { "status" : "value1"}}</label>
     </div><br>
 
-      <div class="form">
+      <div>
         <label for="filterInput">Equipment ID:</label>
         <textarea type="text" id="filterInput" name="filterInput" rows="4" cols="25" required></textarea>
       </div>
-      <div class="form">
+      <div>
         <label for="changesInput">Changes:</label>
         <textarea type="text" id="changesInput" name="changesInput"  rows="4" cols="25" required></textarea>
       </div>
   
     <button type="button" onclick="updateDoc()">Update Equipment</button>
-    <div class="response" id="updateResponse"><pre>Awaiting Update..</pre></div>
   </form>
-  
-  <!-- END HTTP requests -->
- 
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p id="error-message"></p>
+    </div>
+  </div>
+   
 </body>
 </html>

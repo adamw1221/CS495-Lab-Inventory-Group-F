@@ -63,20 +63,19 @@ async function updateDoc() {
 
         //5. Check if the update was successful (number set in postRequest)
         if (updateResponse == 1) {
-            document.getElementById('updateResponse').innerText = `1 document updated`;
+            openPopup('1 document updated');
         }
         else if (updateResponse == 0){
-            document.getElementById('updateResponse').innerText = `No document updated`;
+            openPopup('No document updated');
         }
         else {
             console.error('Update failed');
-            displayError(`Update failed. Please try again later.`, "updateResponse");
+            openPopup('Update failed. Please try again later.');
         }
   
     } else {
         console.error('A data field is empty or undefined');
-        document.getElementById('updateResponse').innerText =
-            'A data field is empty or undefined';
+        openPopup('A data field is empty or undefined');
     }
 }
 
@@ -103,7 +102,11 @@ function parseInputString(inputString) {
     }
 }
 
-function displayError(message, responseId) {
-    const errorElement = document.getElementById(responseId);
-    errorElement.innerText = message;
+function openPopup(errorMessage) {
+    document.getElementById('error-message').innerText = errorMessage;
+    document.getElementById('popup').style.display = 'block';
+}
+  
+function closePopup(){
+    document.getElementById('popup').style.display = 'none';
 }

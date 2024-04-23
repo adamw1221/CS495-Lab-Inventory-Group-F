@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Return Parts</title>
   <link rel="stylesheet" href="styles.css">
   <script type="text/javascript" src="returnParts.js"></script>
 </head>
-
 
 <body>
   <header>
@@ -31,7 +30,7 @@
   </nav>
 
   <br><br>
-  <div>
+  <div class="form">
     <form id="returnForm">
       <table id="userTable">
           <thead>
@@ -49,14 +48,14 @@
           </tbody>
       </table>
       <br><br>
-      <h4>Please provide a description of where the part(s) was returned.</h4>
-      <h4>Optional: Photo showing where part was returned.</h4>
-      <label for="description">Description:</label>
-      <input type="text" id="description" name="description" required>
-      <br>
-      <label for="file">Upload Picture:</label>
-      <input type="file" id="file" name="file" accept="image/*">
-      <br>
+      <div>
+        <label for="description">Please provide a description of where the part(s) was returned:</label>
+        <input type="text" id="description" name="description" maxlength="100" required>
+      </div>
+      <div>
+        <label for="file">Optional - Provide a photo showing where part was returned:</label>
+        <input type="file" id="file" name="file" accept="image/*">
+      </div>
       <button type="submit">Submit</button>
     </form>
   </div>
