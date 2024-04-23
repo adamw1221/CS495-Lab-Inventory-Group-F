@@ -75,14 +75,19 @@ document.addEventListener("DOMContentLoaded", async function () {
         const checkboxes = document.querySelectorAll('#userTable tbody input[type="checkbox"]');
     
         // Iterate through checkboxes
+        let checks = false;
         checkboxes.forEach(function(checkbox) {
             if (checkbox.checked) {
+                checks = true;
                 // Make a POST request to clear out "Checkout_Status"
                 console.log(checkbox.parentNode.parentNode);
                 clearCheckoutStatus(checkbox.parentNode.parentNode); // Pass the table row
             }
         });
-        openPopup("Part(s) successfully returned!");
+
+        if (!checks) {
+            openPopup("Please select at least one item to return.");
+        }
     });
 });
 
@@ -163,24 +168,28 @@ async function clearCheckoutStatus(row) {
         postRequest(data, "/makereturn").then(res => {
             console.log(res);
             if (res != 0) {
-                console.log("UNO");
+                console.log("Removing from table...");
                 row.remove();
 
                 const updatedUserData = JSON.parse(sessionStorage.getItem("userData")).filter(user => user.id !== itemId);
                 sessionStorage.setItem("userData", JSON.stringify(updatedUserData));
 
                 populateTable(updatedUserData);
+                openPopup('Part(s) successfully returned!');
             }
             else {
                 console.error('Failed to make return:', res.message);
+                openPopup('Failed to make return. Please try again later.');
             }
 
         }).catch(error => {
             console.error('Error making return:', error);
+            openPopup('An error occured while processing your request. Please try again later.');
         })
     }
     else{
-        console.error('First cell not found in the row.');
+        console.error('Equipment ID not found in the row.');
+        openPopup('An error occured while processing your request. Please try again later.');
     }
 }
 
