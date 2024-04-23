@@ -42,6 +42,17 @@ async function postRequest(data, endpoint) {
   }
 }
 
+async function getRequest(endpoint) {
+  try {
+      const response = await fetch(`${baseURL}${endpoint}`);
+      const responseText = await response.text();
+      return responseText;
+  }
+  catch (error) {
+      console.error('Error:', error.message);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
     // Check if equipment data is stored in sessionStorage
     const storedEquipmentData = sessionStorage.getItem("equipment");
@@ -167,6 +178,7 @@ async function checkoutPart() {
   // END-DEBUG
 
   // 2.0: send request to verify that checkout is possible
+  const username = await getRequest('/getUser');
   const data = {};
   data["type"] = "validate"
   data["input"] = {
@@ -175,7 +187,7 @@ async function checkoutPart() {
     "checkoutTime": checkoutTime,
     "returnDate": returnDate,
     "returnTime": returnTime,
-    "username": "myusername",
+    "username": username,
   };
   var response;
   postRequest(data, "/checkout").then(res => {
