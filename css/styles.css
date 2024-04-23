@@ -203,7 +203,10 @@ nav ul li {
 }
 
 form {
-    width: 75%;
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
 }
 
 .form div {
