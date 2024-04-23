@@ -9,6 +9,4 @@ If the run commands in the next section give you node_module errors, this should
   
 ## Run:
 Run the command  **npm start**  to start our server and connect to our database.
-   
-   
 
