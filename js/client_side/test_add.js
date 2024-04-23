@@ -50,26 +50,26 @@ async function addDoc() {
     macInput = document.getElementById("mac").value;
   }
   var statusInput = null;
-  if (document.getElementById("status").value == "Working") {
+  if (document.querySelector('input[name="status"]:checked')) {
     statusInput = "Working";
   } else {
     statusInput = "Broken";
   }
   var availableInput = null;
-  if (document.getElementById("available").value == "Yes") {
+  if (document.querySelector('input[name="available"]:checked')) {
     availableInput = "Yes";
   } else {
     availableInput = "No";
   }
   var mobileInput = null;
-  if (document.getElementById("mobile").value == "Yes") {
+  if (document.querySelector('input[name="mobile"]:checked')) {
     mobileInput = "Yes";
   } else {
     mobileInput = "No";
   }
   const roomInput = document.getElementById("room").value;
   var requestInput = null;
-  if (document.getElementById("request").value == "Yes") {
+  if (document.querySelector('input[name="request"]:checked')) {
     requestInput = "Yes";
   } else {
     requestInput = "No";
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", async function () {
  async function fetchEquipmentData() {
 
     try {
-      const response = await fetch('http://localhost:3000/getEquipment');
+      const response = await fetch(`${baseURL}/getEquipment`);
       
       if (!response.ok) {
         throw new Error('Network response was not ok');

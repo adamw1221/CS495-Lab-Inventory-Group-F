@@ -1,5 +1,5 @@
-const { hostname, protocol } = window.location;
-const baseURL = `${protocol}//${hostname}`;
+const { hostname, protocol, port } = window.location;
+const baseURL = `${protocol}//${hostname}:${port}`;
 
 async function postRequest(data, endpoint) {
     // configure options for post request
@@ -24,9 +24,9 @@ async function postRequest(data, endpoint) {
     }
   }
 
-async function getRequest(endpoint) {
+  async function getRequest(endpoint) {
     try {
-        const response = await fetch('http://localhost:3000' + endpoint);
+        const response = await fetch(`${baseURL}${endpoint}`);
         const responseText = await response.text();
         return responseText;
     }
