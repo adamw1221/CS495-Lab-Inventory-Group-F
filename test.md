@@ -17,7 +17,9 @@ Certain features have a bigger impact on our application's usefulness than other
 
     1. **Reason:** We have a MongoDB Atlas database that holds our equipment and user data. If lose conenction to it then our server won't be able to fulfil any requests, making the application useless.
     2. **Test:** 
-        1.
+        1. In your terminal, try to hit our DB using the mongo CLI (command line interface), via our connection string. Run this command:
+            1. **mongosh "mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority"**
+        2. ![Good Result](images/mongosh_pic)
 
 2. Server stability
 
@@ -25,10 +27,10 @@ Certain features have a bigger impact on our application's usefulness than other
     2. **Test:**
     
         1. In your terminal, send a manual HTTP "HEAD" request to our application's URL with this command:
-        2. **curl -I https://lab-inventory-6d96bc525443.herokuapp.com/login**
-        3. You should get this response: **HTTP/1.1 200 OK**
-        4. An error would return something like **HTTP/1.1 404 Not Found**
-        5. You can also past the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise you should get a heroku error message page.
+            1. **curl -I https://lab-inventory-6d96bc525443.herokuapp.com/login**
+        2. You should get this response: **HTTP/1.1 200 OK**
+        3. An error would return something like **HTTP/1.1 404 Not Found**
+        4. You can also past the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise you should get a heroku error message page.
 
 3. User login
 
