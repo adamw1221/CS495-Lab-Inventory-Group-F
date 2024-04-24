@@ -92,13 +92,13 @@ The following tests require user interaction with the corresponding webpages and
     3. Enter **"Available : Never"** for *Changes*
     4. Click **Update Equipment**
     5. You should get a notification of a document successfully updated.
-    6. Can further verify by repeating this update, which will show that 0 documents were removed.
+    6. Can further verify by repeating this update, which will show that 0 documents were updated.
    
 3. Login
 
     1.  Visit our login link above
     2. Enter **classmate** for username and password. 
-    3. You should be redirected to **"My Checkouts"** ( a student view) after successfully logging in. 
+    3. You should be redirected to **"My Checkouts"** (in a student view) after successfully logging in. 
         3. If this doesn't work you should remain on the login page.
     4. If you attempt to visit any of the pages above (add, update, remove) you should get an error screen, forcing you to go back to the Checkout or Return page.
     5. ![Add Part](img/no_auth.png)
@@ -119,10 +119,10 @@ The following tests require user interaction with the corresponding webpages and
 
     1. Go to Remove Old Parts page
     2. Enter **"testPart"** for *EquipmentID*
-        1. If it doesn't exist you can follow the step above to add it.
+        1. If it doesn't exist you can follow the Add step above to add it.
     3. Click **Remove part**
     4. You should get a notification of a successful removal.
-    5. Can further verify via Update or Remove for testPart
+    5. Can further verify via Update or Remove for *testPart*
 
 
 ### Other Test Cases
@@ -131,7 +131,7 @@ The following tests require user interaction with the corresponding webpages and
 8. Attempt to add existing equipment
 9. Attempt to add equipment without filling in form
 10. Attempt to add an unavailable username on Add User
-11. Attempt to update non existing equipment
+11. Attempt to update non-existing equipment
 12. Attempt to update equipment with empty form
 13. Attempt to checkout multiple parts (desired functionality? backlog)
 14. Attempt to checkout unavailable part
