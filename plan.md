@@ -68,9 +68,9 @@ This will connect the application to mongodb
         2. password: kNvoF1iXUX3GAfzk
 
 ### 6 Errors
-If the run commands in the next section give you node_module errors, this should fix it:
+If the run commands in the next section give you node_module errors, this should fix it.  From the folder CS495-Lab-Inventory-Group-F, run:
 1. **rm -rf node_modules**
-    1. (If you're on powershell or this doesn't work, you can manually delete the node_modules package for the same effect)
+    1. If you're on powershell or this doesn't work, you can manually delete the node_modules package for the same effect
        
 2. **npm install**
 
