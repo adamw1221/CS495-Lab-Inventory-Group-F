@@ -66,3 +66,22 @@ This will connect the application to mongodb
         1. Username: LabAdmin
            
         2. password: kNvoF1iXUX3GAfzk
+
+### 6 Errors
+If the run commands in the next section give you node_module errors, this should fix it:
+- **rm -rf node_modules**
+- **npm install**
+  
+### 7 Run Locally:
+1. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
+   
+   1. Or run **node js\server_side\server.js**
+
+3. In your web browser paste and go to: **http://localhost:3000**
+  
+5. You should be directed to a login page.
+   1. For access to all pages -> **username & password: temp2**
+
+   2. For access to student view -> **username & password: classmate**
+   
+6. See our section on hosting for deploying with Heroku
