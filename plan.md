@@ -3,10 +3,10 @@ Our Lab Inventory site is a web application that uses Node Js, Express Js, and M
 
 ### 1 Install Node.js (LTS) and NPM 
 1.	In your terminal/command prompt, run these commands to see if you have Node and Npm: 
-    
-   1.	**node -v** and **npm -v**
-    
-   2.	You should see something like “**v20.11.0 and 10.5.2**” 
+
+    1.	**node -v** and **npm -v**
+       
+    2.	You should see something like “**v20.11.0 and 10.5.2**” 
 
 2.	If not, you can download an installer for your system then run it and follow on screen instructions:
     
