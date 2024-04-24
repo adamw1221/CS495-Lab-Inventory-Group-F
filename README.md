@@ -1,43 +1,6 @@
 # CS495
 ## Lab Inventory Project
 
-### Setup
-1. Clone the repository-> Open a terminal and run the command:
-   
-   **git clone https://github.com/adamw1221/CS495-Lab-Inventory-Group-F.git**
-   
-2. Navigate into the project folder: **CD CS495-Lab-Inventory-Group-F**
-   
-   All of the following commands will be run from this folder
-   
-3. The clone will be of the **main** branch, so if there's a more up-to-date branch like **sprint3** you can use this command:
-
-   example template:    **git checkout -b < newBranchName > origin/< newBranchName >**
-
-   actual cmd:     **git checkout -b sprint3 origin/sprint3**
-   
-5. Now you should be on the branch you just made, with code from the up-to-date branch
-
-### Errors
-If the run commands in the next section give you node_module errors, this should fix it:
-- **rm -rf node_modules**
-- **npm install**
-  
-### Run:
-1. A) Run the command  **npm start**  to start our server and connect to our database.
-   
-   
-   B) Or run **node js\server_side\server.js**
-
-
-3. In your web browser paste and go to: **http://localhost:3000**
-  
-5. You should be directed to a login page.
-   For access to all pages -> **username & password: temp2**
-
-   For access to student view -> **username & password: classmate**
-
-
 ## Project Focus
 Our job is to build a web application to help the Robotics Lab manage inventory​
 
