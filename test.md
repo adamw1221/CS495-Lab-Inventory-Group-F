@@ -82,7 +82,7 @@ The following tests require user interaction with the corresponding webpages and
     4. Click **Add part**
     5. You should get a notification of a successful add.
     6. Can further verify via Update or Remove
-    7. ![Add Part](img/addparts.png)
+    7. ![Add Part](img/addpart.png)
 
 2. Update Part 
 
