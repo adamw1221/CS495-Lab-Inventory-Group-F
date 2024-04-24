@@ -6,7 +6,7 @@ Our Lab Inventory site is a web application that uses Node Js, Express Js, and M
 
     1.	**node -v** and **npm -v**
        
-    2.	You should see something like “**v20.11.0 and 10.5.2**” 
+    2.	You should see something like “**v20.11.0 and 10.5.2**” respectively
 
 2.	If not, you can download an installer for your system then run it and follow on screen instructions:
     
@@ -45,22 +45,23 @@ This allows you to make changes to your own copy without affecting the main bran
     2. You should get a message saying that you switched to the new branch you just created. 
     
     3. Now you are good to make changes to code and commit them: 
-        1. See Sections 5 and 6
+        1. See the "**Add Environment Variable File**" section first, and our Feature description and our modify/extend sections below offer further guidance
            
-        2. git add .   (to stage all files that you’ve modified) 
+        2. **git add .**   (to stage all files that you’ve modified) 
     
-    4. When ready to locally “save” those changes use: **git commit -m " code for this checkpoint"**
+    4. When ready to locally “save” those changes, use: **git commit -m "code for this checkpoint"**
     
-    5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github  at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
+    5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
 
 ### 5	Add Environment Variable File
 This will connect the application to mongodb
 
-1. Create a file named **.env** in the top lovel of folder **CS495-Lab-Inventory-Group-F**
+1. Create a file named **.env** in the top level of folder **CS495-Lab-Inventory-Group-F**
 
-2. Add this connection string:
+2. Add this connection string for our generic user:
     1. MONGODB_URI = mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority
-
-3. Username: LabAdmin
-
-4. password: kNvoF1iXUX3GAfzk
+       
+    3. To log into our MongoDB Atlas UI at: https://account.mongodb.com/account/login
+        1. Username: LabAdmin
+           
+        2. password: kNvoF1iXUX3GAfzk
