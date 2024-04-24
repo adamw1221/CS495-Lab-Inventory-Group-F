@@ -31,7 +31,7 @@ Certain features have a bigger impact on our application's usefulness than other
             1. **curl -I https://lab-inventory-6d96bc525443.herokuapp.com/login**
         2. You should get this response: **HTTP/1.1 200 OK**
         3. An error would return something like **HTTP/1.1 404 Not Found**
-        4. You can also past the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise, you should get a heroku error message page.
+        4. You can also paste the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise, you should get a heroku error message page.
 
 3. User login
 
