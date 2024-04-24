@@ -72,6 +72,8 @@ The following tests require user interaction with the corresponding webpages and
 
 **Username & Password**: **temp2**
 
+### Major Features
+
 1. Add Part 
 
     1. Go to Add Part page
@@ -91,9 +93,29 @@ The following tests require user interaction with the corresponding webpages and
     4. Click **Update Equipment**
     5. You should get a notification of a document successfully updated.
     6. Can further verify by trying to repeat this update, which will show that 0 documents were removed.
+   
+3. Login
 
+    1.  Visit our login link above
+    2. Enter **classmate** for username and password. 
+    3. You should be redirected to **"My Checkouts"** ( a student view) after succesfully loging in. 
+        3. If this doesn't work you should remain on the login page.
+    4. If you attempt to visit any of the pages above (add, update, remove) you should get an error screen, forcing you to go back to the Checkout or Return page.
+    5. ![Add Part](img/no_auth.png)
+
+4. Checkout Part
+
+    1.  Go to Checkout Parts
+    2. Select **"testPart"** from the dropdown.
+    3. Enter today's date for *Checkout Date*
+    4. Enter a future time for the *Checkout Time*
+    5. Enter a future date for *Return Date*
+    6. Enter a future time for *Return Time*
+    7. Click the *Checkout* button
+    8. You should get a notification for a successfull checkout.
+    9. This can be verified by opening a new tab and visiting your **"My Checkouts"** page where the new equipment should be displayed.
     
-3.  Remove Part 
+5.  Remove Part 
 
     1. Go to Remove Old Parts page
     2. Enter **"testPart"** for *EquipmentID*
@@ -101,19 +123,19 @@ The following tests require user interaction with the corresponding webpages and
     3. Click **Remove part**
     4. You should get a notification of a successful removal.
     5. Can further verify via Update or Remove for testPart
-   
-4. Login
 
-    1.  Visit our login link above
-    2. Enter **classmate** for username and password. 
-    3. You should be redirected to a **"My Checkouts"** (student view) after succesfully loging in. 
-        3. If this doesn't work you should remain on the login page.
-    4. If you attempt to visit any of the pages above (add, update, remove) you should get an error screen, forcing you to go back to the Checkout or Return page.
-    5. ![Add Part](img/no_auth.png)
 
-Webpage Views based on user type 
-
-Input: Valid user login credentials 
-
-Expected: Upon successful login, students should see a view for checkout parts and teachers should have view to perform CRUD operations, along with other respective features 
-
+### Other Test Cases
+6. Login with wrong or missing username/password
+7. After 30 minutes of beng logged in, atempt to return directly to a non-login page
+8. Attempt to add existing equipment
+9. Attempt to add equipment without filling in form
+10. Attempt to add unavailable username on Add User
+11. Attempt to update non existing equipment
+12. Attempt to update equipment with empty form
+13. Attempt to checkout multiple parts (desired functionality? backlog)
+14. Attempt to checkout unavailable part
+15. Attempt checkout with invalid dates/times
+16. Attempt to update part to available while its checked out (desired functionality? backlog)
+17. Attempt to remove user while logged in as that user.
+18. Attempt to remove last user in database
