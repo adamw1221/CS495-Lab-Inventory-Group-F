@@ -75,9 +75,9 @@ If the run commands in the next section give you node_module errors, this should
 Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
 Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following: 
 
-const { hostname, protocol, port } = window.location;
+    const { hostname, protocol, port } = window.location;
 
-const baseURL = `${protocol}//${hostname}:${port}`;
+    const baseURL = `${protocol}//${hostname}:${port}`;
   
 ### 7 Run Locally:
 1. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
