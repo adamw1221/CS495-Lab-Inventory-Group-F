@@ -11,25 +11,36 @@ This testing workflow ensures we're sending the right data, getting it in the re
 
 
 ## High Risk Features
-Certain features have a bigger impact on our application's usefulness than others. Those features are, **database connectivity, server stability, user login, checkout part, and return part**. 
+Certain features have a bigger impact on our application's usefulness than others. Those features are, **database connectivity, server stability, user login, checkout part, and return part**. These test involve a mixture of automated an manual but could be adaptaed to be fully automated in the future.
 
 1. Database connectivity
 
-    1. 
+    1. **Reason:** We have a MongoDB Atlas database that holds our equipment and user data. If lose conenction to it then our server won't be able to fulfil any requests, making the application useless.
+    2. **Test:** 
+        1.
 
 2. Server stability
 
-    1. 
+    1. **Reason:** If our server goes down, a user might be able to navigate between pages (if they're available at all), but again they would be useless if there was nothing to handle requests.
+    2. **Test:**
+    
+        1. In your terminal, send a manual HTTP "HEAD" request to our application's URL with this command:
+        2. **curl -I https://lab-inventory-6d96bc525443.herokuapp.com/login**
+        3. You should get this response: **HTTP/1.1 200 OK**
+        4. An error would return something like **HTTP/1.1 404 Not Found**
+        5. You can also past the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise you should get a heroku error message page.
 
 3. User login
 
-    1. 
+    1. **Reason:** If no one can login then the site's functionality won't be available for any requests to be made.
 
 4. Checkout part
 
-    1.  
+    1. **Reason:** This is our application's primary use case and one of the only pages visable to students so it's critical that it works at all times.
 
 5. Return part
+
+    1. **Reason:** This feature is only high risk because if it fails, any (physically) returned equipment is unavailable until it's fixed or an admin manually handles returns which would be extensive overhead.This could lead to checkout functionality being useless with nothing available.
   
 ## User Acceptance Testing
 Run the command  **npm start**  to start our server and connect to our database.
