@@ -33,7 +33,7 @@ Certain features have a bigger impact on our application's usefulness than other
         3. An error would return something like **HTTP/1.1 404 Not Found**
         4. You can also paste the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise, you should get a heroku error message page.
 
-3. User login
+3. User Login
 
     1. **Reason:** If no one can log in then the site's functionality won't be available for any requests to be made.
     
@@ -42,7 +42,7 @@ Certain features have a bigger impact on our application's usefulness than other
         2. For manual testing you can visit our heroku login link above and enter **classmate** for username and password. You should be redirected to a student view after successfully logging in. 
         3. If this doesn't work (or another username/password combination known to be in the db), you should remain on the login page.
 
-4. Checkout part
+4. Checkout Part
 
     1. **Reason:** This is our application's primary use case and one of the only pages visible to students so it's critical that it works at all times.
     
@@ -52,14 +52,14 @@ Certain features have a bigger impact on our application's usefulness than other
         3. Pick an available piece of equipment from the dropdown. Select valid checkout dates/times and returns, then press the checkout button.
         4. You should get a notification that it was successfully checked out.
     
-5. Return part
+5. Return Part
 
-    1. **Reason:** This feature is only high risk because if it fails, any (physically) returned equipment is unavailable until it's fixed or an admin manually handles returns which would be extensive overhead.This could lead to checkout functionality being useless with nothing available.
+    1. **Reason:** This feature is only high risk because if it fails, any (physically) returned equipment is unavailable until it's fixed or an admin manually handles returns which would be extensive overhead. This could lead to checkout functionality being useless with nothing available.
    
     2. **Test:**
         1. For manual testing you can visit our heroku page above and log in with **classmate**. 
         2. Follow the instructions to checkout a part from **section 4**.
-        3. Navigate to the **Return Parts** page. You should see your new equipment. If not, open the page in a new tab to fully refresh the session.
+        3. Navigate to the **Return Parts** page. You should see your new equipment in a table on the screen. If not, open the page in a new tab to fully refresh the session.
         4. Select the small square on the far left-hand side of the equipment in the table in the Return column. 
         5. Add a description, then press submit. You should get a notification saying the return was successful.
   
