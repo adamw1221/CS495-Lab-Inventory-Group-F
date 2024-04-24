@@ -75,7 +75,7 @@ If the run commands in the next section give you node_module errors, this should
 2. **npm install**
 
 Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
-Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following lines. These specify the port locally, but may not work with our hosting solution: 
+Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following lines. These specify the port locally but may not work with our hosting solution: 
 
     const { hostname, protocol, port } = window.location;
 
