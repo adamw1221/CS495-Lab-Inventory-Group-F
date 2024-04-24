@@ -39,26 +39,26 @@ c.	You should now see all of our application code hosted on our main branch on g
 This allows you to make changes to your own copy without affecting the main branch.
 a.	From CS495-Lab-Inventory-Group-F, use this command: 
     
-    i.	**git checkout -b featureBranchName**
+    i. **git checkout -b featureBranchName**
     
-    ii.	You should get a message saying that you switched to the new branch you just created. 
+    ii. You should get a message saying that you switched to the new branch you just created. 
     
-    iii.	Now you are good to make changes to code and commit them: 
-        1.	See Sections 5 and 6
-        2.	git add .   (to stage all files that you’ve modified) 
+    iii. Now you are good to make changes to code and commit them: 
+        1. See Sections 5 and 6
+        2.git add .   (to stage all files that you’ve modified) 
     
-    iv.	When ready to locally “save” those changes use:
+    iv. When ready to locally “save” those changes use:
 **git commit -m " code for this checkpoint"**
     
-    v.	 To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github  at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
+    v. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github  at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
 
 ### 5	Add Environment Variable File
 This will connect the application to mongodb
-a.	Create a file named **.env** in the top lovel of folder **CS495-Lab-Inventory-Group-F**
+a. Create a file named **.env** in the top lovel of folder **CS495-Lab-Inventory-Group-F**
 
-b.	Add this connection string:
-    i.	MONGODB_URI = mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority
+b. Add this connection string:
+    i. MONGODB_URI = mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority
 
-c.	Username: LabAdmin
+c. Username: LabAdmin
 
-d.	password: kNvoF1iXUX3GAfzk
+d. password: kNvoF1iXUX3GAfzk
