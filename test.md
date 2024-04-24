@@ -11,46 +11,46 @@ This testing workflow ensures we're sending the right data, getting it in the re
 
 
 ## High Risk Features
-Certain features have a bigger impact on our application's usefulness than others. Those features are, **database connectivity, server stability, user login, checkout part, and return part**. These test involve a mixture of automated an manual but could be adaptaed to be fully automated in the future.
+Certain features have a bigger impact on our application's usefulness than others. Those features are, **database connectivity, server stability, user login, checkout part, and return part**. These tests involve a mixture of automated and manual but could be adapted to be fully automated in the future.
 
-1. Database connectivity
+1. Database Connectivity
 
-    1. **Reason:** We have a MongoDB Atlas database that holds our equipment and user data. If lose conenction to it then our server won't be able to fulfil any requests, making the application useless.
+    1. **Reason:** We have a MongoDB Atlas database that holds our equipment and user data. If we lose connection to it then our server won't be able to fulfill any requests, making the application useless.
     2. **Test:** 
         1. In your terminal, try to hit our DB using the mongo CLI (command line interface), via our connection string. Run this command:
             1. **mongosh "mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority"**
         2. This should be the response upon a successful connection.
             1. ![Good Result](images/mongosh_pic.png)
 
-2. Server stability
+2. Server Stability
 
-    1. **Reason:** If our server goes down, a user might be able to navigate between pages (if they're available at all), but again they would be useless if there was nothing to handle requests.
+    1. **Reason:** If our server goes down a user might be able to navigate between pages (if they're available at all), but they would be inactive if there was nothing to handle requests.
     2. **Test:**
     
         1. In your terminal, send a manual HTTP "HEAD" request to our application's URL with this command:
             1. **curl -I https://lab-inventory-6d96bc525443.herokuapp.com/login**
         2. You should get this response: **HTTP/1.1 200 OK**
         3. An error would return something like **HTTP/1.1 404 Not Found**
-        4. You can also past the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise you should get a heroku error message page.
+        4. You can also past the link **https://lab-inventory-6d96bc525443.herokuapp.com/login** into your browser to  visit the site. If it serves you the login page then the server is up. Otherwise, you should get a heroku error message page.
 
 3. User login
 
-    1. **Reason:** If no one can login then the site's functionality won't be available for any requests to be made.
+    1. **Reason:** If no one can log in then the site's functionality won't be available for any requests to be made.
     
     2. **Test:**
         1. Covered by our automatic test.
-        2. For manual testing you can visit our heroku login link above and enter **classmate** for username and password. You should be redirected to a student view after succesfully loging in. 
+        2. For manual testing you can visit our heroku login link above and enter **classmate** for username and password. You should be redirected to a student view after successfully logging in. 
         3. If this doesn't work (or another username/password combination known to be in the db), you should remain on the login page.
 
 4. Checkout part
 
-    1. **Reason:** This is our application's primary use case and one of the only pages visable to students so it's critical that it works at all times.
+    1. **Reason:** This is our application's primary use case and one of the only pages visible to students so it's critical that it works at all times.
     
     2. **Test:**
         1. Covered by our automatic test.
         2. For manual testing you can visit our heroku page above and log in with **classmate**. 
         3. Pick an available piece of equipment from the dropdown. Select valid checkout dates/times and returns, then press the checkout button.
-        4. You should get a notification that it was sucessfully checked out.
+        4. You should get a notification that it was successfully checked out.
     
 5. Return part
 
@@ -58,15 +58,15 @@ Certain features have a bigger impact on our application's usefulness than other
    
     2. **Test:**
         1. For manual testing you can visit our heroku page above and log in with **classmate**. 
-        2. Follow the instructions to cehckout a part from **section 4**.
-        3. Navigate to the **Return Parts** page. You should see your new equipment. If not, open the page in a enw tab to fully refresh the session.
+        2. Follow the instructions to checkout a part from **section 4**.
+        3. Navigate to the **Return Parts** page. You should see your new equipment. If not, open the page in a new tab to fully refresh the session.
         4. Select the small square on the far left-hand side of the equipment in the table in the Return column. 
-        5. Add a description, then press submit. You should get a notification saying the return was succesful.
+        5. Add a description, then press submit. You should get a notification saying the return was successful.
   
 ## User Acceptance Testing
 
 
-The following tests require user interaction with the corresponding webpages and are verifiable (after logging in) by on screen response or completing a complementary action.
+The following tests require user interaction with the corresponding webpages and are verifiable (after logging in) by on-screen response or completing a complementary action.
 
 **Website Link**: https://lab-inventory-6d96bc525443.herokuapp.com/login
 
@@ -88,7 +88,7 @@ The following tests require user interaction with the corresponding webpages and
 
     1. Input: ID and Value of existing equipment and Key-Value pairs with updated values     1. Go to Update Part page
     2. Enter **"id : testPart"** for *Equipment Id*
-        1. Otherwise, you can check the Checkout Parts page dropdown to get an available ID for a part to change. (Just change it back afterwards).
+        1. Otherwise, you can check the Checkout Parts page dropdown to get an available ID for a part to change. (Just change it back afterward).
     3. Enter **"Available : Never"** for *Changes*
     4. Click **Update Equipment**
     5. You should get a notification of a document successfully updated.
@@ -98,7 +98,7 @@ The following tests require user interaction with the corresponding webpages and
 
     1.  Visit our login link above
     2. Enter **classmate** for username and password. 
-    3. You should be redirected to **"My Checkouts"** ( a student view) after succesfully loging in. 
+    3. You should be redirected to **"My Checkouts"** ( a student view) after successfully logging in. 
         3. If this doesn't work you should remain on the login page.
     4. If you attempt to visit any of the pages above (add, update, remove) you should get an error screen, forcing you to go back to the Checkout or Return page.
     5. ![Add Part](img/no_auth.png)
@@ -112,7 +112,7 @@ The following tests require user interaction with the corresponding webpages and
     5. Enter a future date for *Return Date*
     6. Enter a future time for *Return Time*
     7. Click the *Checkout* button
-    8. You should get a notification for a successfull checkout.
+    8. You should get a notification for a successful checkout.
     9. This can be verified by opening a new tab and visiting your **"My Checkouts"** page where the new equipment should be displayed.
     
 5.  Remove Part 
@@ -127,10 +127,10 @@ The following tests require user interaction with the corresponding webpages and
 
 ### Other Test Cases
 6. Login with wrong or missing username/password
-7. After 30 minutes of beng logged in, atempt to return directly to a non-login page
+7. After 30 minutes of being logged in, attempt to return directly to a non-login page
 8. Attempt to add existing equipment
 9. Attempt to add equipment without filling in form
-10. Attempt to add unavailable username on Add User
+10. Attempt to add an unavailable username on Add User
 11. Attempt to update non existing equipment
 12. Attempt to update equipment with empty form
 13. Attempt to checkout multiple parts (desired functionality? backlog)
