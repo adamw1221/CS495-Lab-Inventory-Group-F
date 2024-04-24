@@ -115,7 +115,7 @@ The following tests require user interaction with the corresponding webpages and
     8. You should get a notification for a successful checkout
     9. This can be verified by opening a new tab and visiting your **"My Checkouts"** page where the new equipment should be displayed.
     
-5.  Remove Part 
+5.  Remove Part (Requires being logged in as an admin, i.e., **temp2**)
 
     1. Go to Remove Old Parts page
     2. Enter **"testPart"** for *EquipmentID*
