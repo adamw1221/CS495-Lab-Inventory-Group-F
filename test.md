@@ -19,7 +19,7 @@ Certain features have a bigger impact on our application's usefulness than other
     2. **Test:** 
         1. In your terminal, try to hit our DB using the mongo CLI (command line interface), via our connection string. Run this command:
             1. **mongosh "mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority"**
-        2. ![Good Result](images/mongosh_pic)
+        2. ![Good Result](images/mongosh_pic.png)
 
 2. Server stability
 
