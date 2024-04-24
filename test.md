@@ -88,11 +88,11 @@ The following tests require user interaction with the corresponding webpages and
 
     1. Go to Update Part page
     2. Enter **"id : testPart"** for *Equipment Id*
-        1. Otherwise, you can check the Checkout Parts page dropdown to get an available ID for a part to change. (Just change it back afterward).
+        1. Otherwise, you can check the Checkout Parts page dropdown to get an available ID for a part to change. (Just change it back to **"Yes"** afterward).
     3. Enter **"Available : Never"** for *Changes*
     4. Click **Update Equipment**
     5. You should get a notification of a document successfully updated.
-    6. Can further verify by trying to repeat this update, which will show that 0 documents were removed.
+    6. Can further verify by repeating this update, which will show that 0 documents were removed.
    
 3. Login
 
