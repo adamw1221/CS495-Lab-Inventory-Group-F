@@ -116,3 +116,9 @@ This page works similarly to the "My Checkouts" page for the first element. The 
 ### Other Features
 - The navigation bar and other component styling is designed to adjust relative text sizes and object scaling for smaller screens, such as a tablet or phone. These are present in the stylesheet's screen media queries at the bottom.
 - There is a planned feature where the navigation bar html DOM is dynamically generated when the logged in user lands on our site so that the tabs are only visible with the proper permissions (student or admin), but this feature is on the backlog.
+
+
+
+## How to Modify/Extend Software:
+Our project involves a front-end of HTML files with CSS elements, with functionality implemented with JavaScript. Our back-end is our server, which uses MongoDB. Our front end can be changed by modifying our CSS and HTML files or adding additional HTML files for any additional pages. The JavaScript files can be manipulated similarly. Our dependencies are listed in our package.json file, under “dependencies”. We used Heroku to host our website and server. Heroku hosts our code by installing the dependencies itself, so those dependencies are not installed on our GitHub. To host on another platform, there are a few things that might need changed. Heroku assigns a port dynamically to an application, so our program first gets that port from Heroku, and then applies it in each of the JavaScript files for each of the web pages. To host on another platform, this might need to be updated, depending on how that platform assigns a port value. Our backlog and test cases can be found on GitHub, along with instructions for running those test cases. For our code styling, we attempted to follow the conventions listed in the link below: 
+https://www.w3schools.com/js/js_conventions.asp 
