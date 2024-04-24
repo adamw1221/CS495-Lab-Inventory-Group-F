@@ -46,7 +46,8 @@ This allows you to make changes to your own copy without affecting the main bran
     
     3. Now you are good to make changes to code and commit them: 
         1. See Sections 5 and 6
-        2.git add .   (to stage all files that you’ve modified) 
+           
+        2. git add .   (to stage all files that you’ve modified) 
     
     4. When ready to locally “save” those changes use: **git commit -m " code for this checkpoint"**
     
