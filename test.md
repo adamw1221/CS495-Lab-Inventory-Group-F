@@ -27,7 +27,6 @@ Certain features have a bigger impact on our application's usefulness than other
 
     1. **Reason:** If our server goes down a user might be able to navigate between pages (if they're available at all), but they would be inactive if there was nothing to handle requests.
     2. **Test:**
-    
         1. In your terminal, send a manual HTTP "HEAD" request to our application's URL with this command:
             1. **curl -I https://lab-inventory-6d96bc525443.herokuapp.com/login**
         2. You should get this response: **HTTP/1.1 200 OK**
