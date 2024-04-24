@@ -77,45 +77,39 @@ The following tests require user interaction with the corresponding webpages and
     1. Go to Add Part page
     2. Enter **"testPart"** for *equipment name, type, and room number.*
     3. Click the buttons for *working, available, and mobile*
-    4. Click Add part
+    4. Click **Add part**
     5. You should get a notification of a successful add.
     6. Can further verify via Update or Remove
     7. ![Add Part](img/addparts.png)
 
 2. Update Part 
 
-    1. Input: ID and Value of existing equipment and Key-Value pairs with updated values 
+    1. Input: ID and Value of existing equipment and Key-Value pairs with updated values     1. Go to Update Part page
+    2. Enter **"id : testPart"** for *Equipment Id*
+        1. Otherwise, you can check the Checkout Parts page dropdown to get an available ID for a part to change. (Just change it back afterwards).
+    3. Enter **"Available : Never"** for *Changes*
+    4. Click **Update Equipment**
+    5. You should get a notification of a document successfully updated.
+    6. Can further verify by trying to repeat this update, which will show that 0 documents were removed.
 
-    2. Expected: Successful update notification and updates applied to respective equipment in database 
+    
+3.  Remove Part 
 
-    3. Can further verify by repeating the Update which will notify user the values are already present 
+    1. Go to Remove Old Parts page
+    2. Enter **"testPart"** for *EquipmentID*
+        1. If it doesn't exist you can follow the step above to add it.
+    3. Click **Remove part**
+    4. You should get a notification of a successful removal.
+    5. Can further verify via Update or Remove for testPart
+   
+4. Login
 
-3. Checkout Part 
-
-    1. Input: Valid form values 
-
-    2. Expected: Successful checkout notification and corresponding checkout information in respective equipment’s document  
-
-    3. Can be verified by repeating the checkout which should notify the user it’s unavailable 
-
-    4. Can also input invalid form values then attempt checkout to ensure error handling is sufficient 
-
-4.  Remove Part 
-
-    1. Input: Existing equipment ID 
-
-    2. Expected: Successful removal notification and removal of equipment from database 
-
-    3. Can verify with attempt at Update or Checkout which should both notify the user the operation is unsuccessful/impossible 
-
-5. Server Hosting 
-
-    1. First: Standup website using hosting solution (Heroku?) 
-
-    2. Test: Attempt to have team members on different devices successfully use any of the CRUD operations on the website 
-
-    3. Expected: The website features should be responsive for this hosting solution as when we run the server locally. The database should reflect any successful operations. 
-
+    1.  Visit our login link above
+    2. Enter **classmate** for username and password. 
+    3. You should be redirected to a **"My Checkouts"** (student view) after succesfully loging in. 
+        3. If this doesn't work you should remain on the login page.
+    4. If you attempt to visit any of the pages above (add, update, remove) you should get an error screen, forcing you to go back to the Checkout or Return page.
+    5. ![Add Part](img/no_auth.png)
 
 Webpage Views based on user type 
 
