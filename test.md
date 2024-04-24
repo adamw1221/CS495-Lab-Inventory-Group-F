@@ -21,6 +21,7 @@ Certain features have a bigger impact on our application's usefulness than other
             1. **mongosh "mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority"**
         2. This should be the response upon a successful connection.
             1. ![Good Result](images/mongosh_pic.png)
+            2. Enter **"exit"** to leave the mongo CLI
 
 2. Server Stability
 
