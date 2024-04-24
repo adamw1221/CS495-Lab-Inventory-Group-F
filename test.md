@@ -19,7 +19,8 @@ Certain features have a bigger impact on our application's usefulness than other
     2. **Test:** 
         1. In your terminal, try to hit our DB using the mongo CLI (command line interface), via our connection string. Run this command:
             1. **mongosh "mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority"**
-        2. ![Good Result](images/mongosh_pic.png)
+        2. This should be the response upon a successful connection.
+            1. ![Good Result](images/mongosh_pic.png)
 
 2. Server stability
 
@@ -35,11 +36,20 @@ Certain features have a bigger impact on our application's usefulness than other
 3. User login
 
     1. **Reason:** If no one can login then the site's functionality won't be available for any requests to be made.
+    2. **Test:**
+        1. Covered by our automatic test.
+        2. For manual testing you can visit our heroku login link above and enter **classmate** for username and password. You should be redirected to a student view after succesfully loging in. 
+        3. If this doesn't work (or another username/password combination known to be in the db), you should remain on the login page.
 
 4. Checkout part
 
     1. **Reason:** This is our application's primary use case and one of the only pages visable to students so it's critical that it works at all times.
-
+    2. **Test:**
+        1. Covered by our automatic test.
+        2. For manual testing you can visit our heroku page above and log in with **classmate**. 
+        3. Pick an available piece of equipment from the dropdown. Select valid checkout dates/times and returns, then press the checkout button.
+        4. You should get a notification that it was sucessfully checked out.
+    
 5. Return part
 
     1. **Reason:** This feature is only high risk because if it fails, any (physically) returned equipment is unavailable until it's fixed or an admin manually handles returns which would be extensive overhead.This could lead to checkout functionality being useless with nothing available.
