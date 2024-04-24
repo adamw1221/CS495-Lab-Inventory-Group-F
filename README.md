@@ -1,5 +1,4 @@
-# CS495
-## Lab Inventory Project
+# CS495 - Lab Inventory Project
 
 ## Project Focus
 Our job is to build a web application to help the Robotics Lab manage inventory​
@@ -36,6 +35,102 @@ email: awwrote@crimson.ua.edu
 
 mobile: (702) 630-9946
 
+Our Lab Inventory site is a web application that uses Node Js, Express Js, and Mongodb (Atlas). 
+# How To Install Software
+
+### 1 Install Node.js (LTS) and NPM 
+1.	In your terminal/command prompt, run these commands to see if you have Node and Npm: 
+
+    1.	**node -v** and **npm -v**
+       
+    2.	You should see something like “**v20.11.0 and 10.5.2**” respectively
+
+2.	If not, you can download an installer for your system then run it and follow on screen instructions:
+    
+    1.	https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
+        1.	This will install both Node and Npm
+
+### 2	Install Git
+1.	Run this command to see if you have git installed: 
+    
+    1.	**git --version** 
+    
+    2.	You should get a response like "**git version 2.33.0**" 
+
+2.	If not, you will need to install git for your device:
+    
+    1.	(e.g., windows 64 bit) via: https://git-scm.com/downloads
+
+3.  Use all default settings. There are also tutorial videos for this on YouTube     https://youtu.be/dqFJVEIJEU0?si=ZWT3sDrYuDu8fiaw
+
+### 3	Setting up your local git repo with our remote repo:
+1.	Use this command to make a copy of the remote repository so you can get stuff from it and send stuff to it. 
+    
+    2.	**git clone https://github.com/adamw1221/CS495-Lab-Inventory-Group-F.git**
+    
+    3.	You should now have the folder **CS495-Lab-Inventory-Group-F**
+
+2.	Navigate into that folder with command: **cd CS495-Lab-Inventory-Group-F**
+3.	You should now see all of our application code hosted on our main branch on github.
+
+### 4	Setting up a personal branch
+This allows you to make changes to your own copy without affecting the main branch.
+
+1.	From CS495-Lab-Inventory-Group-F, use this command: 
+    
+    1. **git checkout -b featureBranchName**
+    
+    2. You should get a message saying that you switched to the new branch you just created. 
+    
+    3. Now you are good to make changes to code and commit them: 
+        1. See the "**Add Environment Variable File**" section first, and our Feature description and our modify/extend sections below offer further guidance
+           
+        2. **git add .**   (to stage all files that you’ve modified) 
+    
+    4. When ready to locally “save” those changes, use: **git commit -m "code for this checkpoint"**
+    
+    5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
+
+### 5	Add Environment Variable File
+This will connect the application to mongodb
+
+1. Create a file named **.env** in the top level of folder **CS495-Lab-Inventory-Group-F**
+
+2. Add this connection string for our generic user:
+    1. MONGODB_URI = mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority
+       
+    3. To log into our MongoDB Atlas UI at: https://account.mongodb.com/account/login
+        1. Username: LabAdmin
+           
+        2. password: kNvoF1iXUX3GAfzk
+
+### 6 Errors
+If the run commands in the next section give you node_module errors, this should fix it.  From the folder CS495-Lab-Inventory-Group-F, run:
+1. **rm -rf node_modules**
+    1. If you're on powershell or this doesn't work, you can manually delete the node_modules package for the same effect
+       
+2. **npm install**
+
+Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
+Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following lines. These specify the port locally but may not work with our hosting solution: 
+
+    const { hostname, protocol, port } = window.location;
+
+    const baseURL = `${protocol}//${hostname}:${port}`;
+  
+### 7 Run Locally:
+1. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
+   
+   1. Or run **node js\server_side\server.js**
+
+3. In your web browser paste and go to: **http://localhost:3000**
+  
+5. You should be directed to a login page.
+   1. For access to all pages -> **username & password: temp2**
+
+   2. For access to student view -> **username & password: classmate**
+   
+6. See our section below on Hosting for deploying with Heroku
 
 
 ## Feature List:
