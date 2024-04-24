@@ -69,8 +69,10 @@ This will connect the application to mongodb
 
 ### 6 Errors
 If the run commands in the next section give you node_module errors, this should fix it:
-- **rm -rf node_modules**
-- **npm install**
+1. **rm -rf node_modules**
+    1. (If you're on powershell or this doesn't work, you can manually delete the node_modules package for the same effect)
+       
+2. **npm install**
 
 Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
 Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following: 
