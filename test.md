@@ -36,6 +36,7 @@ Certain features have a bigger impact on our application's usefulness than other
 3. User login
 
     1. **Reason:** If no one can login then the site's functionality won't be available for any requests to be made.
+    
     2. **Test:**
         1. Covered by our automatic test.
         2. For manual testing you can visit our heroku login link above and enter **classmate** for username and password. You should be redirected to a student view after succesfully loging in. 
@@ -44,6 +45,7 @@ Certain features have a bigger impact on our application's usefulness than other
 4. Checkout part
 
     1. **Reason:** This is our application's primary use case and one of the only pages visable to students so it's critical that it works at all times.
+    
     2. **Test:**
         1. Covered by our automatic test.
         2. For manual testing you can visit our heroku page above and log in with **classmate**. 
@@ -53,6 +55,13 @@ Certain features have a bigger impact on our application's usefulness than other
 5. Return part
 
     1. **Reason:** This feature is only high risk because if it fails, any (physically) returned equipment is unavailable until it's fixed or an admin manually handles returns which would be extensive overhead.This could lead to checkout functionality being useless with nothing available.
+   
+    2. **Test:**
+        1. For manual testing you can visit our heroku page above and log in with **classmate**. 
+        2. Follow the instructions to cehckout a part from **section 4**.
+        3. Navigate to the **Return Parts** page. You should see your new equipment.
+        4. Select the small square on the far left-hand side of the equipment in the table in the Return column. 
+        5. Add a description, then press submit. You should get a notification saying the return was succesful.
   
 ## User Acceptance Testing
 Run the command  **npm start**  to start our server and connect to our database.
