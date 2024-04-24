@@ -99,7 +99,7 @@ The following tests require user interaction with the corresponding webpages and
     1.  Visit our login link above
     2. Enter **classmate** for username and password. 
     3. You should be redirected to **"My Checkouts"** (in a student view) after successfully logging in. 
-        3. If this doesn't work you should remain on the login page.
+        1. If this doesn't work you should remain on the login page.
     4. If you attempt to visit any of the pages above (add, update, remove) you should get an error screen, forcing you to go back to the Checkout or Return page.
     5. ![Add Part](img/no_auth.png)
 
