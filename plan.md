@@ -76,6 +76,7 @@ Also if the local server seems like it isn't serving routes, you can check the c
 Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following: 
 
 const { hostname, protocol, port } = window.location;
+
 const baseURL = `${protocol}//${hostname}:${port}`;
   
 ### 7 Run Locally:
