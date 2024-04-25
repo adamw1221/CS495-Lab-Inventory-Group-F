@@ -321,7 +321,7 @@ app.post('/', rateLimiter,  async(req, res) => {
                 res.status(200).json({message: result});
             }
             else if (req.body.type == "update") {
-                const filter = req.body.filter;
+                const filter = {"id" : req.body.filter};
                 const updateDB = req.body.update;
                 const result = await update(client,"InventoryDB", "Robotics_Lab",
                     filter, updateDB);// returns string
