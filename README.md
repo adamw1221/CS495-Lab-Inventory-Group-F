@@ -91,7 +91,7 @@ This allows you to make changes to your own copy without affecting the main bran
     
     5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
 
-### 5	Add Environment Variable File
+### 5	Add Environment Variable File (UPDATE - This file should already exist on this branch, along with the **headers** from step 6)
 This will connect the application to mongodb
 
 1. Create a file named **.env** in the top level of folder **CS495-Lab-Inventory-Group-F**
@@ -112,7 +112,7 @@ If the run commands in the next section give you node_module errors, this should
 2. **npm install**
 
 Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
-Those can likely be fixed by replacing the first two lines of our files in **js/client_side** with the following lines. These specify the port locally but may not work with our hosting solution: 
+Those can likely be fixed by replacing the **headers** of our files in **js/client_side** with the following lines. These specify the port locally but may not work with our hosting solution: 
 
     const { hostname, protocol, port } = window.location;
 
