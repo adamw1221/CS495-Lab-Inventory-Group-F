@@ -14,8 +14,6 @@ This testing workflow ensures we're sending the right data, getting it in the re
 1. Navigate to directory: **cd CS495-Lab-Inventory-Group-F**
 2. Run the command: **npm test**
 3. Output Example:
-   
-4. ![Good Result](img/test_example_2.png)
 
 ## High Risk Features
 Certain features have a bigger impact on our application's usefulness than others. Those features are, **database connectivity, server stability, user login, checkout part, and return part**. These tests involve a mixture of automated and manual but could be adapted to be fully automated in the future.
