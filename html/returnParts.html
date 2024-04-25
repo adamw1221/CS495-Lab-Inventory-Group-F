@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Return Parts</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="returnParts.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="ua-square-logo.png" alt="UA Logo">
+    </div>
+    <h1>Return Parts</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
+      <li><a href="/update" id="updateParts">Update Parts</a></li>
+      <li><a href="/add" id="addParts">Add Parts</a></li>
+      <li><a href="/addUser" id="addUser">Add User</a></li>
+      <li><a href="/remove" id="removeOldParts">Remove Old Parts</a></li>
+      <li><a href="/removeUser" id="removeOldUser">Remove Old User</a></li>
+      <li><a href="/userProfile" id="myCheckouts">My Checkouts</a></li>
+      <li><a href="/returnParts" id="returnParts">Return Parts</a></li>
+    </ul>
+  </nav>
+
+  <br><br>
+  <div class="form">
+    <form id="returnForm">
+      <table id="userTable">
+          <thead>
+              <tr>
+                  <th>Return?</th>
+                  <th>Equipment ID</th>
+                  <th>Checkout Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+              </tr>
+          </tbody>
+      </table>
+      <br><br>
+      <div>
+        <label for="description">Please provide a description of where the part(s) was returned:</label>
+        <textarea type="text" id="description" name="description" rows="4" cols="25" maxlength="100" required></textarea>
+      </div>
+      <div>
+        <label for="file">Optional - Provide a photo showing where part was returned:</label>
+        <input type="file" id="file" name="file" accept="image/*">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p id="error-message"></p>
+    </div>
+  </div>
+ 
+</body>
+</html>

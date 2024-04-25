@@ -1,24 +1,22 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Read Parts</title>
+  <title>Remove User</title>
   <link rel="stylesheet" href="styles.css">
-  <script type="text/javascript" src="testRead.js"></script>
+  <script type="text/javascript" src="removeUser.js"></script>
 </head>
-
 
 <body>
   <header>
     <div class="logo">
       <img src="ua-square-logo.png" alt="UA Logo">
     </div>
-    <h1>View Lab Inventory</h1>
+    <h1>Remove Existing User</h1>
   </header>
 
+  <!-- Buttons to Matching Page or add Nav Bar -->
   <nav>
     <ul>
       <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
@@ -28,16 +26,21 @@
       <li><a href="/remove" id="removeOldParts">Remove Old Parts</a></li>
       <li><a href="/removeUser" id="removeOldUser">Remove Old User</a></li>
       <li><a href="/userProfile" id="myCheckouts">My Checkouts</a></li>
+      <li><a href="/returnParts" id="returnParts">Return Parts</a></li>
     </ul>
   </nav>
+  <!-- END Buttons to Matching Page or add Nav Bar -->
 
-  <!-- testing http request -->
-  <br>
-  <br>
-  <label for="id-input">Part ID:</label>
-  <input type="text" id="id-input" name="id-input">
-  <button onclick="searchById()">Get MAC Address</button>
-  <div id="response">MAC address goes here:</div>
+  <!-- Input box for Part ID and Remove button -->
+  <div class="form">
+    <div>
+      <label for="userIdInput">User ID:</label>
+      <input type="text" id="userIdInput">
+    </div>
+    <br><br>
+    <button type="button" onclick="removeDocument()" id="removeButton">Remove User</button>  
+  </div>
+  <!-- END Input box for User button -->
  
 </body>
 </html>

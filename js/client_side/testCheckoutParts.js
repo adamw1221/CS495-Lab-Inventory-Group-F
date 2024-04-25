@@ -1,5 +1,5 @@
-const { hostname, protocol } = window.location;
-const baseURL = `${protocol}//${hostname}`;
+const { hostname, protocol, port } = window.location;
+const baseURL = `${protocol}//${hostname}:${port}`;
 
 async function fetchEquipmentData() {
 
@@ -42,9 +42,20 @@ async function postRequest(data, endpoint) {
   }
 }
 
+async function getRequest(endpoint) {
+  try {
+      const response = await fetch(`${baseURL}${endpoint}`);
+      const responseText = await response.text();
+      return responseText;
+  }
+  catch (error) {
+      console.error('Error:', error.message);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
     // Check if equipment data is stored in sessionStorage
-    const storedEquipmentData = sessionStorage.getItem("equipmentData");
+    const storedEquipmentData = sessionStorage.getItem("equipment");
   
     if (storedEquipmentData) {
       // If data is present in sessionStorage, use it to populate the dropdown
@@ -56,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // console.log("EqData: ", equipmentData);
         populateDropdown(equipmentData);
           // Store equipment data in sessionStorage
-        sessionStorage.setItem("equipmentData", JSON.stringify(equipmentData));
+        sessionStorage.setItem("equipment", JSON.stringify(equipmentData));
     }
   
     // Add event listener to the dropdown
@@ -167,6 +178,7 @@ async function checkoutPart() {
   // END-DEBUG
 
   // 2.0: send request to verify that checkout is possible
+  const username = await getRequest('/getUser');
   const data = {};
   data["type"] = "validate"
   data["input"] = {
@@ -175,12 +187,17 @@ async function checkoutPart() {
     "checkoutTime": checkoutTime,
     "returnDate": returnDate,
     "returnTime": returnTime,
-    "username": "myusername",
+    "username": username,
   };
   var response;
   postRequest(data, "/checkout").then(res => {
     console.log(res);
     response = res;
+
+    if(response.error){ 
+      alert(response.error);
+      return;
+    }
 
     if(response[0] == "No issues"){
       // 4.0: possible + no request needed: send request to perform checkout
@@ -202,8 +219,8 @@ async function checkoutPart() {
     }
     else{
       // 6.0: impossible: notify user
-      openPopup("Invalid checkout or return date! Please select another.");
-      console.log("Res: Issues..");
+      openPopup("Invalid checkout! Please try again.");
+      console.log("Res: Issues..", response);
     }
   });
 

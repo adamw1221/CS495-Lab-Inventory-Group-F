@@ -1,42 +1,132 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const runServer = require("./run_server.js");
+const {runServer, sessionConfig} = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
-const add = require("../operations/doc_add.js");
+const { add, addUser } = require("../operations/doc_add.js");
+const { authUser, loginLimiter, rateLimiter } = require("./auth.js");
 const remove = require("../operations/doc_remove.js");
-
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const path = require('path');
+const { requireLogin, requireAdmin, hashPassword } = require('./helpers.js');
+
+
 const app = express();
+app.disable('x-powered-by');
 const port = process.env.PORT || 3000;
 
-const path = require('path');
-
-app.get("/", function (req, res) {
-res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
-});
-
-app.use(express.static(path.join(__dirname, '..', '..', 'html')));
-app.use(express.static(path.join(__dirname, '..', '..', 'css')));
-app.use(express.static(path.join(__dirname, '..', '..', 'img')));
-app.use(express.static(path.join(__dirname, '..', 'client_side')));
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(path.join(__dirname, "..","..", "css",)));
+app.use(express.static(path.join(__dirname, "..","..", "html",)));
+app.use(express.static(path.join(__dirname, "..", "client_side",)));
+app.use(express.static(path.join(__dirname, "..","..", "img",)));
+app.use(session(sessionConfig));
+
+// Start server
 let client;
 async function initializeServer() {
     client = await runServer();
+    return client;
 }
+client = initializeServer();
 
-initializeServer();
-app.use(bodyParser.json());
+// Page Routing Below
 
-app.get("/updateParts", function (req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', 'html', 'testUpdate.html'));
+// "home" page
+app.get("/", requireLogin, function (req, res) {
+
+    // Redirect user based on their role
+    if (req.session.role === 'admin') {
+        res.redirect('/add');
+    } else {
+        res.redirect('/userProfile');
+    }
 });
 
-app.get('/getEquipment', async (req, res) => {
+app.get('/login', (req, res) => {
+    const errorMessage = req.query.error || '';
+    // res.redirect('/login.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'login.html'));
+});
+  
+app.get('/userProfile', requireLogin, (req, res) => {
+    // res.redirect('/userProfile.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'userProfile.html'));
+});
+
+app.get('/update', requireLogin, requireAdmin, (req, res) => {
+    // res.redirect('/update.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'update.html'));
+});
+
+app.get('/add', requireLogin, requireAdmin, (req, res) => {
+    // res.redirect('/add.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
+});
+
+app.get('/addUser',requireLogin, requireAdmin, (req, res) => {
+    // res.redirect('/addUser.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
+});
+
+app.get('/remove', requireLogin, requireAdmin, (req, res) => {
+    // res.redirect('/remove.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
+});
+
+app.get('/removeUser', requireLogin, requireAdmin,(req, res) => {
+    // res.redirect('/removeUser.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
+});
+
+app.get('/checkoutParts', requireLogin, (req, res) => {
+    // res.redirect('/checkoutParts.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
+});
+
+app.get('/returnParts', requireLogin, (req, res) => {
+    // res.redirect('/returnParts.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
+});
+
+// Operation Requests Below
+
+app.post('/auth/login', loginLimiter, async (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    try{//Note: returns user object
+        const user = await authUser(username, password, client, "InventoryDB", "Roster");
+        console.log('Authentication successful:', user);
+
+        if (user["userType"] === 'admin' ) {
+            // console.log("Admin in!");
+                req.session.userId = username;
+                req.session.role = "admin";
+                res.redirect('/add');
+            } 
+            else {
+                req.session.userId = username;
+                req.session.role = "student";
+                res.redirect('/userProfile');
+            }
+
+    }
+    catch(error){
+        console.error('Authentication failed:', error);
+
+        // Redirect back to login with error query parameter
+        res.redirect('/login?error=Authentication failed.'); 
+    }
+
+});
+
+app.get('/getEquipment', requireLogin,rateLimiter, async (req, res) => {
     console.log('get request received: ', req.url);
 
     try{
@@ -56,6 +146,23 @@ app.get('/getEquipment', async (req, res) => {
     
 });
 
+app.get('/getUser', (req, res) => {
+    console.log('get request received: ', req.url);
+
+    try {
+        if (req.session.userId) {
+            res.status(200).send(req.session.userId);
+        }
+        else {
+            res.status(500).send();
+        }
+    }
+    catch (error) {
+        console.error("Error in /getUser route:", error.message);
+        res.status(500).send();
+    }
+});
+
 app.post('/data', (req, res) => {
     console.log('post request received:', req.url);
     const requestData = req.body;
@@ -63,11 +170,15 @@ app.post('/data', (req, res) => {
     res.send('received post request. data received: ', JSON.stringify(requestData));
 });
 
-app.post('/checkout', async(req, res) => {
+app.post('/checkout', rateLimiter, async(req, res) => {
     console.log('request received:', req.url);
+    // console.log('request type:', req.body.type);
+    // console.log('request body:', req.body);
 
     if (client) {
         if (req.body.type == "validate") {
+            console.log('request type validated:', req.body.type);
+
             // validate checkout input
             const issues = [];
 
@@ -155,12 +266,51 @@ app.post('/checkout', async(req, res) => {
         }
     }
     else {
+        console.log('request type NOT validated:', req.body.type);
+
         res.status(500).send("Sorry there's a problem with the website!" +
             "Please try again later.");
     }
 });
 
-app.post('/', async(req, res) => {
+app.post('/userprofiledata',requireLogin, async(req, res) => {
+    console.log(req.body);
+    const query = req.body;
+    //const query = {Checkout_Status: username};
+    // need to modify/add new read operation that can return multiple documents?
+    const result = await read(client, "InventoryDB", "Robotics_Lab", query);
+    res.status(200).send(result);
+});
+
+app.post('/makereturn', requireLogin, async(req, res) => {
+    console.log('request received:', req.url);
+    console.log(req.body);
+
+    const filter = {"id": req.body.id};
+
+    const Checkout_Status = {}
+    const updateDB = {"Checkout_Status": Checkout_Status,
+                              "Available": "Yes"};
+    
+    try{
+        const result = await update(client, "InventoryDB", "Robotics_Lab", filter, updateDB);
+        console.log(result);
+        if (result){
+            console.log('Checkout status cleared successfully.');
+            res.status(200).send("clear");
+        }
+        else {
+            console.log('Failed to clear status.');
+            res.status(500).send('Failed to clear status.');
+        }
+
+    } catch (error){
+        console.error('Error:', error);
+        res.status(500).send('An error occured while clearing Checkout_Status.');
+    }
+});
+
+app.post('/', rateLimiter,  async(req, res) => {
     console.log('request received:', req.url);
 
         if (client) {
@@ -168,14 +318,14 @@ app.post('/', async(req, res) => {
                 console.log(req.body.input);
                 const query = {id: req.body.input};
                 const result = await read(client, "InventoryDB", "Robotics_Lab", query);
-                res.status(200).send(result);
+                res.status(200).json({message: result});
             }
             else if (req.body.type == "update") {
                 const filter = req.body.filter;
                 const updateDB = req.body.update;
                 const result = await update(client,"InventoryDB", "Robotics_Lab",
                     filter, updateDB);// returns string
-                res.status(200).send(result); //0 or 1
+                res.status(200).json({message : result}); //0 or 1
             }
             else if (req.body.type == "remove") {
                 console.log('Removing Document: ', req.body.input);
@@ -189,11 +339,40 @@ app.post('/', async(req, res) => {
                 }
             }
             else if (req.body.type == "add") {
-                const itemId = req.body.filter;
-                const itemName = req.body.name;
+                const document = req.body.data;
                 const result = await add(client,"InventoryDB", "Robotics_Lab",
-                    itemId, itemName);// returns string
-                res.status(200).send(result);
+                    document);// returns string
+                res.status(200).json({message: result});
+                // res.status(200).send(result);
+            }
+            else if (req.body.type == "addUser") {
+                console.log('\n User Data: ', req.body.userInfo);
+                try {
+                    var userInfo = req.body.userInfo;
+                    const hashedPassword = await hashPassword(userInfo.password, 10);
+                    userInfo.password = hashedPassword;
+
+                    const result = await addUser(client,"InventoryDB", "Roster", userInfo);
+                    res.status(200).json({ message: result});
+                } catch (error) {
+                    if(error.errorResponse && error.errorResponse.code === 11000){
+                        res.status(500).json({ error: "Duplicate Username Error."});
+                    } else {
+                        console.error("Error adding user:", error.errorResponse);
+                        res.status(500).json({ error: "An error occurred while adding the user."});
+                    }
+                }
+            }
+            else if (req.body.type == "removeUser") {
+                console.log('Removing User: ', req.body.input);
+                const query = { "username": req.body.input };
+                const result = await remove(client, "InventoryDB", "Roster", query);
+                //console.log(result.deletedCount);
+                if (result.deletedCount == 1) {
+                    res.status(200).json({ success: true, message: 'Document removed successsfully.' });
+                } else {
+                    res.status(404).json({ success: false, message: 'Document not found or already removed.' });
+                }
             }
         }else{
             res.status(500).send("Sorry there's a problem with the website!" +
@@ -201,23 +380,30 @@ app.post('/', async(req, res) => {
         }
 });
 
+app.get('/test', (req, res) => {
+    // console.log("\nThis is a test route for our automated testing framework.\n");
+    res.send('Hello, World!');
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
-/*
-    // imports
-    const runServer = require("./run_server.js");
-    const testOperations = require("./test_operations.js");
+// Function waits for mongo db connection, for automated testing
+function getClient() {
+    return new Promise((resolve, reject) => {
+        if (client) {
+            resolve(client);
+        } else {
+            // If client is not available, wait for it to be initialized
+            const interval = setInterval(() => {
+                if (client) {
+                    clearInterval(interval);
+                    resolve(client);
+                }
+            }, 1000); // Check every second
+        }
+    });
+}
 
-    // connects to mongodb server
-    const client = await runServer();
-
-    // performs operations
-    if (client) {
-
-        await testOperations(client);
-        await client.close();
-        
-    }
-*/
+module.exports = {app, getClient};

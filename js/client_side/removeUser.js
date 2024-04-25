@@ -22,30 +22,34 @@ async function postRequest(data){
 }
 
 async function removeDocument() {
-    const partId = document.getElementById("partIdInput").value.trim();
-    
-    const data = {
-        type: 'remove',
-        input: partId
-    };
 
     try {
-        const removeResponse = await postRequest(data);
-        console.log("Remove Response: ", removeResponse);
 
-        if (removeResponse.success){
-            document.getElementById('removeResponse').innerText = removeResponse.message;
-        } 
-        else if(removeResponse.error) {
-            alert( removeResponse.error);
+        const userId = document.getElementById("userIdInput").value.trim();
+        
+        if(userId.trim() !== ""){
+            const data = {
+                type: 'removeUser',
+                input: userId
+            };
+
+            const removeResponse = await postRequest(data);
+
+            if(removeResponse.error){
+                alert( removeResponse.error);
+            }
+            else{
+                alert( removeResponse.message);
+            }
+
         }
         else{
-            console.error('Removal failed:', removeResponse.message);
-            document.getElementById('removeResponse').innerText = 'Removal failed: ' + removeResponse.message;
+            throw new Error('Please enter a UserID.');
         }
+        
     } catch (error) {
         console.error('Error removing document:', error);
-        document.getElementById('removeResponse').innerText = 'An error occured while removing the document.';
+        alert(error);
     }
 
 }

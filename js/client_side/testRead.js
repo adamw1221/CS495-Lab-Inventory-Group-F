@@ -1,5 +1,5 @@
-const { hostname, protocol } = window.location;
-const baseURL = `${protocol}//${hostname}`;
+const { hostname, protocol, port } = window.location;
+const baseURL = `${protocol}//${hostname}:${port}`;
 
 async function postRequest(data) {
     // configure options for post request
@@ -17,7 +17,10 @@ async function postRequest(data) {
         const response = await fetch(`${baseURL}`, options);
         // convert response into json and then post into div component
         const dbData = await response.json();
-        console.log(dbData);
+        console.log(dbData.message);
+        if(dbData.error){
+            alert(dbData.error);
+        }
         document.getElementById('response').innerText = await dbData["0"]["MAC"];
     } catch (error) {
         console.error('Error:', error);

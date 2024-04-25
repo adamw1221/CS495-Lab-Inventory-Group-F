@@ -1,5 +1,5 @@
-const { hostname, protocol } = window.location;
-const baseURL = `${protocol}//${hostname}`;
+const { hostname, protocol, port } = window.location;
+const baseURL = `${protocol}//${hostname}:${port}`;
 
 async function postRequest(data) {
     // configure options for post request
@@ -16,8 +16,15 @@ async function postRequest(data) {
         // send request while providing data parameter
         const response = await fetch(`${baseURL}`, options);
         
-        const responseText = await response.text();
-        const intValue = parseInt(responseText, 10);
+        const responseJson = await response.json();
+
+        var intValue=0;
+        if(responseJson.error){
+            alert(responseJson.error);
+        }
+        else{
+            intValue = parseInt(responseJson.message, 10);
+        }
 
         // Check if the parsing was successful
         if (!isNaN(intValue)) {
@@ -56,20 +63,19 @@ async function updateDoc() {
 
         //5. Check if the update was successful (number set in postRequest)
         if (updateResponse == 1) {
-            document.getElementById('updateResponse').innerText = `1 document updated`;
+            openPopup('1 document updated');
         }
         else if (updateResponse == 0){
-            document.getElementById('updateResponse').innerText = `No document updated`;
+            openPopup('No document updated');
         }
         else {
             console.error('Update failed');
-            displayError(`Update failed. Please try again later.`, "updateResponse");
+            openPopup('Update failed. Please try again later.');
         }
   
     } else {
         console.error('A data field is empty or undefined');
-        document.getElementById('updateResponse').innerText =
-            'A data field is empty or undefined';
+        openPopup('A data field is empty or undefined');
     }
 }
 
@@ -96,7 +102,11 @@ function parseInputString(inputString) {
     }
 }
 
-function displayError(message, responseId) {
-    const errorElement = document.getElementById(responseId);
-    errorElement.innerText = message;
+function openPopup(errorMessage) {
+    document.getElementById('error-message').innerText = errorMessage;
+    document.getElementById('popup').style.display = 'block';
+}
+  
+function closePopup(){
+    document.getElementById('popup').style.display = 'none';
 }

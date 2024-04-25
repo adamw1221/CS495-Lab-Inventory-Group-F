@@ -1,0 +1,15 @@
+{
+    "data": {
+      "id": "Auto_Test_Part",
+      "name": "Test_Deletes",
+      "MAC": null,
+      "Status": "Working",
+      "Available": "Yes",
+      "Mobile": null,
+      "Room": null,
+      "Request_Needed": "requestInput",
+      "Checkout_Status": null
+    },
+
+    "type": "add"
+}

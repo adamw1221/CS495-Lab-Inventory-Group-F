@@ -5,9 +5,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Read Parts</title>
+  <title>Add User</title>
   <link rel="stylesheet" href="styles.css">
-  <script type="text/javascript" src="testRead.js"></script>
+  <script type="text/javascript" src="addUser.js"></script>
 </head>
 
 
@@ -16,9 +16,9 @@
     <div class="logo">
       <img src="ua-square-logo.png" alt="UA Logo">
     </div>
-    <h1>View Lab Inventory</h1>
+    <h1>Add New user</h1>
   </header>
-
+    
   <nav>
     <ul>
       <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
@@ -28,16 +28,31 @@
       <li><a href="/remove" id="removeOldParts">Remove Old Parts</a></li>
       <li><a href="/removeUser" id="removeOldUser">Remove Old User</a></li>
       <li><a href="/userProfile" id="myCheckouts">My Checkouts</a></li>
+      <li><a href="/returnParts" id="returnParts">Return Parts</a></li>
     </ul>
   </nav>
 
-  <!-- testing http request -->
-  <br>
-  <br>
-  <label for="id-input">Part ID:</label>
-  <input type="text" id="id-input" name="id-input">
-  <button onclick="searchById()">Get MAC Address</button>
-  <div id="response">MAC address goes here:</div>
- 
+  <div class="form">
+    <div>
+      <label >Enter new username:</label>
+      <input type = "text" id = "userId" maxlength="50">
+    </div>
+    <div>
+      <label >Enter new password:</label>
+      <input type="text" id="password" maxlength="16">
+    </div>
+
+    <div class="radio-container">
+      <label>
+        <input type="radio" id="stuentRadio" name="userType" value="student"> Student
+      </label>
+      <label>
+        <input type="radio" id="adminRadio" name="userType" value="admin"> Admin
+      </label>
+    </div>
+    
+    <button type="button" onclick="addUser()">Add User</button>
+  </div>
+
 </body>
 </html>

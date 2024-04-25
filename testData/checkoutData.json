@@ -1,0 +1,10 @@
+{
+    "type": "validate",
+    "input":{
+        "selectedEquipment": "Auto_Test_Part",
+        "checkoutDate": "2124-04-23",
+        "checkoutTime": "10:30",
+        "returnDate": "2124-04-26",
+        "returnTime": "19:00"
+    }
+}

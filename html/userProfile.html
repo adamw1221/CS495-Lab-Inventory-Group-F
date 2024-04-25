@@ -5,9 +5,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Basic Website</title>
+  <title>My Checkouts</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- <script type="text/javascript" src="basicWebsite.js"></script> -->
+  <script type="text/javascript" src="userProfile.js"></script>
 </head>
 
 
@@ -16,7 +16,7 @@
     <div class="logo">
       <img src="ua-square-logo.png" alt="UA Logo">
     </div>
-    <h1>Lab Inventory Checkout</h1>
+    <h1>My Checkouts</h1>
   </header>
 
   <nav>
@@ -24,27 +24,31 @@
       <li><a href="/checkoutParts" id="checkoutParts">Checkout Parts</a></li>
       <li><a href="/update" id="updateParts">Update Parts</a></li>
       <li><a href="/add" id="addParts">Add Parts</a></li>
+      <li><a href="/addUser" id="addUser">Add User</a></li>
       <li><a href="/remove" id="removeOldParts">Remove Old Parts</a></li>
+      <li><a href="/removeUser" id="removeOldUser">Remove Old User</a></li>
       <li><a href="/userProfile" id="myCheckouts">My Checkouts</a></li>
+      <li><a href="/returnParts" id="returnParts">Return Parts</a></li>
     </ul>
   </nav>
 
-  <!-- testing http request -->
-  <br>
-  <br>
-  <button onclick="makeRequest()">Make Request</button>
-  <div id="response">Text goes here</div>
-  <script>
-    async function makeRequest() {
-        try {
-            const response = await fetch('http://localhost:3000');
-            const data = await response.text();
-            document.getElementById('response').innerText = data;
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-  </script>
+  <br><br>
+  <div>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Equipment Name</th>
+                <th>Checkout Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+  </div>
  
 </body>
 </html>
