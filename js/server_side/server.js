@@ -50,48 +50,48 @@ app.get("/", requireLogin, function (req, res) {
 
 app.get('/login', (req, res) => {
     const errorMessage = req.query.error || '';
-    res.redirect('/login.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'login.html'));
+    // res.redirect('/login.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'login.html'));
 });
   
 app.get('/userProfile', requireLogin, (req, res) => {
-    res.redirect('/userProfile.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'userProfile.html'));
+    // res.redirect('/userProfile.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'userProfile.html'));
 });
 
 app.get('/update', requireLogin, requireAdmin, (req, res) => {
-    res.redirect('/update.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'update.html'));
+    // res.redirect('/update.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'update.html'));
 });
 
 app.get('/add', requireLogin, requireAdmin, (req, res) => {
-    res.redirect('/add.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
+    // res.redirect('/add.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
 });
 
 app.get('/addUser',requireLogin, requireAdmin, (req, res) => {
-    res.redirect('/addUser.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
+    // res.redirect('/addUser.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
 });
 
 app.get('/remove', requireLogin, requireAdmin, (req, res) => {
-    res.redirect('/remove.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
+    // res.redirect('/remove.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
 });
 
 app.get('/removeUser', requireLogin, requireAdmin,(req, res) => {
-    res.redirect('/removeUser.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
+    // res.redirect('/removeUser.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
 });
 
 app.get('/checkoutParts', requireLogin, (req, res) => {
-    res.redirect('/checkoutParts.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
+    // res.redirect('/checkoutParts.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
 });
 
 app.get('/returnParts', requireLogin, (req, res) => {
-    res.redirect('/returnParts.html');
-    // res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
+    // res.redirect('/returnParts.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
 });
 
 // Operation Requests Below

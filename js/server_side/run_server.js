@@ -1,9 +1,11 @@
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+require('dotenv').config();
+
+const MONGO_DB_URI = process.env.MONGO_DB_URI;
 
 const store = new MongoDBStore({
-    uri: "mongodb+srv://pjmazzei:pjmazzei" +
-                "@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority",
+    uri: MONGO_DB_URI,
     collection: 'User_Session_Data',
     databaseName: 'InventoryDB'
   });
@@ -25,9 +27,7 @@ async function runServer() {
     const poolSize = 10;
     
     // creates client
-    const uri = "mongodb+srv://pjmazzei:pjmazzei" +
-                "@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority";
-    const client = new MongoClient(uri, {
+    const client = new MongoClient(MONGO_DB_URI, {
         serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
