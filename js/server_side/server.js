@@ -16,16 +16,11 @@ const app = express();
 app.disable('x-powered-by');
 const port = process.env.PORT || 3000;
 
-//app.use(express.static('LabInventory'));
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-/*
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "..", "..", "html", 'checkoutParts.html'));
-});
-*/
+
 app.use(express.static(path.join(__dirname, "..","..", "css",)));
 app.use(express.static(path.join(__dirname, "..","..", "html",)));
 app.use(express.static(path.join(__dirname, "..", "client_side",)));
@@ -42,12 +37,8 @@ client = initializeServer();
 
 // Page Routing Below
 
-app.get('/me', (req, res) => {
-    console.log("I SEE YOU!");
-    res.send('Hello, World!');
-  });
-  // "home" page
-  app.get("/", requireLogin, function (req, res) {
+// "home" page
+app.get("/", requireLogin, function (req, res) {
 
     // Redirect user based on their role
     if (req.session.role === 'admin') {
@@ -320,8 +311,8 @@ app.post('/makereturn', requireLogin, async(req, res) => {
     }
 });
 
-app.post('/', requireLogin, rateLimiter,  async(req, res) => {
-    console.log('request received:', req.url);
+app.post('/', rateLimiter,  async(req, res) => {
+    console.log('\nrequest received:', req.url);
 
         if (client) {
             if (req.body.type == "read") {
@@ -356,6 +347,7 @@ app.post('/', requireLogin, rateLimiter,  async(req, res) => {
                 // res.status(200).send(result);
             }
             else if (req.body.type == "addUser") {
+                console.log('\n User Data: ', req.body.userInfo);
                 try {
                     var userInfo = req.body.userInfo;
                     const hashedPassword = await hashPassword(userInfo.password, 10);
@@ -387,6 +379,11 @@ app.post('/', requireLogin, rateLimiter,  async(req, res) => {
             res.status(500).send("Sorry there's a problem with the website!" +
             "Please try again later.");
         }
+});
+
+app.get('/test', (req, res) => {
+    // console.log("\nThis is a test route for our automated testing framework.\n");
+    res.send('Hello, World!');
 });
 
 app.listen(port, () => {

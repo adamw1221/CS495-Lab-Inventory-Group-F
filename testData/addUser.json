@@ -1,10 +1,8 @@
 {
-    "type": "validate",
-    "input":{
-        "selectedEquipment": "automated_test_part",
-        "checkoutDate": "2124-04-23",
-        "checkoutTime": "10:30",
-        "returnDate": "2124-04-26",
-        "returnTime": "19:00"
-    }
+    "userInfo": {
+        "username": "Auto_Test_User2",
+        "password": "Test_Deletes",
+        "userType": "admin"
+    },
+    "type": "addUser"
 }

@@ -1,10 +1,12 @@
   const request = require('supertest');
-  const checkoutData = require('../../testData/checkoutData.json');
-  const loginData = require('../../testData/login.json');
+  const checkoutData = require('../testData/checkoutData.json');
+  const loginData = require('../testData/login.json');
+  const addUserData = require('../testData/addUser.json');
+  const removeData = require('../testData/removeUser.json');
+  const removePart = require('../testData/removePart.json');
+  const addPart = require('../testData/addPart.json');
   const {app, getClient} = require('../js/server_side/server.js');
 
-// console.log('Data: ', checkoutData);
-// console.log('App: ', app);
 
 describe('Server API', () => {
   before(async function() {
@@ -12,9 +14,11 @@ describe('Server API', () => {
     client = await getClient(); // Wait for the client to be available
 });
   // Test case for a GET request
-  it('Should return "Hello, World!" for GET /me', (done) => {
+  it('Should return "Hello, World!" for GET /test', (done) => {
+    console.log("\n\n ----- Starting Base Test -----\n");
+
     request(app)
-      .get('/me')
+      .get('/test')
       .expect(200) // Expecting HTTP status code 200
       .end((err, res) => {
         if (err) return done(err); // Pass the error to Mocha if there's an error
@@ -29,7 +33,10 @@ describe('Server API', () => {
       });
   });
 
+  // Checkout Validate Test
   it('Should successfully Validate a part before checkout', (done) => {
+    console.log("\n\n ----- Starting Validate Part Test -----\n");
+
     request(app)
       .post('/checkout')
       .send(checkoutData)
@@ -50,7 +57,10 @@ describe('Server API', () => {
       });
   });
 
+  // Login Validation Test
   it('Should successfully validate login credentials', (done) => {
+    console.log("\n\n ----- Starting Validate Login Test -----\n");
+
     request(app)
       .post('/auth/login')
       .send(loginData)
@@ -59,7 +69,7 @@ describe('Server API', () => {
         if (err) {
           return done(err);
         }
-        
+
         if (res.status  === 302 && res.headers.location) {
           const redirectLocation = res.headers.location;
           console.log('Redirect location:', redirectLocation);
@@ -70,10 +80,97 @@ describe('Server API', () => {
       });
   });
 
+  // Add/Remove User Test
+  it('Should successfully add, then remove new user', (done) => {
+    console.log("\n\n ----- Starting Add/Remove User Test -----\n");
+
+    request(app)
+      .post('/')
+      .send(addUserData)
+      .set('Content-Type', 'application/json;charset=utf-8')
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        if (res.status  == 200 ) {
+          const message = res.body.message;
+          console.log(`\nResponse Message: ${message}`);
+          console.log(`\nPerforming Clean Up via post/removeUser`);
+
+          // Now make a delete request to delete the user
+          request(app)
+            .post('/')
+            .send(removeData)
+            .end((err, res) => {
+              if (err) {
+                return done(err);
+              }
+
+              if (res.status === 200) {
+                console.log(res.body.message);
+                done();
+              } else {
+                done(new Error(res.body.message));
+              }
+            });
+        } 
+        else if(res.status  == 500 ){
+          done(new Error(res.body.error));
+        }
+        else{
+          done(new Error('1. Expected status code 200'));
+        }
+      });
+  });
+
+  // Add/Remove Part Test
+  it('Should successfully add, then remove new part', (done) => {
+    console.log("\n\n ----- Starting Add/Remove Part Test -----\n");
+
+    request(app)
+      .post('/')
+      .send(addPart)
+      .set('Content-Type', 'application/json;charset=utf-8')
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        if (res.status  == 200 ) {
+          const message = res.body.message;
+          console.log(`\nResponse Message: ${message}`);
+          console.log(`\nPerforming Clean Up via post/remove`);
+
+          // Now make a delete request to delete the user
+          request(app)
+            .post('/')
+            .send(removePart)
+            .end((err, res) => {
+              if (err) {
+                return done(err);
+              }
+
+              if (res.status === 200) {
+                console.log(res.body.message);
+                done();
+              } else {
+                done(new Error(res.body.message));
+              }
+            });
+        } 
+        else if(res.status  == 500 ){
+          done(new Error(res.body.error));
+        }
+        else{
+          done(new Error('1. Expected status code 200'));
+        }
+      });
+  });
+
 });
 
 after(() => {
-  // Close the server
   setTimeout(() => {
     // Close the server
       console.log('Server closed');
