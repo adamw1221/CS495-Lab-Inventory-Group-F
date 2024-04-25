@@ -79,7 +79,7 @@ The following tests require user interaction with the corresponding webpages and
 
 **Website Link**: https://lab-inventory-6d96bc525443.herokuapp.com/login
 
-**Username & Password**: **temp2**
+**Admin username & password**: **temp2**
 
 ### Major Features
 
