@@ -22,7 +22,7 @@ const requireAdmin = (req, res, next) => {
 async function hashPassword(plaintextPassword, saltRounds) {
     const hash = await bcrypt.hashSync(plaintextPassword, saltRounds);
     if(hash){
-        console.log("Hash: ", hash);
+        console.log(`\nHash: ${hash}\n`);
         return hash; // Return the hashed password
     }
 }
