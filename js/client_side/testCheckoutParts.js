@@ -1,5 +1,5 @@
-const { hostname, protocol } = window.location;
-const baseURL = `${protocol}//${hostname}`;
+const { hostname, protocol, port } = window.location;
+const baseURL = `${protocol}//${hostname}:${port}`;
 
 async function fetchEquipmentData() {
 
