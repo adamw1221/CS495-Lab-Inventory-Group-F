@@ -1,13 +1,13 @@
 # CS495 - Lab Inventory Test Documentation
 
 ## Automated Testing
-We've implemented automated testing for the following components of our web application: **Checkout Part**, **Login**, **Add User**, and **Add Part**. To achieve this we used the **Mocha** and **Suspertest** testing frameworks which are easily accessible by Node js.
+We've implemented automated testing for the following components of our web application: **Checkout Part**, **Login**, **Add User**, **Remove User**, **Add Part**, and **Remove Part**. To achieve this we used the **Mocha** and **Suspertest** testing frameworks which are easily accessible by Node js.
 
 **Mocha** is a flexible JavaScript test framework that provides an api for defining test suites, *and **Supertest** is a library for testing HTTP servers and offers an api for sending HTTP requests in Node.js. We chose this for our testing stack because our webpage handles everything with requests made to our server and this stack allows us to send mock user input for each component with relative ease.
 
-To hold that mock user input we created json files for each component. When the test script is run, a component test will hit the database using that data then the response is verified with conditionals. In some cases a second request is made to verify the DB has been altered, and that response is also verified with conditionals. 
+To hold that mock user input we created json files for each component. When the test script is run, a component test will hit the database using that data, and then the response is verified with conditionals. In some cases, a second request is made to verify the DB has been altered or cleaned up, and that response is also verified with conditionals. 
 
-This testing workflow ensures we're sending the right data, getting it in the request, sucessfully hitting the DB, and ultimately that these features work as expected.
+This testing workflow ensures we're sending the right data, getting it in the request, successfully hitting the DB, and ultimately that these features work as expected.
 
 
 ## High Risk Features
