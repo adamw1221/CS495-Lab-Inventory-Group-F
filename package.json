@@ -4,7 +4,7 @@
     "description": "",
     "main": "js/server_side/server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha test/server.test.js",
         "start": "node js/server_side/server.js"
     },
     "author": "",
@@ -18,7 +18,9 @@
         "express-rate-limit": "^7.2.0",
         "express-session": "^1.18.0",
         "lodash": "^4.17.21",
+        "mocha": "^10.4.0",
         "mongodb": "^6.5.0",
-        "optional-require": "^1.1.8"
+        "optional-require": "^1.1.8",
+        "supertest": "^6.3.4"
     }
 }

@@ -36,11 +36,16 @@ app.use(session(sessionConfig));
 let client;
 async function initializeServer() {
     client = await runServer();
+    return client;
 }
-initializeServer();
+client = initializeServer();
 
 // Page Routing Below
 
+app.get('/me', (req, res) => {
+    console.log("I SEE YOU!");
+    res.send('Hello, World!');
+  });
   // "home" page
   app.get("/", requireLogin, function (req, res) {
 
@@ -54,45 +59,54 @@ initializeServer();
 
 app.get('/login', (req, res) => {
     const errorMessage = req.query.error || '';
-    res.sendFile(path.join(__dirname,"..","..", "html",'login.html'));
+    res.redirect('/login.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'login.html'));
 });
   
 app.get('/userProfile', requireLogin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'userProfile.html'));
+    res.redirect('/userProfile.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'userProfile.html'));
 });
 
 app.get('/update', requireLogin, requireAdmin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'update.html'));
+    res.redirect('/update.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'update.html'));
 });
 
 app.get('/add', requireLogin, requireAdmin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
+    res.redirect('/add.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'add.html'));
 });
 
 app.get('/addUser',requireLogin, requireAdmin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
+    res.redirect('/addUser.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'addUser.html'));
 });
 
 app.get('/remove', requireLogin, requireAdmin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
+    res.redirect('/remove.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'remove.html'));
 });
 
 app.get('/removeUser', requireLogin, requireAdmin,(req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
+    res.redirect('/removeUser.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'removeUser.html'));
 });
 
 app.get('/checkoutParts', requireLogin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
+    res.redirect('/checkoutParts.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'checkoutParts.html'));
 });
 
 app.get('/returnParts', requireLogin, (req, res) => {
-    res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
+    res.redirect('/returnParts.html');
+    // res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
 });
 
 // Operation Requests Below
 
 app.post('/auth/login', loginLimiter, async (req, res) => {
-
+    console.log("LOGIN: ", res.body);
     let username = req.body.username;
     let password = req.body.password;
 
@@ -168,9 +182,13 @@ app.post('/data', (req, res) => {
 
 app.post('/checkout', rateLimiter, async(req, res) => {
     console.log('request received:', req.url);
+    // console.log('request type:', req.body.type);
+    // console.log('request body:', req.body);
 
     if (client) {
         if (req.body.type == "validate") {
+            console.log('request type validated:', req.body.type);
+
             // validate checkout input
             const issues = [];
 
@@ -258,6 +276,8 @@ app.post('/checkout', rateLimiter, async(req, res) => {
         }
     }
     else {
+        console.log('request type NOT validated:', req.body.type);
+
         res.status(500).send("Sorry there's a problem with the website!" +
             "Please try again later.");
     }
@@ -389,3 +409,21 @@ app.listen(port, () => {
         
     }
 */
+
+function getClient() {
+    return new Promise((resolve, reject) => {
+        if (client) {
+            resolve(client);
+        } else {
+            // If client is not available, wait for it to be initialized
+            const interval = setInterval(() => {
+                if (client) {
+                    clearInterval(interval);
+                    resolve(client);
+                }
+            }, 1000); // Check every second
+        }
+    });
+}
+
+module.exports = {app, getClient};
