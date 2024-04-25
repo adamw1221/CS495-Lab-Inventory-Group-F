@@ -91,7 +91,8 @@ This allows you to make changes to your own copy without affecting the main bran
     
     5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
 
-### 5	Add Environment Variable File (UPDATE - This file should already exist on this branch, along with the **headers** from step 6)
+### 5	Add Environment Variable File 
+(UPDATE - This file should already exist on this branch, along with the **headers** from step 6)
 This will connect the application to mongodb
 
 1. Create a file named **.env** in the top level of folder **CS495-Lab-Inventory-Group-F**
