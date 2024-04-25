@@ -1,14 +1,21 @@
 # CS495 - Lab Inventory Test Documentation
 
 ## Automated Testing
-We've implemented automated testing for the following components of our web application: **Checkout Part**, **Login**, **Add User**, and **Add Part**. To achieve this we used the **Mocha** and **Suspertest** testing frameworks which are easily accessible by Node js.
+We've implemented automated testing for the following components of our web application: **Checkout Part Validation**, **Login**, **Add User**, **Remove User**, **Add Part**, and **Remove Part**. To achieve this we used the **Mocha** and **Suspertest** testing frameworks which are easily accessible by Node js.
 
-**Mocha** is a flexible JavaScript test framework that provides an api for defining test suites, *and **Supertest** is a library for testing HTTP servers and offers an api for sending HTTP requests in Node.js. We chose this for our testing stack because our webpage handles everything with requests made to our server and this stack allows us to send mock user input for each component with relative ease.
+**Mocha** is a flexible JavaScript test framework that provides an api for defining test suites, and **Supertest** is a library for testing HTTP servers and offers an api for sending HTTP requests in Node.js. We chose this for our testing stack because our webpage handles everything with requests made to our server and this stack allows us to send mock user input for each component with relative ease.
 
-To hold that mock user input we created json files for each component. When the test script is run, a component test will hit the database using that data then the response is verified with conditionals. In some cases a second request is made to verify the DB has been altered, and that response is also verified with conditionals. 
+To hold that mock user input we created json files for each component. When the test script is run, a component test will hit the database using that data, and then the response is verified with conditionals. In some cases, a second request is made to verify the DB has been altered or cleaned up, and that response is also verified with conditionals. 
 
-This testing workflow ensures we're sending the right data, getting it in the request, sucessfully hitting the DB, and ultimately that these features work as expected.
+This testing workflow ensures we're sending the right data, getting it in the request, successfully hitting the DB, and ultimately that these features work as expected.
 
+### Run Automated Test (after setting up your development environment)
+
+1. Navigate to root directory: **cd CS495-Lab-Inventory-Group-F**
+2. Run the command: **npm test**
+3. Output Example:
+
+4. ![Good Result](img/test_example_3.png)
 
 ## High Risk Features
 Certain features have a bigger impact on our application's usefulness than others. Those features are, **database connectivity, server stability, user login, checkout part, and return part**. These tests involve a mixture of automated and manual but could be adapted to be fully automated in the future.
@@ -62,6 +69,8 @@ Certain features have a bigger impact on our application's usefulness than other
         3. Navigate to the **Return Parts** page. You should see your new equipment in a table on the screen. If not, open the page in a new tab to fully refresh the session.
         4. Select the small square on the far left-hand side of the equipment in the table in the Return column. 
         5. Add a description, then press submit. You should get a notification saying the return was successful.
+        6. Example:
+        7. ![Good Result](img/return_example.png)
   
 ## User Acceptance Testing
 
@@ -70,7 +79,7 @@ The following tests require user interaction with the corresponding webpages and
 
 **Website Link**: https://lab-inventory-6d96bc525443.herokuapp.com/login
 
-**Username & Password**: **temp2**
+**Admin username & password**: **temp2**
 
 ### Major Features
 
@@ -93,6 +102,9 @@ The following tests require user interaction with the corresponding webpages and
     4. Click **Update Equipment**
     5. You should get a notification of a document successfully updated
     6. Can further verify by repeating this update, which will show that 0 documents were updated.
+    7. Example
+  
+    8. ![Good Result](img/update_example.png)
    
 3. Login
 
