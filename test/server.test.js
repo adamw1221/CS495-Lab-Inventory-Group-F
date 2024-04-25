@@ -96,7 +96,7 @@ describe('Server API', () => {
         if (res.status  == 200 ) {
           const message = res.body.message;
           console.log(`\nResponse Message: ${message}`);
-          console.log(`\nPerforming Clean Up via post/removeUser`);
+          console.log(`\nPerforming Clean Up via post/removeUser\n`);
 
           // Now make a delete request to delete the user
           request(app)
@@ -140,7 +140,7 @@ describe('Server API', () => {
         if (res.status  == 200 ) {
           const message = res.body.message;
           console.log(`\nResponse Message: ${message}`);
-          console.log(`\nPerforming Clean Up via post/remove`);
+          console.log(`\nPerforming Clean Up via post/remove\n`);
 
           // Now make a delete request to delete the user
           request(app)

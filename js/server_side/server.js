@@ -97,7 +97,6 @@ app.get('/returnParts', requireLogin, (req, res) => {
 // Operation Requests Below
 
 app.post('/auth/login', loginLimiter, async (req, res) => {
-    console.log("LOGIN: ", res.body);
     let username = req.body.username;
     let password = req.body.password;
 
@@ -312,7 +311,7 @@ app.post('/makereturn', requireLogin, async(req, res) => {
 });
 
 app.post('/', rateLimiter,  async(req, res) => {
-    console.log('\nrequest received:', req.url);
+    console.log('request received:', req.url);
 
         if (client) {
             if (req.body.type == "read") {
@@ -390,23 +389,7 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
-/*
-    // imports
-    const runServer = require("./run_server.js");
-    const testOperations = require("./test_operations.js");
-
-    // connects to mongodb server
-    const client = await runServer();
-
-    // performs operations
-    if (client) {
-
-        await testOperations(client);
-        await client.close();
-        
-    }
-*/
-
+// Function waits for mongo db connection, for automated testing
 function getClient() {
     return new Promise((resolve, reject) => {
         if (client) {
