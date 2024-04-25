@@ -47,12 +47,12 @@ async function updateDoc() {
     // 2. Formatting
     if (filterInput.trim() !== '' && changesInput.trim() !== '') {
 
-        filterObject = parseInputString(filterInput);
+        // filterObject = parseInputString(filterInput); only updates one at a time so ID is all thats needed
         changesObject = parseInputString(changesInput);
 
         // 3. Construct a data object with the filter, update, and Post Type
         const requestData = {
-            filter: filterObject,
+            filter: filterInput,
             update: changesObject,
             type: 'update'
         };
