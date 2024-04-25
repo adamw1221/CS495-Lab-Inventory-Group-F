@@ -1,7 +1,7 @@
 # CS495 - Lab Inventory Test Documentation
 
 ## Automated Testing
-We've implemented automated testing for the following components of our web application: **Checkout Part**, **Login**, **Add User**, **Remove User**, **Add Part**, and **Remove Part**. To achieve this we used the **Mocha** and **Suspertest** testing frameworks which are easily accessible by Node js.
+We've implemented automated testing for the following components of our web application: **Checkout Part Validation**, **Login**, **Add User**, **Remove User**, **Add Part**, and **Remove Part**. To achieve this we used the **Mocha** and **Suspertest** testing frameworks which are easily accessible by Node js.
 
 **Mocha** is a flexible JavaScript test framework that provides an api for defining test suites, and **Supertest** is a library for testing HTTP servers and offers an api for sending HTTP requests in Node.js. We chose this for our testing stack because our webpage handles everything with requests made to our server and this stack allows us to send mock user input for each component with relative ease.
 
