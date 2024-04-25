@@ -5,6 +5,8 @@ Our job is to build a web application to help the Robotics Lab manage inventoryâ
 
 The web app will allow users to add, update, remove, and read lab equipment. It will also allow users to check out this equipment and notify users when it is due back.â€‹
 
+Final Demo Link: https://youtu.be/L_HsYMrAULM
+
 ## Team Member Bios
 
 ### Preston Mazzei
