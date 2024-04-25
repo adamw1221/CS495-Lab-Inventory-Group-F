@@ -100,6 +100,9 @@ The following tests require user interaction with the corresponding webpages and
     4. Click **Update Equipment**
     5. You should get a notification of a document successfully updated
     6. Can further verify by repeating this update, which will show that 0 documents were updated.
+    7. Example
+  
+    8. ![Good Result](img/update_example.png)
    
 3. Login
 
