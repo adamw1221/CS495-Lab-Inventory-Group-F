@@ -69,6 +69,8 @@ Certain features have a bigger impact on our application's usefulness than other
         3. Navigate to the **Return Parts** page. You should see your new equipment in a table on the screen. If not, open the page in a new tab to fully refresh the session.
         4. Select the small square on the far left-hand side of the equipment in the table in the Return column. 
         5. Add a description, then press submit. You should get a notification saying the return was successful.
+        6. Example:
+        7. ![Good Result](img/return_example.png)
   
 ## User Acceptance Testing
 
