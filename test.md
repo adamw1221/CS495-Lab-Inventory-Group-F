@@ -13,7 +13,8 @@ This testing workflow ensures we're sending the right data, getting it in the re
 
 1. Navigate to directory: **cd CS495-Lab-Inventory-Group-F**
 2. Run the command: **npm test**
-3. Output Example: 
+3. Output Example:
+   
 4. ![Good Result](img/test_example.png)
 
 ## High Risk Features
