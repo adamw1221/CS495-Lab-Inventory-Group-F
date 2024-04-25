@@ -11,7 +11,7 @@ This testing workflow ensures we're sending the right data, getting it in the re
 
 ### Run Automated Test (after setting up your development environment)
 
-1. Navigate to directory: **cd CS495-Lab-Inventory-Group-F**
+1. Navigate to root directory: **cd CS495-Lab-Inventory-Group-F**
 2. Run the command: **npm test**
 3. Output Example:
 
