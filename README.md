@@ -109,7 +109,8 @@ This will connect the application to mongodb
         1. Username: LabAdmin
            
         2. password: kNvoF1iXUX3GAfzk
-    4. If the connection string ever becomes deprecated, Mongo Atlas typically requires you make a new user to generate a new connection string in the proper format. This would be done via the link above. For security purposes, the network access tab could manage IP address you're allowed to connect to the db from. Currently, there is no such restriction as this is in development, but for deployment, this would need to be changed to accommodate a server hosting solution (so that server could connect) and admin IP's for developmental purposes.
+    4. If the connection string ever becomes deprecated, Mongo Atlas typically requires you make a new user to generate a new connection string in the proper format. This would be done via the link above.
+    5. For security purposes, the network access tab could manage IP address you're allowed to connect to the db from. Currently, there is no such restriction as this is in development, but for deployment, this would need to be changed to accommodate a server hosting solution (so that server could connect) and admin IP's for developmental purposes.
 
 ### 6 Errors
 ((Update - node_modules should no longer be stored in our github, so you will need to run **npm install** when you first clone our repo.
