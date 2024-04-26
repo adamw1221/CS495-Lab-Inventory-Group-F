@@ -184,3 +184,37 @@ This page works similarly to the "My Checkouts" page for the first element. The 
 ## How to Modify/Extend Software:
 Our project involves a front-end of HTML files with CSS elements, with functionality implemented with JavaScript. Our back-end is our server, which uses MongoDB. Our front end can be changed by modifying our CSS and HTML files or adding additional HTML files for any additional pages. The JavaScript files can be manipulated similarly. Our dependencies are listed in our package.json file, under “dependencies”. We used Heroku to host our website and server. Heroku hosts our code by installing the dependencies itself, so those dependencies are not installed on our GitHub. To host on another platform, there are a few things that might need changed. Heroku assigns a port dynamically to an application, so our program first gets that port from Heroku, and then applies it in each of the JavaScript files for each of the web pages. To host on another platform, this might need to be updated, depending on how that platform assigns a port value. Our backlog and test cases can be found on GitHub, along with instructions for running those test cases. For our code styling, we attempted to follow the conventions listed in the link below: 
 https://www.w3schools.com/js/js_conventions.asp 
+
+
+
+## Frequently Asked Questions (FAQs):
+### How do I install the software?
+- Follow the step-by-step installation guide provided in the documentation, including installing Node.js, NPM, and Git. Make sure to set up environment variables and dependencies as instructed. If you encounter any issues during installation, refer to the troubleshooting section or seek assistance from the development team.
+
+### How do I log in to the application?
+- Use the provided login screen to enter your username and password. Note that there is no option to create a new user from this screen. If you forget your credentials, contact the system administrator for assistance in resetting your password.
+
+### How do I checkout lab equipment?
+- Navigate to the "Checkout Parts" section, select the equipment you want to checkout, specify checkout and return dates/times, and click the "Checkout" button. Follow the prompts and alerts for any errors or special requests. For additional assistance with the checkout process, refer to the user guide or contact support for help.
+
+### How do I return lab equipment?
+- Visit the "Return Parts" page, select the equipment you wish to return, provide a description of where it was returned, and optionally upload an image. Click the "Submit" button to complete the return process. After returning equipment, ensure that the status is updated accordingly and verify that the returned equipment is no longer listed under your account.
+
+
+
+## Troubleshooting:
+### Installation Issues:
+- Ensure you have correctly installed Node.js, NPM, and Git as per the provided instructions. Verify that environment variables are set up correctly, and dependencies are installed without errors. If you encounter any issues during installation, double-check your system requirements and reinstall.
+
+### Database Connection Problems:
+- Make sure you have set up the environment variables correctly, especially the MongoDB connection string. Verify that the MongoDB Atlas UI credentials are accurate and allow access to the database. If you experience difficulties connecting to the database, ensure that your network settings and firewall configurations permit the required connections.
+
+### Frontend and Backend Integration:
+- Be aware of the frontend and backend components' interactions. Check for proper routing and data validation between the client-side and server-side components. If you notice any inconsistencies or unexpected behavior, review the code for potential integration issues and consult the development team for assistance.
+
+### Hosting Considerations:
+- If deploying the application to a different hosting platform than Heroku, ensure that port assignments and other platform-specific configurations are adjusted accordingly in the code. Test the application thoroughly on the new hosting environment to identify any compatibility issues or performance concerns before deploying it for production use.
+
+### Hosting Node Module Issues:
+- During development many files had trouble getting read from the node modules when hosting to the Heroku server. If you run any issues regarding files from the installed node modules, ensure that your configurations for ignoring files is set up correctly. If the issue persists, refer to the installation guide to uninstall and reinstall the node modules. 
+- `@mongodb-js/saslprep`: This file contains invalid characters and cannot be read from the modules. This file is not crucial to the program and can be ignored.
