@@ -203,6 +203,7 @@ This page works similarly to the "My Checkouts" page for the first element. The 
 ### Other Features
 - The navigation bar and other component styling is designed to adjust relative text sizes and object scaling for smaller screens, such as a tablet or phone. These are present in the stylesheet's screen media queries at the bottom.
 - There is a planned feature where the navigation bar html DOM is dynamically generated when the logged in user lands on our site so that the tabs are only visible with the proper permissions (student or admin), but this feature is on the backlog.
+- Added a **View Checkouts** page for admins to see what equipment is checked out. This is a sprint3 backlog item that we added for admin/future development convenience. Upon loading the page it dynamically builds a table with data stored in the client session. If there is no data there, it will hit our database and grab all checked-out equipment to be stored. No user actions are available on this page.
 
 
 
