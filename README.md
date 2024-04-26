@@ -139,8 +139,10 @@ If the run commands in the next section give you node_module errors, these 2 sho
 
    2. For access to student view -> **username & password: classmate**
       
+   4. View our following **Feature List** section for more info on how to use our webpage UI.
+      
 6. To run our automated test, run command: **npm test**
-    1. See our test.md file fore more info
+    1. See our test.md file for more info
     
 7. Points of interest:
    1. Our html folder holds all of our html files to modify.
