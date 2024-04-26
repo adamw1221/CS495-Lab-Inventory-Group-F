@@ -49,8 +49,8 @@ Our Lab Inventory site is a web application that uses Node Js, Express Js, and M
 
 2.	If not, you can download an installer for your system then run it and follow on screen instructions:
     
-    1.	https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
-        1.	This will install both Node and Npm
+    1.	The will install both Node and Npm: https://nodejs.org/en/download https
+    2.	Here's documentation for Node: https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
 
 ### 2	Install Git
 1.	Run this command to see if you have git installed: 
