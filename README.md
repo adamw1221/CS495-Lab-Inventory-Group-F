@@ -128,7 +128,7 @@ If the run commands in the next section give you node_module errors, these 2 sho
     1. **npm install**
     2. This is a normal part of a node js workflow, as the node_modules build relies on dependencies specified in the package.json. Thus, the package.json is all we need to share among developers.
 
-1. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
+2. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
    
    1. Or run **node js\server_side\server.js**
 
@@ -139,7 +139,7 @@ If the run commands in the next section give you node_module errors, these 2 sho
 
    2. For access to student view -> **username & password: classmate**
       
-6.To run our automated test, run command: **npm test**
+6. To run our automated test, run command: **npm test**
     1. See our test.md file fore more info
     
 7. Points of interest:
