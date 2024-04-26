@@ -4,12 +4,18 @@ const {runServer, sessionConfig} = require("./run_server.js");
 const read = require("../operations/doc_read.js");
 const update = require("../operations/doc_update.js");
 const { add, addUser } = require("../operations/doc_add.js");
-const { authUser, loginLimiter, rateLimiter } = require("./auth.js");
 const remove = require("../operations/doc_remove.js");
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
-const { requireLogin, requireAdmin, hashPassword } = require('./helpers.js');
+const {
+    authUser,
+    loginLimiter,
+    rateLimiter,
+    requireLogin,
+    requireAdmin,
+    hashPassword
+} = require("./auth.js");
 
 
 const app = express();
@@ -94,6 +100,11 @@ app.get('/returnParts', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname,"..","..", "html",'returnParts.html'));
 });
 
+app.get('/viewCheckouts', requireLogin,requireAdmin, (req, res) => {
+    // res.redirect('/viewCheckouts.html');
+    res.sendFile(path.join(__dirname,"..","..", "html",'viewCheckouts.html'));
+});
+
 // Operation Requests Below
 
 app.post('/auth/login', loginLimiter, async (req, res) => {
@@ -145,6 +156,7 @@ app.get('/getEquipment', requireLogin,rateLimiter, async (req, res) => {
     }
     
 });
+
 
 app.get('/getUser', (req, res) => {
     console.log('get request received: ', req.url);
@@ -281,6 +293,14 @@ app.post('/userprofiledata',requireLogin, async(req, res) => {
     const result = await read(client, "InventoryDB", "Robotics_Lab", query);
     res.status(200).send(result);
 });
+
+app.post('/getCheckedOutParts',requireLogin, async(req, res) => {
+    console.log(req.body);
+    const query = req.body;
+    const result = await read(client, "InventoryDB", "Robotics_Lab", query);
+    res.status(200).send(result);
+});
+
 
 app.post('/makereturn', requireLogin, async(req, res) => {
     console.log('request received:', req.url);

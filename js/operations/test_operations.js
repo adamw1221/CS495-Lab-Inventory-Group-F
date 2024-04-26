@@ -6,27 +6,13 @@ async function testOperations(inClient) {
     const read = require("./doc_read.js");
     const remove = require("./doc_remove.js");
 
-    // list of operations to be done
-    await update(
-        inClient,
-        "sample_airbnb",
-        "listingsAndReviews",
-        { name: "Ribeira Charming Duplex" },
-        { minimum_nights: "2", maximum_nights: "30"}
-    );
+    // sample list of operations to be done
 
     await read(
         inClient,
         "InventoryDB",
         "Robotics_Lab",
         { id: 'turtlebot13' }
-    );
-
-    await remove(
-        inClient,
-        "sample_analytics",
-        "accounts",
-        {account_id: 903542}
     );
 
 }

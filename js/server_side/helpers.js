@@ -1,3 +1,6 @@
+//deprecated - moved all of these into auth.js since they were logically similar enough relating to auth and security 
+//maybe use this for other functions that need not eb in server.js directly
+
 const bcrypt = require('bcrypt');
 
 const requireLogin = (req, res, next) => {
