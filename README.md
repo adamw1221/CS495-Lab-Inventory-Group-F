@@ -49,8 +49,8 @@ Our Lab Inventory site is a web application that uses Node Js, Express Js, and M
 
 2.	If not, you can download an installer for your system then run it and follow on screen instructions:
     
-    1.	https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
-        1.	This will install both Node and Npm
+    1.	The will install both Node and Npm: https://nodejs.org/en/download
+    2.	Here's documentation for Node: https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
 
 ### 2	Install Git
 1.	Run this command to see if you have git installed: 
@@ -81,49 +81,55 @@ This allows you to make changes to your own copy without affecting the main bran
 1.	From CS495-Lab-Inventory-Group-F, use this command: 
     
     1. **git checkout -b featureBranchName**
+        1. Feel free to rename featureBranchName to something meaningful
     
-    2. You should get a message saying that you switched to the new branch you just created. 
+    3. You should get a message saying that you switched to the new branch you just created. 
     
-    3. Now you are good to make changes to code and commit them: 
-        1. See the "**Add Environment Variable File**" section first, and our Feature description and our modify/extend sections below offer further guidance
+    4. Now you are good to make changes to code and commit them: 
+        1. See the "**Run Locally**" section first, and our Feature description and our modify/extend sections below offer further guidance
            
         2. **git add .**   (to stage all files that you’ve modified) 
     
-    4. When ready to locally “save” those changes, use: **git commit -m "code for this checkpoint"**
+    5. When ready to locally “save” those changes, use: **git commit -m "code for this checkpoint"**
     
-    5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
+    6. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
 
-### 5	Add Environment Variable File 
-(UPDATE - This file should already exist on this branch, along with the **headers** from step 6. If so, you can skip these steps.)
+### 5	Add Environment Variable File (Deprecated)
+((UPDATE - This file should already exist on this branch so you can skip these steps.
+Note: Currently, our database and collection names are hardcoded in /js/operations, run_server.js, and server.js, but these names could be added to our .env file for better maintenance.))
 
 This will connect the application to mongodb
 
 1. Create a file named **.env** in the top level of folder **CS495-Lab-Inventory-Group-F**
 
-2. Add this connection string for our generic user:
+2. Add this connection string for our generic user (level: project cluster manager):
     1. MONGODB_URI = mongodb+srv://LabAdmin:kNvoF1iXUX3GAfzk@inventory.8onczej.mongodb.net/?retryWrites=true&w=majority
        
     3. To log into our MongoDB Atlas UI at: https://account.mongodb.com/account/login
         1. Username: LabAdmin
            
         2. password: kNvoF1iXUX3GAfzk
+    4. If the connection string ever becomes deprecated, Mongo Atlas typically requires you make a new user to generate a new connection string in the proper format. This would be done via the link above.
+    5. For security purposes, the network access tab could manage IP address you're allowed to connect to the db from. Currently, there is no such restriction as this is in development, but for deployment, this would need to be changed to accommodate a server hosting solution (so that server could connect) and admin IP's for developmental purposes.
 
 ### 6 Errors
-If the run commands in the next section give you node_module errors, this should fix it.  From the folder CS495-Lab-Inventory-Group-F, run:
+((Update - node_modules should no longer be stored in our github, so you will need to run **npm install** when you first clone our repo.
+If node_modules is ever accidentally pushed to github and you happen to pull it down, the command below to remove it will help with errors related to new packages/dependencies 
+you might not have that are specified in the package json.))
+
+If the run commands in the next section give you node_module errors, these 2 should fix it.  From the folder CS495-Lab-Inventory-Group-F, run:
 1. **rm -rf node_modules**
     1. If you're on powershell or this doesn't work, you can manually delete the node_modules package for the same effect
        
 2. **npm install**
 
-Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
-Those can likely be fixed by replacing the **headers** of our files in **js/client_side** with the following lines. These specify the port locally but may not work with our hosting solution: 
-
-    const { hostname, protocol, port } = window.location;
-
-    const baseURL = `${protocol}//${hostname}:${port}`;
   
 ### 7 Run Locally:
-1. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
+1. If you don't have a node_modules package in your CS495-Lab-Inventory-Group-F folder, or if you just cloned our repo, run this command:
+    1. **npm install**
+    2. This is a normal part of a node js workflow, as the node_modules build relies on dependencies specified in the package.json. Thus, the package.json is all we need to share among developers.
+
+2. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
    
    1. Or run **node js\server_side\server.js**
 
@@ -133,8 +139,27 @@ Those can likely be fixed by replacing the **headers** of our files in **js/clie
    1. For access to all pages -> **username & password: temp2**
 
    2. For access to student view -> **username & password: classmate**
-   
-6. See our section below on Hosting for deploying with Heroku
+      
+   4. View our following **Feature List** section for more info on how to use our webpage UI.
+      
+6. To run our automated test, run command: **npm test**
+    1. See our test.md file for more info
+    
+7. Points of interest:
+   1. Our html folder holds all of our html files to modify.
+   2. Our js/operations folder holds basic CRUD operations that are imported into server.js and used to handle requests that hit our database
+   3. Our html pages have <script> header tags that link to javascript files in js/client_side. These client-side files add functionality to our webpages and often make requests to the server, using user input from the webpages.
+   4. Server.js is where all of our endpoints are defined and requests are handled.
+   5. Auth.js holds helper functions and middleware related to logins, rate limiting, and security. Rate limits currently allow 100 requests per IP address within 10 minutes. Sessions log out users after 30 minutes, but we didn't get to implement a user logout which should be trivial.
+   6. Login sends requests from the login form in login.html, so it currently doesn't have/need a clientside js file. Student users can currently see all html pages in the navbar but won't be served admin pages like add, remove, or update.
+   7. To view all checked out equipment, hit the Robotics_Lab collection in our db with this query: { "Available": "No" } (mongo db atlas offers a UI for this as well, see **step 5**).
+   8. Server session data has to be sent via a request/endpoint to the client to be stored in client session. We do this with usernames for example, since login.js has no clientside page to do so and we don't want to expose this in an imbedded js script in the html.
+   9. Equipment is often stored in the client session to cut down requests against the database, however, that means opening a new tab is often needed to refresh the client session if the database has been updated. This may not be ideal and could be changed by modifying the eventlistener in testCheckoutParts.js.
+   10. Run_server.js sets up our mongodb connection and uses that database as our server session store instead of an external server session (which in our case would be with our server hosting solution heroku). This was not a necessary change, just one of convenience for viewing the sessions.
+   11. Test_db_connect.js isn't used in our application, but it can be used in conjunction with js/operations/test_operations.js to hit our database directly without going through the webpage UI. This is useful for defining an update to all of the parts or performing some other one-off CRUD operation.
+   12. Our database can also be hit with python scripts via our connection string from **step 5** . We used that to add the parts to the database from an Excel spreadsheet.
+   13. "Test" in a filename is just a lingering part of our naming conventions from development.
+
 
 
 ## Feature List:
@@ -184,3 +209,37 @@ This page works similarly to the "My Checkouts" page for the first element. The 
 ## How to Modify/Extend Software:
 Our project involves a front-end of HTML files with CSS elements, with functionality implemented with JavaScript. Our back-end is our server, which uses MongoDB. Our front end can be changed by modifying our CSS and HTML files or adding additional HTML files for any additional pages. The JavaScript files can be manipulated similarly. Our dependencies are listed in our package.json file, under “dependencies”. We used Heroku to host our website and server. Heroku hosts our code by installing the dependencies itself, so those dependencies are not installed on our GitHub. To host on another platform, there are a few things that might need changed. Heroku assigns a port dynamically to an application, so our program first gets that port from Heroku, and then applies it in each of the JavaScript files for each of the web pages. To host on another platform, this might need to be updated, depending on how that platform assigns a port value. Our backlog and test cases can be found on GitHub, along with instructions for running those test cases. For our code styling, we attempted to follow the conventions listed in the link below: 
 https://www.w3schools.com/js/js_conventions.asp 
+
+
+
+## Frequently Asked Questions (FAQs):
+### How do I install the software?
+- Follow the step-by-step installation guide provided in the documentation, including installing Node.js, NPM, and Git. Make sure to set up environment variables and dependencies as instructed. If you encounter any issues during installation, refer to the troubleshooting section or seek assistance from the development team.
+
+### How do I log in to the application?
+- Use the provided login screen to enter your username and password. Note that there is no option to create a new user from this screen. If you forget your credentials, contact the system administrator for assistance in resetting your password.
+
+### How do I checkout lab equipment?
+- Navigate to the "Checkout Parts" section, select the equipment you want to checkout, specify checkout and return dates/times, and click the "Checkout" button. Follow the prompts and alerts for any errors or special requests. For additional assistance with the checkout process, refer to the user guide or contact support for help.
+
+### How do I return lab equipment?
+- Visit the "Return Parts" page, select the equipment you wish to return, provide a description of where it was returned, and optionally upload an image. Click the "Submit" button to complete the return process. After returning equipment, ensure that the status is updated accordingly and verify that the returned equipment is no longer listed under your account.
+
+
+
+## Troubleshooting:
+### Installation Issues:
+- Ensure you have correctly installed Node.js, NPM, and Git as per the provided instructions. Verify that environment variables are set up correctly, and dependencies are installed without errors. If you encounter any issues during installation, double-check your system requirements and reinstall.
+
+### Database Connection Problems:
+- Make sure you have set up the environment variables correctly, especially the MongoDB connection string. Verify that the MongoDB Atlas UI credentials are accurate and allow access to the database. If you experience difficulties connecting to the database, ensure that your network settings and firewall configurations permit the required connections.
+
+### Frontend and Backend Integration:
+- Be aware of the frontend and backend components' interactions. Check for proper routing and data validation between the client-side and server-side components. If you notice any inconsistencies or unexpected behavior, review the code for potential integration issues and consult the development team for assistance.
+
+### Hosting Considerations:
+- If deploying the application to a different hosting platform than Heroku, ensure that port assignments and other platform-specific configurations are adjusted accordingly in the code. Test the application thoroughly on the new hosting environment to identify any compatibility issues or performance concerns before deploying it for production use.
+
+### Hosting Node Module Issues:
+- During development many files had trouble getting read from the node modules when hosting to the Heroku server. If you run any issues regarding files from the installed node modules, ensure that your configurations for ignoring files is set up correctly. If the issue persists, refer to the installation guide to uninstall and reinstall the node modules. 
+- `@mongodb-js/saslprep`: This file contains invalid characters and cannot be read from the modules. This file is not crucial to the program and can be ignored.
