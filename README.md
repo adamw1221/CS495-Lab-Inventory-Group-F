@@ -81,20 +81,22 @@ This allows you to make changes to your own copy without affecting the main bran
 1.	From CS495-Lab-Inventory-Group-F, use this command: 
     
     1. **git checkout -b featureBranchName**
+        1. Feel free to rename featureBranchName to something meaningful
     
-    2. You should get a message saying that you switched to the new branch you just created. 
+    3. You should get a message saying that you switched to the new branch you just created. 
     
-    3. Now you are good to make changes to code and commit them: 
+    4. Now you are good to make changes to code and commit them: 
         1. See the "**Add Environment Variable File**" section first, and our Feature description and our modify/extend sections below offer further guidance
            
         2. **git add .**   (to stage all files that you’ve modified) 
     
-    4. When ready to locally “save” those changes, use: **git commit -m "code for this checkpoint"**
+    5. When ready to locally “save” those changes, use: **git commit -m "code for this checkpoint"**
     
-    5. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
+    6. To send them to your remote feature branch use: **git push origin featureBranchName** . The first time you do this your new branch will become visible on github at https://github.com/adamw1221/CS495-Lab-Inventory-Group-F
 
-### 5	Add Environment Variable File 
-(UPDATE - This file should already exist on this branch, along with the **headers** from step 6. If so, you can skip these steps.)
+### 5	Add Environment Variable File (Deprecated)
+((UPDATE - This file should already exist on this branch so you can skip these steps.
+Currently, our database and collection names are hardcoded in /js/operations, run_server.js, and server.js, but these names could be added to our .env file for better maintenance.))
 
 This will connect the application to mongodb
 
@@ -108,21 +110,23 @@ This will connect the application to mongodb
            
         2. password: kNvoF1iXUX3GAfzk
 
-### 6 Errors
-If the run commands in the next section give you node_module errors, this should fix it.  From the folder CS495-Lab-Inventory-Group-F, run:
+### 6 Errors (Deprecated)
+((Update - node_modules should no longer be stored in our github, so instead you will need to run **npm install** when you first clone our repo.
+If node_modules is ever accidentally pushed to github and you happen to pull it down, the command below to remove it will help with errors related to new packages/dependencies 
+you might not have that are specified in the package json.))
+
+If the run commands in the next section give you node_module errors, these 2 should fix it.  From the folder CS495-Lab-Inventory-Group-F, run:
 1. **rm -rf node_modules**
     1. If you're on powershell or this doesn't work, you can manually delete the node_modules package for the same effect
        
 2. **npm install**
 
-Also if the local server seems like it isn't serving routes, you can check the console with inspect or F12 on some machines.
-Those can likely be fixed by replacing the **headers** of our files in **js/client_side** with the following lines. These specify the port locally but may not work with our hosting solution: 
-
-    const { hostname, protocol, port } = window.location;
-
-    const baseURL = `${protocol}//${hostname}:${port}`;
   
 ### 7 Run Locally:
+1. If you don't have a node_modules package in your CS495-Lab-Inventory-Group-F folder, or if you just cloned our repo, run this command:
+    1. **npm install**
+    2. This is a normal part of a node js workflow, as the node_modules build relies on dependencies specified in the package.json. Thus, the package.json is all we need to share among developers.
+S
 1. From the folder CS495-Lab-Inventory-Group-F, run the command  **npm start**  to start our server and connect to our database.
    
    1. Or run **node js\server_side\server.js**
