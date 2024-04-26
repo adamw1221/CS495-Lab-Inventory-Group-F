@@ -138,18 +138,23 @@ If the run commands in the next section give you node_module errors, these 2 sho
 
    2. For access to student view -> **username & password: classmate**
       
-6. Points of interest:
+6.To run our automated test, run command: **npm test**
+    1. See our test.md file fore more info
+    
+7. Points of interest:
    1. Our html folder holds all of our html files to modify.
    2. Our js/operations folder holds basic CRUD operations that are imported into server.js and used to handle requests that hit our database
    3. Our html pages have <script> header tags that link to javascript files in js/client_side. These client-side files add functionality to our webpages and often make requests to the server, using user input from the webpages.
    4. Server.js is where all of our endpoints are defined and requests are handled.
    5. Auth.js holds helper functions and middleware related to logins, rate limiting, and security. Rate limits currently allow 100 requests per IP address within 10 minutes. Sessions log out users after 30 minutes, but we didn't get to implement a user logout which should be trivial.
    6. Login sends requests from the login form in login.html, so it currently doesn't have/need a clientside js file. Student users can currently see all html pages in the navbar but won't be served admin pages like add, remove, or update.
-   7. To view all checked out equipment, hit the Robotics_Lab collection in our db with this query: { "Available": "No" } (mongo db atlas offers a UI for this as well, see **step 5**). Server session data has to be sent via a request/endpoint to the client to be stored in client session. We do this with usernames.
-   8. Equipment is often stored in the client session to cut down requests against the database, however that means opening a new tabs is often needed to refresh the client session. This may not be ideal and could be changed by modifying the eventlistener in testCheckoutParts.
+   7. To view all checked out equipment, hit the Robotics_Lab collection in our db with this query: { "Available": "No" } (mongo db atlas offers a UI for this as well, see **step 5**). Server session data has to be sent via a request/endpoint to the client to be stored in client session. We do this with usernames for example, since login.js has no clientside page to do so and we don't want to expose this in an imbedded js script in the html.
+   8. Equipment is often stored in the client session to cut down requests against the database, however, that means opening a new tab is often needed to refresh the client session if the database has been updated. This may not be ideal and could be changed by modifying the eventlistener in testCheckoutParts.js.
    9. Run_server.js sets up our mongodb connection and uses that database as our server session store instead of an external server session (which in our case would be with our server hosting solution heroku). This was not a necessary change, just one of convenience for viewing the sessions.
    10. Test_db_connect.js isn't used in our application, but it can be used in conjunction with js/operations/test_operations.js to hit our database directly without going through the webpage UI. This is useful for defining an update to all of the parts or performing some other one-off CRUD operation.
    11. Our database can also be hit with python scripts via our connection string from **step 5** . We used that to add the parts to the database from an Excel spreadsheet.
+   12. "Test" in a filename is just a lingering part of our naming conventions from development.
+
 
 
 ## Feature List:
