@@ -96,7 +96,7 @@ The following tests require user interaction with the corresponding webpages and
 2. Update Part 
 
     1. Go to Update Part page
-    2. Enter **"id : testPart"** for *Equipment Id*
+    2. Enter **"testPart"** for *Equipment Id*
         1. Otherwise, you can check the Checkout Parts page dropdown to get an available ID for a part to change. (Just change it back to **"Yes"** afterward).
     3. Enter **"Available : Never"** for *Changes*
     4. Click **Update Equipment**
