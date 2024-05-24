@@ -19,7 +19,7 @@
         "express-session": "^1.18.0",
         "lodash": "^4.17.21",
         "mocha": "^10.4.0",
-        "mongodb": "^6.5.0",
+        "mongodb": "^6.6.0",
         "optional-require": "^1.1.8",
         "supertest": "^6.3.4"
     }
